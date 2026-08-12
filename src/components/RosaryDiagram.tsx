@@ -224,8 +224,8 @@ export function RosaryDiagram({ displayLang }: Props) {
                   y1={c.ly + uy * 17}
                   x2={c.tx - ux * 9}
                   y2={c.ty - uy * 9}
-                  stroke={isActive ? GOLD : 'rgba(255, 255, 255, 0.55)'}
-                  strokeWidth={isActive ? 1.5 : 1}
+                  stroke={isActive ? GOLD : 'rgba(255, 255, 255, 0.85)'}
+                  strokeWidth={isActive ? 2.5 : 2}
                 />
                 <circle cx={c.lx} cy={c.ly} r={isActive ? 17 : 15} fill={GOLD} style={{ transition: 'r 0.15s ease' }} />
                 <text x={c.lx} y={c.ly} dy="0.36em" textAnchor="middle" className="rosary-diagram-badge-num">
