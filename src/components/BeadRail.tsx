@@ -7,9 +7,10 @@ interface Props {
   position: BeadPosition;
   displayLang: DisplayLang;
   onBeadClick: (beadIndex: number) => void;
+  onNext: () => void;
 }
 
-export function BeadRail({ rail, position, displayLang, onBeadClick }: Props) {
+export function BeadRail({ rail, position, displayLang, onBeadClick, onNext }: Props) {
   if (position === 'hidden') return null;
 
   return (
@@ -28,9 +29,14 @@ export function BeadRail({ rail, position, displayLang, onBeadClick }: Props) {
         ))}
       </div>
       {rail.isSegmentEnd && (
-        <div className="bead-rail-more" aria-hidden="true">
+        <button
+          type="button"
+          className="bead-rail-more"
+          onClick={onNext}
+          aria-label={displayLang === 'en' ? 'Continue' : 'Tiếp tục'}
+        >
           ⌄
-        </div>
+        </button>
       )}
     </div>
   );

@@ -277,9 +277,13 @@
 
 .bead-rail-more {
   margin-top: 10px;
+  background: transparent;
+  border: none;
+  padding: 6px;
   color: var(--gold);
   font-size: 16px;
   line-height: 1;
+  cursor: pointer;
   animation: bead-rail-bounce 1.6s ease-in-out infinite;
 }
 

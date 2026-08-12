@@ -108,7 +108,13 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
 
       <div className="reading-body">
         {settings.beadPosition === 'left' && (
-          <BeadRail rail={rail} position="left" displayLang={displayLang} onBeadClick={rosary.jumpToBead} />
+          <BeadRail
+            rail={rail}
+            position="left"
+            displayLang={displayLang}
+            onBeadClick={rosary.jumpToBead}
+            onNext={rosary.next}
+          />
         )}
 
         <main
@@ -140,7 +146,13 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
         </main>
 
         {settings.beadPosition === 'right' && (
-          <BeadRail rail={rail} position="right" displayLang={displayLang} onBeadClick={rosary.jumpToBead} />
+          <BeadRail
+            rail={rail}
+            position="right"
+            displayLang={displayLang}
+            onBeadClick={rosary.jumpToBead}
+            onNext={rosary.next}
+          />
         )}
       </div>
 
