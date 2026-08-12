@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LangToggle } from '../components/LangToggle';
 import { MysteryBackground } from '../components/MysteryBackground';
+import { RosaryDiagram } from '../components/RosaryDiagram';
 import { useDisplayLang } from '../state/useDisplayLang';
 import { useSlideshow } from '../state/useSlideshow';
 import { mysterySets, todaysMysteryKey } from '../data/mysteries';
@@ -78,6 +79,8 @@ export function PickerPage() {
       <button type="button" className="landing-share" onClick={handleShare}>
         {copied ? (displayLang === 'en' ? 'Copied!' : 'Đã sao chép!') : displayLang === 'en' ? 'Share' : 'Chia sẻ'}
       </button>
+
+      <RosaryDiagram displayLang={displayLang} />
     </div>
   );
 }
