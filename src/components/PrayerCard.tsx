@@ -59,11 +59,15 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations, sho
   const [prayerOpen, setPrayerOpen] = useState(false);
   const [secondaryOpenIndex, setSecondaryOpenIndex] = useState<number | null>(null);
 
-  const verse = step.kind === 'hailMary' ? getBeadVerse(step.slug) : undefined;
+  // The 3 opening Hail Marys (before the decades begin) share kind:'hailMary' with the
+  // decade beads but have no scripture verse and aren't part of a decade — they should
+  // stay centered like the rest of the opening prayers, not use the bead-verse layout.
+  const isDecadeBead = step.kind === 'hailMary' && step.decadeNumber !== undefined;
+  const verse = isDecadeBead ? getBeadVerse(step.slug) : undefined;
 
   return (
     <motion.div
-      className={`prayer-card${step.kind === 'hailMary' ? ' prayer-card-bead' : ''}`}
+      className={`prayer-card${isDecadeBead ? ' prayer-card-bead' : ''}`}
       variants={container}
       initial="hidden"
       animate="visible"

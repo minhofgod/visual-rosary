@@ -88,11 +88,14 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
   // to the one shared image for the whole mystery until that slug has been sourced.
   const image = getBeadImage(step.slug) ?? (currentMystery ? getMysteryImage(currentMystery.imageKey) : undefined);
   // The footer bar (mystery/fruit/reference) matches visualrosary.org's own "Footer"
-  // setting: shown on Hail Mary and Glory Be sections only, not the decade-intro banner
-  // (which already shows the mystery name and fruit prominently on its own).
+  // setting: shown on Hail Mary and Glory Be sections within a decade only — not the
+  // decade-intro banner (which already shows the mystery name and fruit on its own),
+  // and not the opening tail's own Hail Marys/Glory Be, which happen before any
+  // mystery has actually been announced yet.
+  const isDecadeStep = step.decadeNumber !== undefined;
   const showFooterBar =
-    settings.showFooter && !!currentMystery && (step.kind === 'hailMary' || step.kind === 'gloryBe');
-  const footerVerse = step.kind === 'hailMary' ? getBeadVerse(step.slug) : undefined;
+    settings.showFooter && isDecadeStep && (step.kind === 'hailMary' || step.kind === 'gloryBe');
+  const footerVerse = step.kind === 'hailMary' && isDecadeStep ? getBeadVerse(step.slug) : undefined;
 
   return (
     <div className="reading-screen">
@@ -134,7 +137,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
         )}
 
         <main
-          className={`reading-main${step.kind === 'hailMary' ? ' reading-main-bead' : ''}`}
+          className={`reading-main${step.kind === 'hailMary' && isDecadeStep ? ' reading-main-bead' : ''}`}
           onTouchStart={swipe.onTouchStart}
           onTouchEnd={swipe.onTouchEnd}
           onMouseDown={swipe.onMouseDown}
