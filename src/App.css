@@ -404,14 +404,23 @@
   display: inline-flex;
   align-items: baseline;
   gap: 4px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  border: 1.5px solid transparent;
   border-radius: 12px;
-  padding: 14px 28px;
+  padding: 14px 8px;
   margin: 0 auto;
   cursor: pointer;
   color: #fff;
   font: inherit;
+  transition: border-color 0.3s ease, padding 0.3s ease;
+}
+
+.prayer-trigger:hover,
+.prayer-trigger:focus-visible,
+.prayer-trigger:active {
+  border-color: rgba(255, 255, 255, 0.6);
+  padding-left: 28px;
+  padding-right: 28px;
 }
 
 .prayer-trigger-label,
