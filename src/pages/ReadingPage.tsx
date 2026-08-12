@@ -68,8 +68,8 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
   }, [location.hash]);
 
   const set = mysterySets[mysteryKey];
-  const rail = getRailView(rosary.currentStep);
   const step = rosary.currentStep;
+  const rail = getRailView(step, rosary.steps);
   // Decade steps use their own mystery's image. The opening prayers (before any
   // mystery has been announced) don't have one of their own, so they cycle through
   // this set's 5 mystery images instead — a themed preview of the decades ahead,

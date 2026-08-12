@@ -21,11 +21,17 @@ export function BeadRail({ rail, position, displayLang, onBeadClick }: Props) {
             key={i}
             type="button"
             className={`rail-dot rail-dot-${item.kind} is-${item.state}`}
-            aria-label={item.kind}
+            title={displayLang === 'en' ? item.tooltip.en : item.tooltip.vi}
+            aria-label={displayLang === 'en' ? item.tooltip.en : item.tooltip.vi}
             onClick={() => onBeadClick(item.beadIndex)}
           />
         ))}
       </div>
+      {rail.isSegmentEnd && (
+        <div className="bead-rail-more" aria-hidden="true">
+          ⌄
+        </div>
+      )}
     </div>
   );
 }

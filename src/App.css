@@ -275,6 +275,26 @@
   box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.3);
 }
 
+.bead-rail-more {
+  margin-top: 10px;
+  color: var(--gold);
+  font-size: 16px;
+  line-height: 1;
+  animation: bead-rail-bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes bead-rail-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+}
+
 /* ---------- Prayer card (reading screen content) ---------- */
 
 .prayer-card {
