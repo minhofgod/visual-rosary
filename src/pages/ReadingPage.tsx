@@ -101,7 +101,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
         <div className="reading-header-right">
           <LangToggle value={displayLang} onChange={setDisplayLang} />
           <button type="button" className="icon-button" onClick={() => setSettingsOpen(true)} aria-label="settings">
-            ⚙
+            ☰
           </button>
         </div>
       </header>
