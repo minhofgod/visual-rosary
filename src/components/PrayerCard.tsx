@@ -33,6 +33,7 @@ function Text({ text, displayLang, className }: { text: Bilingual; displayLang: 
 
 export function PrayerCard({ step, displayLang, stepNumber, totalSteps, showFruits, showMeditations }: Props) {
   const [meditationOpen, setMeditationOpen] = useState(false);
+  const [prayerOpen, setPrayerOpen] = useState(false);
 
   return (
     <div className="prayer-card">
@@ -59,8 +60,16 @@ export function PrayerCard({ step, displayLang, stepNumber, totalSteps, showFrui
         </div>
       )}
 
-      <Text text={step.heading} displayLang={displayLang} className="prayer-heading" />
-      <Text text={step.prayer} displayLang={displayLang} className="prayer-text" />
+      <button type="button" className="prayer-trigger" onClick={() => setPrayerOpen(true)}>
+        <Text text={step.heading} displayLang={displayLang} className="prayer-trigger-label" />
+        <span className="prayer-trigger-ellipsis">…</span>
+      </button>
+
+      {prayerOpen && (
+        <Modal title={displayLang === 'en' ? step.heading.en : step.heading.vi} onClose={() => setPrayerOpen(false)}>
+          <Text text={step.prayer} displayLang={displayLang} className="prayer-text" />
+        </Modal>
+      )}
 
       {meditationOpen && step.mystery && (
         <Modal title={displayLang === 'en' ? 'Meditation' : 'Suy Niệm'} onClose={() => setMeditationOpen(false)}>
