@@ -118,7 +118,7 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
       beadIndex: decadeLargeBead,
       kind: 'decadeIntro',
       prayer: prayers.ourFather,
-      heading: heading(`Ngắm thứ ${d}`, `Decade ${d}`),
+      heading: heading('Kinh Lạy Cha', 'Our Father'),
       slug: `${base}-our-father`,
       mystery,
       decadeNumber: d,

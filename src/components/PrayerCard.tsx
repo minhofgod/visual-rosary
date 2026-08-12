@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import type { Step } from '../data/sequence';
 import type { DisplayLang } from '../state/useDisplayLang';
 import type { Bilingual } from '../data/types';
@@ -29,33 +30,52 @@ function Text({ text, displayLang, className }: { text: Bilingual; displayLang: 
   );
 }
 
+// Matches visualrosary.org's own pacing: lines fade up one after another rather
+// than the whole card appearing as a single block (measured ~0.2s between lines).
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.2, delayChildren: 0.1 } },
+} as const;
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+} as const;
+
 export function PrayerCard({ step, displayLang, showFruits, showMeditations }: Props) {
   const [meditationOpen, setMeditationOpen] = useState(false);
   const [prayerOpen, setPrayerOpen] = useState(false);
   const [secondaryOpen, setSecondaryOpen] = useState(false);
 
   return (
-    <div className="prayer-card">
+    <motion.div className="prayer-card" variants={container} initial="hidden" animate="visible">
       {step.mystery && (
         <div className="mystery-banner">
-          <Text text={step.mystery.title} displayLang={displayLang} className="mystery-title" />
+          <motion.div variants={item}>
+            <Text text={step.mystery.title} displayLang={displayLang} className="mystery-title" />
+          </motion.div>
 
           {showFruits && (
             <>
-              <div className="fruit-label">{displayLang === 'en' ? 'The Fruit of this Mystery is' : 'Hoa trái của ngắm này là'}</div>
-              <Text text={step.mystery.petition} displayLang={displayLang} className="mystery-petition" />
+              <motion.div variants={item} className="fruit-label">
+                {displayLang === 'en' ? 'The Fruit of this Mystery is' : 'Hoa trái của ngắm này là'}
+              </motion.div>
+              <motion.div variants={item}>
+                <Text text={step.mystery.petition} displayLang={displayLang} className="mystery-petition" />
+              </motion.div>
             </>
           )}
 
           {showMeditations && (
-            <button type="button" className="meditation-button" onClick={() => setMeditationOpen(true)}>
-              {displayLang === 'en' ? 'View the Meditation' : 'Xem Bài Suy Niệm'}
-            </button>
+            <motion.div variants={item}>
+              <button type="button" className="meditation-button" onClick={() => setMeditationOpen(true)}>
+                {displayLang === 'en' ? 'View the Meditation' : 'Xem Bài Suy Niệm'}
+              </button>
+            </motion.div>
           )}
         </div>
       )}
 
-      <div className="prayer-triggers">
+      <motion.div variants={item} className="prayer-triggers">
         <button type="button" className="prayer-trigger" onClick={() => setPrayerOpen(true)}>
           <Text text={step.heading} displayLang={displayLang} className="prayer-trigger-label" />
           <span className="prayer-trigger-ellipsis">…</span>
@@ -67,7 +87,7 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations }: P
             <span className="prayer-trigger-ellipsis">…</span>
           </button>
         )}
-      </div>
+      </motion.div>
 
       {prayerOpen && (
         <Modal title={displayLang === 'en' ? step.heading.en : step.heading.vi} onClose={() => setPrayerOpen(false)}>
@@ -89,6 +109,6 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations }: P
           <Text text={step.mystery.meditation} displayLang={displayLang} className="meditation-text" />
         </Modal>
       )}
-    </div>
+    </motion.div>
   );
 }

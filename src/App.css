@@ -343,9 +343,10 @@
 .mystery-title p {
   font-family: 'Source Serif 4', serif;
   font-weight: 600;
-  font-size: 26px;
+  font-size: 40px;
+  line-height: 1.15;
   color: var(--gold);
-  margin: 0 0 10px;
+  margin: 0 0 14px;
   display: block;
 }
 
@@ -358,7 +359,7 @@
 .mystery-petition,
 .mystery-petition p {
   font-family: 'Source Serif 4', serif;
-  font-size: 19px;
+  font-size: 28px;
   color: var(--gold);
   margin: 0 0 14px;
   display: block;
