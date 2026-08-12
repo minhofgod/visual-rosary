@@ -1,4 +1,4 @@
-# Lần Hạt Mân Côi — Visual Rosary
+# Đọc Kinh Mân Côi — Visual Rosary (dockinhmancoi.com)
 
 A bilingual (Vietnamese / English) visual companion for praying the Rosary. Standalone
 React + Vite web app, meant to be linked from the main "Hỏi Đáp Công Giáo" site.

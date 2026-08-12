@@ -6,6 +6,7 @@ export interface Settings {
   beadPosition: BeadPosition;
   showFruits: boolean;
   showMeditations: boolean;
+  showScriptures: boolean;
 }
 
 const STORAGE_KEY = 'rosary.settings';
@@ -14,6 +15,7 @@ const defaults: Settings = {
   beadPosition: 'right',
   showFruits: true,
   showMeditations: true,
+  showScriptures: true,
 };
 
 function load(): Settings {

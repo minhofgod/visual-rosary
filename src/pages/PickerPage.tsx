@@ -20,7 +20,7 @@ export function PickerPage() {
     const url = window.location.href;
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'Lần Hạt Mân Côi', url });
+        await navigator.share({ title: 'Đọc Kinh Mân Côi', url });
       } catch {
         // user cancelled the share sheet — no-op
       }
@@ -47,7 +47,7 @@ export function PickerPage() {
 
       <header className="reading-header">
         <div className="landing-wordmark">
-          <span>Lần Hạt</span>
+          <span>Đọc Kinh</span>
           <span>Mân Côi</span>
         </div>
         <div className="reading-header-right">

@@ -140,6 +140,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
                 displayLang={displayLang}
                 showFruits={settings.showFruits}
                 showMeditations={settings.showMeditations}
+                showScriptures={settings.showScriptures}
               />
             </motion.div>
           </AnimatePresence>

@@ -68,6 +68,19 @@ export function SettingsPanel({ settings, onChange, onClose, displayLang }: Prop
               </div>
             </div>
           </label>
+          <label className="settings-checkbox">
+            <input
+              type="checkbox"
+              checked={settings.showScriptures}
+              onChange={(e) => onChange({ showScriptures: e.target.checked })}
+            />
+            <div>
+              <div className="settings-checkbox-title">{t(displayLang, 'Lời Kinh Thánh', 'Scriptures')}</div>
+              <div className="settings-checkbox-desc">
+                {t(displayLang, 'Câu Kinh Thánh ở mỗi Kinh Kính Mừng của một chục.', 'A scripture verse on each Hail Mary bead of a decade.')}
+              </div>
+            </div>
+          </label>
         </div>
       </div>
     </div>

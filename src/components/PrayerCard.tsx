@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import type { Step } from '../data/sequence';
 import type { DisplayLang } from '../state/useDisplayLang';
 import type { Bilingual } from '../data/types';
+import { getBeadVerse } from '../data/beadVerses';
 import { Modal } from './Modal';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
   displayLang: DisplayLang;
   showFruits: boolean;
   showMeditations: boolean;
+  showScriptures: boolean;
 }
 
 function Text({ text, displayLang, className }: { text: Bilingual; displayLang: DisplayLang; className?: string }) {
@@ -41,10 +43,12 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 } as const;
 
-export function PrayerCard({ step, displayLang, showFruits, showMeditations }: Props) {
+export function PrayerCard({ step, displayLang, showFruits, showMeditations, showScriptures }: Props) {
   const [meditationOpen, setMeditationOpen] = useState(false);
   const [prayerOpen, setPrayerOpen] = useState(false);
   const [secondaryOpen, setSecondaryOpen] = useState(false);
+
+  const verse = step.kind === 'hailMary' ? getBeadVerse(step.slug) : undefined;
 
   return (
     <motion.div className="prayer-card" variants={container} initial="hidden" animate="visible">
@@ -78,6 +82,17 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations }: P
             </motion.div>
           )}
         </div>
+      )}
+
+      {showScriptures && verse && (
+        <motion.div variants={item} className="scripture-block">
+          <Text
+            text={{ vi: verse.vi, en: verse.en }}
+            displayLang={displayLang}
+            className="scripture-text"
+          />
+          <p className="scripture-ref">{verse.ref}</p>
+        </motion.div>
       )}
 
       <motion.div variants={item} className="prayer-triggers">
