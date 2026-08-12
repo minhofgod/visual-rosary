@@ -69,10 +69,19 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
 
   const set = mysterySets[mysteryKey];
   const rail = getRailView(rosary.currentStep);
-  const currentMystery = rosary.currentStep.decadeNumber ? set.list[rosary.currentStep.decadeNumber - 1] : undefined;
+  const step = rosary.currentStep;
+  // Decade steps use their own mystery's image. The opening prayers (before any
+  // mystery has been announced) don't have one of their own, so they cycle through
+  // this set's 5 mystery images instead — a themed preview of the decades ahead,
+  // rather than a blank gradient. The closing prayer stays a plain gradient.
+  const currentMystery = step.decadeNumber
+    ? set.list[step.decadeNumber - 1]
+    : step.kind !== 'closing'
+      ? set.list[step.index % 5]
+      : undefined;
   // Prefer a bead-specific image (e.g. a unique painting per Hail Mary); fall back
   // to the one shared image for the whole mystery until that slug has been sourced.
-  const image = getBeadImage(rosary.currentStep.slug) ?? (currentMystery ? getMysteryImage(currentMystery.imageKey) : undefined);
+  const image = getBeadImage(step.slug) ?? (currentMystery ? getMysteryImage(currentMystery.imageKey) : undefined);
 
   return (
     <div className="reading-screen">
