@@ -11,6 +11,9 @@ export interface Mystery {
   order: number;
   title: Bilingual;
   petition: Bilingual;
+  meditation: Bilingual;
+  /** key into mysteryImages.ts for the full-bleed background painting */
+  imageKey: string;
 }
 
 export interface MysterySet {

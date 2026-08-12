@@ -1,0 +1,75 @@
+import type { Settings, BeadPosition } from '../state/useSettings';
+import type { DisplayLang } from '../state/useDisplayLang';
+
+interface Props {
+  settings: Settings;
+  onChange: (patch: Partial<Settings>) => void;
+  onClose: () => void;
+  displayLang: DisplayLang;
+}
+
+const t = (lang: DisplayLang, vi: string, en: string) => (lang === 'en' ? en : lang === 'both' ? `${vi} / ${en}` : vi);
+
+export function SettingsPanel({ settings, onChange, onClose, displayLang }: Props) {
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="settings-panel" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <h2>{t(displayLang, 'Cài Đặt', 'Settings')}</h2>
+          <button type="button" className="modal-close" onClick={onClose} aria-label="Close">
+            ×
+          </button>
+        </div>
+
+        <div className="settings-group">
+          <h3>{t(displayLang, 'Vị trí chuỗi hạt', 'Beads')}</h3>
+          <div className="settings-radios">
+            {(['left', 'right', 'hidden'] as BeadPosition[]).map((pos) => (
+              <label key={pos} className="settings-radio">
+                <input
+                  type="radio"
+                  name="beadPosition"
+                  checked={settings.beadPosition === pos}
+                  onChange={() => onChange({ beadPosition: pos })}
+                />
+                {pos === 'left' && t(displayLang, 'Trái', 'Left')}
+                {pos === 'right' && t(displayLang, 'Phải', 'Right')}
+                {pos === 'hidden' && t(displayLang, 'Ẩn', 'Hidden')}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="settings-group">
+          <h3>{t(displayLang, 'Hiển thị', 'Display')}</h3>
+          <label className="settings-checkbox">
+            <input
+              type="checkbox"
+              checked={settings.showFruits}
+              onChange={(e) => onChange({ showFruits: e.target.checked })}
+            />
+            <div>
+              <div className="settings-checkbox-title">{t(displayLang, 'Hoa trái', 'Fruits')}</div>
+              <div className="settings-checkbox-desc">
+                {t(displayLang, 'Hoa trái thiêng liêng của mỗi ngắm.', 'The intention of each mystery.')}
+              </div>
+            </div>
+          </label>
+          <label className="settings-checkbox">
+            <input
+              type="checkbox"
+              checked={settings.showMeditations}
+              onChange={(e) => onChange({ showMeditations: e.target.checked })}
+            />
+            <div>
+              <div className="settings-checkbox-title">{t(displayLang, 'Suy niệm', 'Meditations')}</div>
+              <div className="settings-checkbox-desc">
+                {t(displayLang, 'Bài suy niệm ở phần Kinh Lạy Cha của mỗi ngắm.', 'The meditation in the Our Father sections.')}
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,15 +1,24 @@
+import { useState } from 'react';
 import { useRosary } from './state/useRosary';
 import { useDisplayLang } from './state/useDisplayLang';
-import { RosarySVG } from './components/RosarySVG';
+import { useSwipeNav } from './state/useSwipeNav';
+import { useSettings } from './state/useSettings';
+import { BeadRail } from './components/BeadRail';
 import { PrayerCard } from './components/PrayerCard';
 import { LangToggle } from './components/LangToggle';
 import { MysteryPicker } from './components/MysteryPicker';
+import { SettingsPanel } from './components/SettingsPanel';
 import { mysterySets } from './data/mysteries';
+import { getRailView } from './data/railView';
+import { getMysteryImage } from './data/mysteryImages';
 import './App.css';
 
 function App() {
   const rosary = useRosary();
   const { displayLang, setDisplayLang } = useDisplayLang();
+  const { settings, setSettings } = useSettings();
+  const swipe = useSwipeNav(rosary.next, rosary.prev);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   if (rosary.currentStep === null) {
     return (
@@ -26,43 +35,71 @@ function App() {
   }
 
   const set = mysterySets[rosary.mysteryKey];
+  const rail = getRailView(rosary.currentStep);
+  const currentMystery = rosary.currentStep.decadeNumber ? set.list[rosary.currentStep.decadeNumber - 1] : undefined;
+  const image = currentMystery ? getMysteryImage(currentMystery.imageKey) : undefined;
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <button type="button" className="header-restart" onClick={rosary.restart}>
-          ← {displayLang === 'en' ? 'Restart' : 'Bắt đầu lại'}
+    <div className="reading-screen">
+      <div
+        className={`bg-layer bg-${rosary.mysteryKey}`}
+        style={image ? { backgroundImage: `url(${image.file})` } : undefined}
+      />
+      <div className="bg-scrim" />
+      {image && (
+        <div className="bg-credit">
+          {image.title}, {image.artist} — Public domain, via Wikimedia Commons
+        </div>
+      )}
+
+      <header className="reading-header">
+        <button type="button" className="icon-button" onClick={rosary.restart} aria-label="restart">
+          ←
         </button>
-        <span className="header-mystery-name">
-          {displayLang === 'en' ? set.name.en : set.name.vi}
-        </span>
-        <LangToggle value={displayLang} onChange={setDisplayLang} />
+        <span className="reading-mystery-name">{displayLang === 'en' ? set.name.en : set.name.vi}</span>
+        <div className="reading-header-right">
+          <LangToggle value={displayLang} onChange={setDisplayLang} />
+          <button type="button" className="icon-button" onClick={() => setSettingsOpen(true)} aria-label="settings">
+            ⚙
+          </button>
+        </div>
       </header>
 
-      <main className="app-main">
-        <RosarySVG currentBeadIndex={rosary.currentStep.beadIndex} onBeadClick={rosary.jumpToBead} />
-        <PrayerCard
-          step={rosary.currentStep}
-          displayLang={displayLang}
-          stepNumber={rosary.stepIndex! + 1}
-          totalSteps={rosary.steps.length}
-        />
-      </main>
-
-      <footer className="app-footer">
-        <button type="button" onClick={rosary.prev} disabled={rosary.stepIndex === 0}>
-          {displayLang === 'en' ? 'Back' : 'Trước'}
-        </button>
-        {rosary.isComplete ? (
-          <button type="button" className="primary" onClick={rosary.restart}>
-            {displayLang === 'en' ? 'Amen — Done' : 'Amen — Xong'}
-          </button>
-        ) : (
-          <button type="button" className="primary" onClick={rosary.next}>
-            {displayLang === 'en' ? 'Next' : 'Tiếp'}
-          </button>
+      <div className="reading-body">
+        {settings.beadPosition === 'left' && (
+          <BeadRail rail={rail} position="left" displayLang={displayLang} onBeadClick={rosary.jumpToBead} />
         )}
-      </footer>
+
+        <main
+          className="reading-main"
+          onTouchStart={swipe.onTouchStart}
+          onTouchEnd={swipe.onTouchEnd}
+          onMouseDown={swipe.onMouseDown}
+          onMouseUp={swipe.onMouseUp}
+        >
+          <PrayerCard
+            step={rosary.currentStep}
+            displayLang={displayLang}
+            stepNumber={rosary.stepIndex! + 1}
+            totalSteps={rosary.steps.length}
+            showFruits={settings.showFruits}
+            showMeditations={settings.showMeditations}
+          />
+        </main>
+
+        {settings.beadPosition === 'right' && (
+          <BeadRail rail={rail} position="right" displayLang={displayLang} onBeadClick={rosary.jumpToBead} />
+        )}
+      </div>
+
+      {settingsOpen && (
+        <SettingsPanel
+          settings={settings}
+          onChange={setSettings}
+          onClose={() => setSettingsOpen(false)}
+          displayLang={displayLang}
+        />
+      )}
     </div>
   );
 }
