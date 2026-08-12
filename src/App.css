@@ -995,10 +995,10 @@
   margin-top: 2px;
 }
 
-.rosary-diagram-legend-gloss {
-  font-family: 'Be Vietnam Pro', sans-serif;
+.rosary-diagram-secondary {
   font-size: 12px;
   color: #b9ac93;
+  font-style: italic;
   margin-top: 2px;
 }
 
