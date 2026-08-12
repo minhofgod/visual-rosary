@@ -617,6 +617,30 @@
   margin-top: 10px;
 }
 
+/* Longer prayers (the Creed, above all) shrink to fit the modal without
+   scrolling, since a scroll gesture inside the modal otherwise gets picked
+   up by the page's swipe-navigation instead of scrolling the text. */
+.prayer-text-md,
+.prayer-text-md p {
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.prayer-text-md p.secondary {
+  font-size: 13px;
+}
+
+.prayer-text-sm,
+.prayer-text-sm p {
+  font-size: 14.5px;
+  line-height: 1.4;
+}
+
+.prayer-text-sm p.secondary {
+  font-size: 12px;
+  margin-top: 6px;
+}
+
 /* ---------- Modal / Settings panel ---------- */
 
 .modal-backdrop {

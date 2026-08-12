@@ -14,6 +14,17 @@ interface Props {
   showScriptures: boolean;
 }
 
+// Long prayers (the Creed, above all) would otherwise force the modal to scroll —
+// and a scroll gesture starting inside the modal gets picked up by the page's own
+// swipe-navigation, advancing to the next step instead of scrolling the text. Scale
+// the font down instead so the whole prayer fits without scrolling in the first place.
+function prayerTextClass(text: Bilingual, displayLang: DisplayLang): string {
+  const length = displayLang === 'both' ? text.vi.length + text.en.length : Math.max(text.vi.length, text.en.length);
+  if (length > 550) return 'prayer-text prayer-text-sm';
+  if (length > 350) return 'prayer-text prayer-text-md';
+  return 'prayer-text';
+}
+
 function Text({ text, displayLang, className }: { text: Bilingual; displayLang: DisplayLang; className?: string }) {
   if (displayLang === 'both') {
     return (
@@ -120,7 +131,7 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations, sho
 
       {prayerOpen && (
         <Modal title={displayLang === 'en' ? step.heading.en : step.heading.vi} onClose={() => setPrayerOpen(false)}>
-          <Text text={step.prayer} displayLang={displayLang} className="prayer-text" />
+          <Text text={step.prayer} displayLang={displayLang} className={prayerTextClass(step.prayer, displayLang)} />
         </Modal>
       )}
 
@@ -133,7 +144,11 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations, sho
           }
           onClose={() => setSecondaryOpenIndex(null)}
         >
-          <Text text={step.secondary[secondaryOpenIndex].prayer} displayLang={displayLang} className="prayer-text" />
+          <Text
+            text={step.secondary[secondaryOpenIndex].prayer}
+            displayLang={displayLang}
+            className={prayerTextClass(step.secondary[secondaryOpenIndex].prayer, displayLang)}
+          />
         </Modal>
       )}
 
