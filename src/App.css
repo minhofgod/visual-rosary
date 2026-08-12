@@ -339,6 +339,22 @@
   margin-bottom: 18px;
 }
 
+.mystery-eyebrow,
+.mystery-eyebrow p {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 6px;
+  display: block;
+}
+
+.mystery-eyebrow p.secondary {
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 2px;
+}
+
 .mystery-title,
 .mystery-title p {
   font-family: 'Source Serif 4', serif;

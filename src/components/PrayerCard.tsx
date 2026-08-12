@@ -50,6 +50,11 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations }: P
     <motion.div className="prayer-card" variants={container} initial="hidden" animate="visible">
       {step.mystery && (
         <div className="mystery-banner">
+          {step.mysteryEyebrow && (
+            <motion.div variants={item}>
+              <Text text={step.mysteryEyebrow} displayLang={displayLang} className="mystery-eyebrow" />
+            </motion.div>
+          )}
           <motion.div variants={item}>
             <Text text={step.mystery.title} displayLang={displayLang} className="mystery-title" />
           </motion.div>

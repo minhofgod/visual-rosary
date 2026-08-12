@@ -52,12 +52,25 @@ export interface Step {
   slug: string;
   /** A second prayer shown on the same screen, e.g. the Fatima Prayer alongside the decade's Glory Be */
   secondary?: { heading: Bilingual; prayer: Bilingual };
+  /** Small label above the mystery title, e.g. "Thứ tư thì ngắm" / "The Fourth Glorious Mystery" */
+  mysteryEyebrow?: Bilingual;
   mystery?: Mystery;
   decadeNumber?: number;
   beadInDecade?: number;
 }
 
 const heading = (vi: string, en: string): Bilingual => ({ vi, en });
+
+// Traditional Vietnamese rosary announcement: "Thứ nhất/hai/ba/tư/năm thì ngắm".
+const ORDINAL_VI = ['nhất', 'hai', 'ba', 'tư', 'năm'];
+const ORDINAL_EN = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
+// Adjective form used in "The First <adjective> Mystery" (matches visualrosary.org)
+const SET_ADJECTIVE_EN: Record<MysteryKey, string> = {
+  joyful: 'Joyful',
+  luminous: 'Luminous',
+  sorrowful: 'Sorrowful',
+  glorious: 'Glorious',
+};
 
 export function buildSequence(mysteryKey: MysteryKey): Step[] {
   const mysterySet = mysterySets[mysteryKey];
@@ -120,6 +133,10 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
       prayer: prayers.ourFather,
       heading: heading('Kinh Lạy Cha', 'Our Father'),
       slug: `${base}-our-father`,
+      mysteryEyebrow: heading(
+        `Thứ ${ORDINAL_VI[d - 1]} thì ngắm`,
+        `The ${ORDINAL_EN[d - 1]} ${SET_ADJECTIVE_EN[mysteryKey]} Mystery`
+      ),
       mystery,
       decadeNumber: d,
     });
