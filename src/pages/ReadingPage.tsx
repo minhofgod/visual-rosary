@@ -85,7 +85,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
 
   return (
     <div className="reading-screen">
-      <MysteryBackground image={image?.file} gradientClass={`bg-${mysteryKey}`} />
+      <MysteryBackground image={image?.file} gradientClass={`bg-${mysteryKey}`} direction={rosary.direction} />
       <div className="bg-scrim" />
       {image && (
         <div className="bg-credit">

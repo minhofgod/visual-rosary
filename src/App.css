@@ -1,83 +1,11 @@
-.app {
-  max-width: 480px;
-  margin: 0 auto;
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  padding: 0 16px;
-  overflow-y: auto;
-}
-
-.app-start {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 24px;
-  padding: 32px 16px;
-}
-
-/* ---------- Mystery picker ---------- */
-
-.mystery-picker h1 {
-  font-size: 32px;
-  margin: 0 0 8px;
-}
-
-.mystery-picker .subtitle {
-  color: var(--text-soft);
-  margin-bottom: 24px;
-}
-
-.mystery-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-}
-
-.mystery-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 18px;
-  border-radius: 12px;
-  border: 1.5px solid var(--border);
-  background: #fff;
-  font: inherit;
-  font-size: 16px;
-  color: var(--text);
-  cursor: pointer;
-  text-align: left;
-}
-
-.mystery-option.is-selected {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-}
-
 .today-badge {
   font-size: 12px;
   font-weight: 600;
-  color: var(--accent);
-  background: var(--accent-soft);
+  color: #241f1b;
+  background: var(--gold);
   border-radius: 999px;
   padding: 3px 10px;
   white-space: nowrap;
-}
-
-.start-button,
-.primary {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 14px 28px;
-  font: inherit;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 8px;
 }
 
 /* ---------- Language toggle ---------- */
@@ -133,20 +61,33 @@
   overflow: hidden;
 }
 
-.bg-layer {
+.bg-viewport {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transform: scale(1.12);
-  transition: opacity 1.1s ease, transform 8s cubic-bezier(0.3, 0, 0.7, 1);
+  overflow: hidden;
 }
 
-.bg-layer.is-active {
-  opacity: 1;
-  transform: scale(1);
+.bg-slide {
+  position: absolute;
+  inset: 0;
+}
+
+.bg-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  animation: kenburns 8s cubic-bezier(0.3, 0, 0.3, 1) forwards;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .bg-scrim {
@@ -176,6 +117,9 @@
 }
 .bg-glorious {
   background-image: linear-gradient(160deg, #6b5220, #2f2410);
+}
+.bg-landing {
+  background-image: linear-gradient(160deg, #4a3320, #1c130c);
 }
 
 .reading-header,
@@ -598,4 +542,92 @@
   font-size: 12px;
   color: rgba(255, 255, 255, 0.6);
   margin-top: 2px;
+}
+
+/* ---------- Landing page ---------- */
+
+.landing-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.landing-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px 24px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.landing-headline {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: clamp(28px, 8vw, 44px);
+  line-height: 1.2;
+  color: var(--gold);
+  margin: 0 0 32px;
+  text-wrap: balance;
+}
+
+.landing-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.landing-links-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+}
+
+.landing-link {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font: inherit;
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(18px, 4.5vw, 22px);
+  padding: 8px 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.25s ease;
+}
+
+.landing-link:hover,
+.landing-link:focus-visible {
+  color: var(--gold);
+}
+
+.landing-share {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
 }

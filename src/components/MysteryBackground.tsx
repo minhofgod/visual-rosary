@@ -1,48 +1,47 @@
-import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface Props {
   image?: string; // background-image url, or undefined for the gradient-only fallback
   gradientClass: string;
+  /** 1 = new image rises up from the bottom (old slides up and away); -1 = reversed. */
+  direction?: 1 | -1;
 }
 
-interface Layer {
-  key: number;
-  image?: string;
-}
+const slideVariants = {
+  enter: (direction: 1 | -1) => ({ y: direction > 0 ? '100%' : '-100%' }),
+  center: { y: 0 },
+  exit: (direction: 1 | -1) => ({ y: direction > 0 ? '-100%' : '100%' }),
+};
 
 /**
- * Two stacked background layers cross-fade whenever `image` changes, instead of
- * the image cutting instantly. Each layer also gets a slow, continuous "Ken Burns"
- * zoom (matching visualrosary.org) so the screen never feels static.
+ * The background photo slides up/away and the new one rises into frame, matching
+ * the section-transition on visualrosary.org, with a slow "Ken Burns" zoom-out
+ * (112% -> 100%) on the photo once it's in place. The slide (outer, framer-motion,
+ * animates `transform: translateY`) and the zoom (inner, plain CSS `animation`,
+ * animates `transform: scale`) are on separate nested elements on purpose — both
+ * animate `transform`, and stacking them on one element would have one clobber
+ * the other.
  */
-export function MysteryBackground({ image, gradientClass }: Props) {
-  const [layers, setLayers] = useState<[Layer, Layer]>([{ key: 0, image }, { key: 1, image: undefined }]);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const nextKey = useRef(2);
-  const prevImage = useRef(image);
-
-  useEffect(() => {
-    if (image === prevImage.current) return;
-    prevImage.current = image;
-    const inactiveIndex = activeIndex === 0 ? 1 : 0;
-    setLayers((prev) => {
-      const next: [Layer, Layer] = [...prev] as [Layer, Layer];
-      next[inactiveIndex] = { key: nextKey.current++, image };
-      return next;
-    });
-    setActiveIndex(inactiveIndex);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [image]);
-
+export function MysteryBackground({ image, gradientClass, direction = 1 }: Props) {
   return (
-    <>
-      {layers.map((layer, i) => (
-        <div
-          key={layer.key}
-          className={`bg-layer ${layer.image ? '' : gradientClass} ${i === activeIndex ? 'is-active' : ''}`}
-          style={layer.image ? { backgroundImage: `url(${layer.image})` } : undefined}
-        />
-      ))}
-    </>
+    <div className="bg-viewport">
+      <AnimatePresence initial={false} custom={direction}>
+        <motion.div
+          key={image ?? 'gradient'}
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.6, ease: [0.3, 0, 0.3, 1] }}
+          className="bg-slide"
+        >
+          <div
+            className={`bg-photo ${image ? '' : gradientClass}`}
+            style={image ? { backgroundImage: `url(${image})` } : undefined}
+          />
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 }
