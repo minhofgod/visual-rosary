@@ -376,6 +376,13 @@
   cursor: pointer;
 }
 
+.prayer-triggers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 .prayer-trigger {
   display: inline-flex;
   align-items: baseline;

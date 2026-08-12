@@ -40,15 +40,7 @@ export function buildBeadLayout(): BeadLayoutItem[] {
 
 export const BEAD_LAYOUT = buildBeadLayout();
 
-export type StepKind =
-  | 'sign'
-  | 'creed'
-  | 'ourFather'
-  | 'hailMary'
-  | 'gloryBe'
-  | 'fatima'
-  | 'decadeIntro'
-  | 'closing';
+export type StepKind = 'sign' | 'creed' | 'ourFather' | 'hailMary' | 'gloryBe' | 'decadeIntro' | 'closing';
 
 export interface Step {
   index: number;
@@ -58,6 +50,8 @@ export interface Step {
   heading: Bilingual;
   /** URL-safe id for deep-linking, e.g. "annunciation-hail-mary-9" (matches visualrosary.org's scheme) */
   slug: string;
+  /** A second prayer shown on the same screen, e.g. the Fatima Prayer alongside the decade's Glory Be */
+  secondary?: { heading: Bilingual; prayer: Bilingual };
   mystery?: Mystery;
   decadeNumber?: number;
   beadInDecade?: number;
@@ -151,14 +145,7 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
       prayer: prayers.gloryBe,
       heading: heading('Kinh Sáng Danh', 'Glory Be'),
       slug: `${base}-glory-be`,
-      decadeNumber: d,
-    });
-    push({
-      beadIndex: lastSmallBead,
-      kind: 'fatima',
-      prayer: prayers.fatimaPrayer,
-      heading: heading('Kinh Fatima', 'Fatima Prayer'),
-      slug: `${base}-fatima`,
+      secondary: { heading: heading('Kinh Fatima', 'Fatima Prayer'), prayer: prayers.fatimaPrayer },
       decadeNumber: d,
     });
   }

@@ -8,4 +8,12 @@ import os from 'node:os'
 export default defineConfig({
   plugins: [react()],
   cacheDir: path.join(os.tmpdir(), 'vite-cache', 'visual-rosary'),
+  server: {
+    watch: {
+      // Static images don't need HMR, and Dropbox's own sync lock on files that
+      // are actively being downloaded/written crashes Vite's fs watcher (EBUSY)
+      // if it tries to watch them.
+      ignored: ['**/public/images/**'],
+    },
+  },
 })
