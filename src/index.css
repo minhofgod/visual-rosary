@@ -21,9 +21,15 @@
 
 body {
   margin: 0;
+  overscroll-behavior-y: none;
 }
 
 h1 {
   font-family: 'Source Serif 4', serif;
   font-weight: 600;
+}
+
+button {
+  font: inherit;
+  color: inherit;
 }

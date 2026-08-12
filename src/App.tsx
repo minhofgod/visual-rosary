@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRosary } from './state/useRosary';
 import { useDisplayLang } from './state/useDisplayLang';
 import { useSwipeNav } from './state/useSwipeNav';
@@ -8,10 +9,17 @@ import { PrayerCard } from './components/PrayerCard';
 import { LangToggle } from './components/LangToggle';
 import { MysteryPicker } from './components/MysteryPicker';
 import { SettingsPanel } from './components/SettingsPanel';
+import { MysteryBackground } from './components/MysteryBackground';
 import { mysterySets } from './data/mysteries';
 import { getRailView } from './data/railView';
 import { getMysteryImage } from './data/mysteryImages';
 import './App.css';
+
+const slideVariants = {
+  enter: (direction: 1 | -1) => ({ y: direction > 0 ? 36 : -36, opacity: 0 }),
+  center: { y: 0, opacity: 1 },
+  exit: (direction: 1 | -1) => ({ y: direction > 0 ? -36 : 36, opacity: 0 }),
+};
 
 function App() {
   const rosary = useRosary();
@@ -41,10 +49,7 @@ function App() {
 
   return (
     <div className="reading-screen">
-      <div
-        className={`bg-layer bg-${rosary.mysteryKey}`}
-        style={image ? { backgroundImage: `url(${image.file})` } : undefined}
-      />
+      <MysteryBackground image={image?.file} gradientClass={`bg-${rosary.mysteryKey}`} />
       <div className="bg-scrim" />
       {image && (
         <div className="bg-credit">
@@ -76,15 +81,26 @@ function App() {
           onTouchEnd={swipe.onTouchEnd}
           onMouseDown={swipe.onMouseDown}
           onMouseUp={swipe.onMouseUp}
+          onWheel={swipe.onWheel}
         >
-          <PrayerCard
-            step={rosary.currentStep}
-            displayLang={displayLang}
-            stepNumber={rosary.stepIndex! + 1}
-            totalSteps={rosary.steps.length}
-            showFruits={settings.showFruits}
-            showMeditations={settings.showMeditations}
-          />
+          <AnimatePresence mode="popLayout" initial={false} custom={rosary.direction}>
+            <motion.div
+              key={rosary.currentStep.index}
+              custom={rosary.direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.4, ease: [0.3, 0, 0.3, 1] }}
+            >
+              <PrayerCard
+                step={rosary.currentStep}
+                displayLang={displayLang}
+                showFruits={settings.showFruits}
+                showMeditations={settings.showMeditations}
+              />
+            </motion.div>
+          </AnimatePresence>
         </main>
 
         {settings.beadPosition === 'right' && (

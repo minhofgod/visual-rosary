@@ -7,8 +7,6 @@ import { Modal } from './Modal';
 interface Props {
   step: Step;
   displayLang: DisplayLang;
-  stepNumber: number;
-  totalSteps: number;
   showFruits: boolean;
   showMeditations: boolean;
 }
@@ -31,16 +29,12 @@ function Text({ text, displayLang, className }: { text: Bilingual; displayLang: 
   );
 }
 
-export function PrayerCard({ step, displayLang, stepNumber, totalSteps, showFruits, showMeditations }: Props) {
+export function PrayerCard({ step, displayLang, showFruits, showMeditations }: Props) {
   const [meditationOpen, setMeditationOpen] = useState(false);
   const [prayerOpen, setPrayerOpen] = useState(false);
 
   return (
     <div className="prayer-card">
-      <div className="prayer-progress">
-        {stepNumber} / {totalSteps}
-      </div>
-
       {step.mystery && (
         <div className="mystery-banner">
           <Text text={step.mystery.title} displayLang={displayLang} className="mystery-title" />
