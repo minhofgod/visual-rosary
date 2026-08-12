@@ -239,6 +239,13 @@
   z-index: 0;
 }
 
+.rail-dot-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .rail-dot {
   position: relative;
   z-index: 1;
@@ -250,6 +257,45 @@
   padding: 0;
   cursor: pointer;
   transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.rail-tooltip {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  background: #201a17;
+  color: #fff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  animation: rail-tooltip-in 0.15s ease-out;
+}
+
+@keyframes rail-tooltip-in {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.bead-rail-left .rail-tooltip {
+  left: 100%;
+  margin-left: 10px;
+}
+
+.bead-rail-right .rail-tooltip {
+  right: 100%;
+  margin-right: 10px;
 }
 
 .rail-dot-large {

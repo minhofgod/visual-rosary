@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { RailView } from '../data/railView';
 import type { DisplayLang } from '../state/useDisplayLang';
 import type { BeadPosition } from '../state/useSettings';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export function BeadRail({ rail, position, displayLang, onBeadClick, onNext }: Props) {
+  const [hovered, setHovered] = useState<number | null>(null);
   if (position === 'hidden') return null;
 
   return (
@@ -18,14 +20,23 @@ export function BeadRail({ rail, position, displayLang, onBeadClick, onNext }: P
       <div className="bead-rail-label">{displayLang === 'en' ? rail.label.en : rail.label.vi}</div>
       <div className="bead-rail-track">
         {rail.items.map((item, i) => (
-          <button
-            key={i}
-            type="button"
-            className={`rail-dot rail-dot-${item.kind} is-${item.state}`}
-            title={displayLang === 'en' ? item.tooltip.en : item.tooltip.vi}
-            aria-label={displayLang === 'en' ? item.tooltip.en : item.tooltip.vi}
-            onClick={() => onBeadClick(item.beadIndex)}
-          />
+          <div key={i} className="rail-dot-wrap">
+            <button
+              type="button"
+              className={`rail-dot rail-dot-${item.kind} is-${item.state}`}
+              aria-label={displayLang === 'en' ? item.tooltip.en : item.tooltip.vi}
+              onClick={() => onBeadClick(item.beadIndex)}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              onFocus={() => setHovered(i)}
+              onBlur={() => setHovered(null)}
+            />
+            {hovered === i && (
+              <div className="rail-tooltip" role="tooltip">
+                {displayLang === 'en' ? item.tooltip.en : item.tooltip.vi}
+              </div>
+            )}
+          </div>
         ))}
       </div>
       {rail.isSegmentEnd && (
