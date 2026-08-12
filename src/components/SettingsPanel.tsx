@@ -81,6 +81,23 @@ export function SettingsPanel({ settings, onChange, onClose, displayLang }: Prop
               </div>
             </div>
           </label>
+          <label className="settings-checkbox">
+            <input
+              type="checkbox"
+              checked={settings.showFooter}
+              onChange={(e) => onChange({ showFooter: e.target.checked })}
+            />
+            <div>
+              <div className="settings-checkbox-title">{t(displayLang, 'Chú thích cuối trang', 'Footer')}</div>
+              <div className="settings-checkbox-desc">
+                {t(
+                  displayLang,
+                  'Thông tin thêm ở cuối các phần Kinh Kính Mừng và Kinh Sáng Danh.',
+                  'Additional information at the bottom of Hail Mary and Glory Be sections.'
+                )}
+              </div>
+            </div>
+          </label>
         </div>
       </div>
     </div>

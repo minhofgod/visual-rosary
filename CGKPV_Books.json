@@ -1,0 +1,297 @@
+{
+  "_readme": "CGKPV Vietnamese Catholic Bible — book lookup table for Obsidian vault wikilinks. Files live at CGKPV/{testament}/{order} {book_name}/{book_name} {chapter}.md. Verse anchor: ###### {verse}. Wikilink: [[{book_name} {chapter}#{verse}|{book_name} {chapter}:{verse}]]",
+  "books": [
+    {
+      "order": "01", "book_name": "Sáng Thế", "testament": "Cựu Ước",
+      "english": "Genesis", "abbrev_en": "Gen", "abbrev_vi": "St"
+    },
+    {
+      "order": "02", "book_name": "Xuất Hành", "testament": "Cựu Ước",
+      "english": "Exodus", "abbrev_en": "Exod", "abbrev_vi": "Xh"
+    },
+    {
+      "order": "03", "book_name": "Lêvi", "testament": "Cựu Ước",
+      "english": "Leviticus", "abbrev_en": "Lev", "abbrev_vi": "Lv"
+    },
+    {
+      "order": "04", "book_name": "Dân Số", "testament": "Cựu Ước",
+      "english": "Numbers", "abbrev_en": "Num", "abbrev_vi": "Ds"
+    },
+    {
+      "order": "05", "book_name": "Đệ Nhị Luật", "testament": "Cựu Ước",
+      "english": "Deuteronomy", "abbrev_en": "Deut", "abbrev_vi": "Đnl"
+    },
+    {
+      "order": "06", "book_name": "Giôsuê", "testament": "Cựu Ước",
+      "english": "Joshua", "abbrev_en": "Josh", "abbrev_vi": "Gs"
+    },
+    {
+      "order": "07", "book_name": "Thủ Lãnh", "testament": "Cựu Ước",
+      "english": "Judges", "abbrev_en": "Judg", "abbrev_vi": "Tl"
+    },
+    {
+      "order": "08", "book_name": "Rút", "testament": "Cựu Ước",
+      "english": "Ruth", "abbrev_en": "Ruth", "abbrev_vi": "R"
+    },
+    {
+      "order": "09", "book_name": "1 Samuen", "testament": "Cựu Ước",
+      "english": "1 Samuel", "abbrev_en": "1 Sam", "abbrev_vi": "1 Sm"
+    },
+    {
+      "order": "10", "book_name": "2 Samuen", "testament": "Cựu Ước",
+      "english": "2 Samuel", "abbrev_en": "2 Sam", "abbrev_vi": "2 Sm"
+    },
+    {
+      "order": "11", "book_name": "1 Các Vua", "testament": "Cựu Ước",
+      "english": "1 Kings", "abbrev_en": "1 Kgs", "abbrev_vi": "1V"
+    },
+    {
+      "order": "12", "book_name": "2 Các Vua", "testament": "Cựu Ước",
+      "english": "2 Kings", "abbrev_en": "2 Kgs", "abbrev_vi": "2V"
+    },
+    {
+      "order": "13", "book_name": "1 Sử Biên", "testament": "Cựu Ước",
+      "english": "1 Chronicles", "abbrev_en": "1 Chr", "abbrev_vi": "1 Sb"
+    },
+    {
+      "order": "14", "book_name": "2 Sử Biên", "testament": "Cựu Ước",
+      "english": "2 Chronicles", "abbrev_en": "2 Chr", "abbrev_vi": "2 Sb"
+    },
+    {
+      "order": "15", "book_name": "Étra", "testament": "Cựu Ước",
+      "english": "Ezra", "abbrev_en": "Ezra", "abbrev_vi": "Et"
+    },
+    {
+      "order": "16", "book_name": "Nơkhêmia", "testament": "Cựu Ước",
+      "english": "Nehemiah", "abbrev_en": "Neh", "abbrev_vi": "Nkm"
+    },
+    {
+      "order": "17", "book_name": "Tôbia", "testament": "Cựu Ước",
+      "english": "Tobit", "abbrev_en": "Tob", "abbrev_vi": "Tb"
+    },
+    {
+      "order": "18", "book_name": "Giuđitha", "testament": "Cựu Ước",
+      "english": "Judith", "abbrev_en": "Jdt", "abbrev_vi": "Gđt"
+    },
+    {
+      "order": "19", "book_name": "Étte", "testament": "Cựu Ước",
+      "english": "Esther", "abbrev_en": "Esth", "abbrev_vi": "Et"
+    },
+    {
+      "order": "20", "book_name": "1 Macabê", "testament": "Cựu Ước",
+      "english": "1 Maccabees", "abbrev_en": "1 Macc", "abbrev_vi": "1Mcb"
+    },
+    {
+      "order": "21", "book_name": "2 Macabê", "testament": "Cựu Ước",
+      "english": "2 Maccabees", "abbrev_en": "2 Macc", "abbrev_vi": "2Mcb"
+    },
+    {
+      "order": "22", "book_name": "Gióp", "testament": "Cựu Ước",
+      "english": "Job", "abbrev_en": "Job", "abbrev_vi": "G"
+    },
+    {
+      "order": "23", "book_name": "Thánh Vịnh", "testament": "Cựu Ước",
+      "english": "Psalms", "abbrev_en": "Ps", "abbrev_vi": "Tv"
+    },
+    {
+      "order": "24", "book_name": "Châm Ngôn", "testament": "Cựu Ước",
+      "english": "Proverbs", "abbrev_en": "Prov", "abbrev_vi": "Cn"
+    },
+    {
+      "order": "25", "book_name": "Giảng Viên", "testament": "Cựu Ước",
+      "english": "Ecclesiastes", "abbrev_en": "Eccl", "abbrev_vi": "Gv"
+    },
+    {
+      "order": "26", "book_name": "Diễm Ca", "testament": "Cựu Ước",
+      "english": "Song of Songs", "abbrev_en": "Song", "abbrev_vi": "Dc"
+    },
+    {
+      "order": "27", "book_name": "Khôn Ngoan", "testament": "Cựu Ước",
+      "english": "Wisdom", "abbrev_en": "Wis", "abbrev_vi": "Kn"
+    },
+    {
+      "order": "28", "book_name": "Huấn Ca", "testament": "Cựu Ước",
+      "english": "Sirach", "abbrev_en": "Sir", "abbrev_vi": "Hc"
+    },
+    {
+      "order": "29", "book_name": "Isaia", "testament": "Cựu Ước",
+      "english": "Isaiah", "abbrev_en": "Isa", "abbrev_vi": "Is"
+    },
+    {
+      "order": "30", "book_name": "Giêrêmia", "testament": "Cựu Ước",
+      "english": "Jeremiah", "abbrev_en": "Jer", "abbrev_vi": "Gr"
+    },
+    {
+      "order": "31", "book_name": "Ai Ca", "testament": "Cựu Ước",
+      "english": "Lamentations", "abbrev_en": "Lam", "abbrev_vi": "Ac"
+    },
+    {
+      "order": "32", "book_name": "Barúc", "testament": "Cựu Ước",
+      "english": "Baruch", "abbrev_en": "Bar", "abbrev_vi": "Br"
+    },
+    {
+      "order": "33", "book_name": "Êdêkien", "testament": "Cựu Ước",
+      "english": "Ezekiel", "abbrev_en": "Ezek", "abbrev_vi": "Ed"
+    },
+    {
+      "order": "34", "book_name": "Đanien", "testament": "Cựu Ước",
+      "english": "Daniel", "abbrev_en": "Dan", "abbrev_vi": "Đn"
+    },
+    {
+      "order": "35", "book_name": "Hôsê", "testament": "Cựu Ước",
+      "english": "Hosea", "abbrev_en": "Hos", "abbrev_vi": "Hs"
+    },
+    {
+      "order": "36", "book_name": "Giôen", "testament": "Cựu Ước",
+      "english": "Joel", "abbrev_en": "Joel", "abbrev_vi": "Ge"
+    },
+    {
+      "order": "37", "book_name": "Amốt", "testament": "Cựu Ước",
+      "english": "Amos", "abbrev_en": "Amos", "abbrev_vi": "Am"
+    },
+    {
+      "order": "38", "book_name": "Ôvađia", "testament": "Cựu Ước",
+      "english": "Obadiah", "abbrev_en": "Obad", "abbrev_vi": "Ov"
+    },
+    {
+      "order": "39", "book_name": "Giôna", "testament": "Cựu Ước",
+      "english": "Jonah", "abbrev_en": "Jonah", "abbrev_vi": "Gn"
+    },
+    {
+      "order": "40", "book_name": "Mikha", "testament": "Cựu Ước",
+      "english": "Micah", "abbrev_en": "Mic", "abbrev_vi": "Mk"
+    },
+    {
+      "order": "41", "book_name": "Nakhum", "testament": "Cựu Ước",
+      "english": "Nahum", "abbrev_en": "Nah", "abbrev_vi": "Nk"
+    },
+    {
+      "order": "42", "book_name": "Khabacúc", "testament": "Cựu Ước",
+      "english": "Habakkuk", "abbrev_en": "Hab", "abbrev_vi": "Kb"
+    },
+    {
+      "order": "43", "book_name": "Xôphônia", "testament": "Cựu Ước",
+      "english": "Zephaniah", "abbrev_en": "Zeph", "abbrev_vi": "Xp"
+    },
+    {
+      "order": "44", "book_name": "Khácgai", "testament": "Cựu Ước",
+      "english": "Haggai", "abbrev_en": "Hag", "abbrev_vi": "Kg"
+    },
+    {
+      "order": "45", "book_name": "Dacaria", "testament": "Cựu Ước",
+      "english": "Zechariah", "abbrev_en": "Zech", "abbrev_vi": "Dcr"
+    },
+    {
+      "order": "46", "book_name": "Malakhi", "testament": "Cựu Ước",
+      "english": "Malachi", "abbrev_en": "Mal", "abbrev_vi": "Ml"
+    },
+    {
+      "order": "47", "book_name": "Mátthêu", "testament": "Tân Ước",
+      "english": "Matthew", "abbrev_en": "Matt", "abbrev_vi": "Mt"
+    },
+    {
+      "order": "48", "book_name": "Máccô", "testament": "Tân Ước",
+      "english": "Mark", "abbrev_en": "Mark", "abbrev_vi": "Mc"
+    },
+    {
+      "order": "49", "book_name": "Luca", "testament": "Tân Ước",
+      "english": "Luke", "abbrev_en": "Luke", "abbrev_vi": "Lc"
+    },
+    {
+      "order": "50", "book_name": "Gioan", "testament": "Tân Ước",
+      "english": "John", "abbrev_en": "John", "abbrev_vi": "Ga"
+    },
+    {
+      "order": "51", "book_name": "Công Vụ Tông Đồ", "testament": "Tân Ước",
+      "english": "Acts", "abbrev_en": "Acts", "abbrev_vi": "Cv"
+    },
+    {
+      "order": "52", "book_name": "Rôma", "testament": "Tân Ước",
+      "english": "Romans", "abbrev_en": "Rom", "abbrev_vi": "Rm"
+    },
+    {
+      "order": "53", "book_name": "1 Côrintô", "testament": "Tân Ước",
+      "english": "1 Corinthians", "abbrev_en": "1 Cor", "abbrev_vi": "1 Cr"
+    },
+    {
+      "order": "54", "book_name": "2 Côrintô", "testament": "Tân Ước",
+      "english": "2 Corinthians", "abbrev_en": "2 Cor", "abbrev_vi": "2 Cr"
+    },
+    {
+      "order": "55", "book_name": "Galát", "testament": "Tân Ước",
+      "english": "Galatians", "abbrev_en": "Gal", "abbrev_vi": "Gl"
+    },
+    {
+      "order": "56", "book_name": "Êphêsô", "testament": "Tân Ước",
+      "english": "Ephesians", "abbrev_en": "Eph", "abbrev_vi": "Ep"
+    },
+    {
+      "order": "57", "book_name": "Philípphê", "testament": "Tân Ước",
+      "english": "Philippians", "abbrev_en": "Phil", "abbrev_vi": "Pl"
+    },
+    {
+      "order": "58", "book_name": "Côlôxê", "testament": "Tân Ước",
+      "english": "Colossians", "abbrev_en": "Col", "abbrev_vi": "Cl"
+    },
+    {
+      "order": "59", "book_name": "1 Thêxalônica", "testament": "Tân Ước",
+      "english": "1 Thessalonians", "abbrev_en": "1 Thess", "abbrev_vi": "1 Tx"
+    },
+    {
+      "order": "60", "book_name": "2 Thêxalônica", "testament": "Tân Ước",
+      "english": "2 Thessalonians", "abbrev_en": "2 Thess", "abbrev_vi": "2 Tx"
+    },
+    {
+      "order": "61", "book_name": "1 Timôthê", "testament": "Tân Ước",
+      "english": "1 Timothy", "abbrev_en": "1 Tim", "abbrev_vi": "1 Tm"
+    },
+    {
+      "order": "62", "book_name": "2 Timôthê", "testament": "Tân Ước",
+      "english": "2 Timothy", "abbrev_en": "2 Tim", "abbrev_vi": "2 Tm"
+    },
+    {
+      "order": "63", "book_name": "Titô", "testament": "Tân Ước",
+      "english": "Titus", "abbrev_en": "Titus", "abbrev_vi": "Tt"
+    },
+    {
+      "order": "64", "book_name": "Philêmon", "testament": "Tân Ước",
+      "english": "Philemon", "abbrev_en": "Philem", "abbrev_vi": "Plm"
+    },
+    {
+      "order": "65", "book_name": "Do thái", "testament": "Tân Ước",
+      "english": "Hebrews", "abbrev_en": "Heb", "abbrev_vi": "Dt"
+    },
+    {
+      "order": "66", "book_name": "Giacôbê", "testament": "Tân Ước",
+      "english": "James", "abbrev_en": "Jas", "abbrev_vi": "Gc"
+    },
+    {
+      "order": "67", "book_name": "1 Phêrô", "testament": "Tân Ước",
+      "english": "1 Peter", "abbrev_en": "1 Pet", "abbrev_vi": "1 Pr"
+    },
+    {
+      "order": "68", "book_name": "2 Phêrô", "testament": "Tân Ước",
+      "english": "2 Peter", "abbrev_en": "2 Pet", "abbrev_vi": "2 Pr"
+    },
+    {
+      "order": "69", "book_name": "1 Gioan", "testament": "Tân Ước",
+      "english": "1 John", "abbrev_en": "1 John", "abbrev_vi": "1 Ga"
+    },
+    {
+      "order": "70", "book_name": "2 Gioan", "testament": "Tân Ước",
+      "english": "2 John", "abbrev_en": "2 John", "abbrev_vi": "2 Ga"
+    },
+    {
+      "order": "71", "book_name": "3 Gioan", "testament": "Tân Ước",
+      "english": "3 John", "abbrev_en": "3 John", "abbrev_vi": "3 Ga"
+    },
+    {
+      "order": "72", "book_name": "Giuđa", "testament": "Tân Ước",
+      "english": "Jude", "abbrev_en": "Jude", "abbrev_vi": "Gđ"
+    },
+    {
+      "order": "73", "book_name": "Khải Huyền", "testament": "Tân Ước",
+      "english": "Revelation", "abbrev_en": "Rev", "abbrev_vi": "Kh"
+    }
+  ]
+}

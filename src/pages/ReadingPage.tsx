@@ -7,6 +7,8 @@ import { useSwipeNav } from '../state/useSwipeNav';
 import { useSettings } from '../state/useSettings';
 import { BeadRail } from '../components/BeadRail';
 import { PrayerCard } from '../components/PrayerCard';
+import { PrayerFooter } from '../components/PrayerFooter';
+import { getBeadVerse } from '../data/beadVerses';
 import { LangToggle } from '../components/LangToggle';
 import { SettingsPanel } from '../components/SettingsPanel';
 import { MysteryBackground } from '../components/MysteryBackground';
@@ -82,6 +84,12 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
   // Prefer a bead-specific image (e.g. a unique painting per Hail Mary); fall back
   // to the one shared image for the whole mystery until that slug has been sourced.
   const image = getBeadImage(step.slug) ?? (currentMystery ? getMysteryImage(currentMystery.imageKey) : undefined);
+  // The footer bar (mystery/fruit/reference) matches visualrosary.org's own "Footer"
+  // setting: shown on Hail Mary and Glory Be sections only, not the decade-intro banner
+  // (which already shows the mystery name and fruit prominently on its own).
+  const showFooterBar =
+    settings.showFooter && !!currentMystery && (step.kind === 'hailMary' || step.kind === 'gloryBe');
+  const footerVerse = step.kind === 'hailMary' ? getBeadVerse(step.slug) : undefined;
 
   return (
     <div className="reading-screen">
@@ -118,7 +126,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
         )}
 
         <main
-          className="reading-main"
+          className={`reading-main${step.kind === 'hailMary' ? ' reading-main-bead' : ''}`}
           onTouchStart={swipe.onTouchStart}
           onTouchEnd={swipe.onTouchEnd}
           onMouseDown={swipe.onMouseDown}
@@ -156,6 +164,10 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
           />
         )}
       </div>
+
+      {showFooterBar && currentMystery && (
+        <PrayerFooter mystery={currentMystery} verse={footerVerse} displayLang={displayLang} />
+      )}
 
       {settingsOpen && (
         <SettingsPanel

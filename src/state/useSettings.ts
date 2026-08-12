@@ -7,6 +7,7 @@ export interface Settings {
   showFruits: boolean;
   showMeditations: boolean;
   showScriptures: boolean;
+  showFooter: boolean;
 }
 
 const STORAGE_KEY = 'rosary.settings';
@@ -16,6 +17,7 @@ const defaults: Settings = {
   showFruits: true,
   showMeditations: true,
   showScriptures: true,
+  showFooter: true,
 };
 
 function load(): Settings {

@@ -10,6 +10,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 1,
         title: { vi: 'Thiên thần truyền tin cho Đức Bà chịu thai', en: 'The Annunciation' },
         petition: { vi: 'Ta hãy xin cho được ở khiêm nhường.', en: 'That we may obtain the virtue of humility.' },
+        fruitShort: { vi: 'Khiêm Nhường', en: 'Humility' },
         imageKey: 'annunciation',
         meditation: {
           en: "At the angel's greeting, Mary does not exalt herself but asks only how such a thing can be, then surrenders entirely: “Let it be done to me according to your word.” Her humility makes room for God to work. We ask for that same emptying of self, so that our own fiat can become the doorway through which grace enters our daily lives.",
@@ -20,6 +21,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 2,
         title: { vi: 'Đức Bà đi viếng bà thánh Isave', en: 'The Visitation' },
         petition: { vi: 'Ta hãy xin cho được lòng yêu người.', en: 'That we may obtain love of neighbor.' },
+        fruitShort: { vi: 'Bác Ái Huynh Đệ', en: 'Fraternal Charity' },
         imageKey: 'visitation',
         meditation: {
           en: "Even carrying the Word made flesh within her, Mary's first thought is for her cousin Elizabeth, and she hurries into the hill country to serve her. True love of God always overflows into service of others. We ask for hearts that, having received Christ, cannot help but hasten toward whoever needs us.",
@@ -30,6 +32,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 3,
         title: { vi: 'Đức Bà sinh Đức Chúa Giêsu nơi hang đá', en: 'The Nativity' },
         petition: { vi: 'Ta hãy xin cho được lòng khó khăn.', en: 'That we may obtain the spirit of poverty.' },
+        fruitShort: { vi: 'Khó Nghèo', en: 'Detachment' },
         imageKey: 'nativity',
         meditation: {
           en: 'The King of Heaven is born not in a palace but a stable, with no bed but a manger. He teaches us from His first breath that greatness is not found in possessions but in simplicity of heart. We ask for the grace to hold the things of this world loosely, that our hands may be free to receive Him.',
@@ -40,6 +43,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 4,
         title: { vi: 'Đức Bà dâng Đức Chúa Giêsu trong đền thánh', en: 'The Presentation in the Temple' },
         petition: { vi: 'Ta hãy xin cho được vâng lời chịu lụy.', en: 'That we may obtain the virtue of obedience.' },
+        fruitShort: { vi: 'Vâng Lời', en: 'Obedience' },
         imageKey: 'presentation',
         meditation: {
           en: 'Mary and Joseph bring the Son of God to the Temple simply because the Law asks it of them, not because He needs purifying. Their quiet obedience, even in something so small, shows us that holiness is built in the ordinary acts of fidelity. We ask for the grace to obey God’s will in the small things of each day.',
@@ -50,6 +54,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 5,
         title: { vi: 'Đức Bà tìm được Đức Chúa Giêsu trong đền thánh', en: 'The Finding in the Temple' },
         petition: { vi: 'Ta hãy xin cho được giữ nghĩa cùng Chúa luôn.', en: 'That we may obtain fidelity to God.' },
+        fruitShort: { vi: 'Niềm Vui Tìm Được Chúa', en: 'Joy at Finding Jesus' },
         imageKey: 'finding',
         meditation: {
           en: "After three anxious days of searching, Mary and Joseph find the boy Jesus in the Temple, intent on His Father's business. Even those closest to Him do not always understand His ways, yet they keep seeking and keep believing. We ask for perseverance in seeking Christ, especially in the seasons when He seems hidden from us.",
@@ -70,6 +75,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
           vi: 'Ta hãy xin cho được sống xứng đáng là con Thiên Chúa.',
           en: 'That we may live worthily as children of God.',
         },
+        fruitShort: { vi: 'Ơn Thanh Tẩy', en: 'The Gift of Baptism' },
         imageKey: 'baptism',
         meditation: {
           en: "As Jesus rises from the waters of the Jordan, the Father's voice names Him beloved Son, and the Spirit descends like a dove. In our own baptism we were claimed with the same words. We ask for the grace to live each day aware that we are truly, already, God's beloved children.",
@@ -83,6 +89,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
           vi: 'Ta hãy xin cho được noi gương Đức Mẹ mà vững tin vào Chúa.',
           en: 'That we may follow Mary’s example of unwavering trust in God.',
         },
+        fruitShort: { vi: 'Lòng Sùng Kính Đức Mẹ', en: 'Marian Devotion' },
         imageKey: 'cana',
         meditation: {
           en: "Mary notices the wine has run out before anyone else does, and simply tells the servants, “Do whatever He tells you.” Her quiet confidence in her Son becomes the occasion for His first miracle. We ask for that same trust, bringing our own empty jars to Jesus and waiting on His word.",
@@ -99,6 +106,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
           vi: 'Ta hãy xin cho được tin vào lòng Chúa thương xót và siêng năng lãnh nhận Bí tích Giao hòa.',
           en: 'That we may trust in God’s mercy and turn often to the Sacrament of Reconciliation.',
         },
+        fruitShort: { vi: 'Rao Giảng Tin Mừng', en: 'Evangelization' },
         imageKey: 'proclamation',
         meditation: {
           en: 'Jesus begins His public life with a simple, urgent call: repent, and believe in the Good News. He does not wait for us to become worthy before inviting us into the Kingdom. We ask for the courage to turn back to Him again and again, trusting that His mercy is always greater than our sin.',
@@ -109,6 +117,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 4,
         title: { vi: 'Đức Chúa Giêsu biến hình trên núi', en: 'The Transfiguration' },
         petition: { vi: 'Ta hãy xin cho được biến đổi nhờ Chúa Thánh Thần.', en: 'That we may be transformed by the Holy Spirit.' },
+        fruitShort: { vi: 'Vinh Quang Chúa Ki-tô', en: "Christ's Glory" },
         imageKey: 'transfiguration',
         meditation: {
           en: 'For a brief moment on the mountain, Peter, James, and John glimpse Christ’s hidden glory, and Peter wants to stay there forever. But the vision is given to strengthen them for the descent, not to replace it. We ask for a taste of God’s glory that sends us back, transformed, into the ordinary work of holiness.',
@@ -122,6 +131,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
           vi: 'Ta hãy xin cho được siêng năng tham dự Thánh lễ và rước Mình Máu Thánh Người.',
           en: 'That we may faithfully attend Mass and receive the Body and Blood of Christ.',
         },
+        fruitShort: { vi: 'Lòng Sùng Kính Thánh Thể', en: 'Devotion to The Blessed Sacrament' },
         imageKey: 'institution',
         meditation: {
           en: 'On the night before He suffered, Jesus takes bread and wine and gives us Himself, entirely, to be received again and again until He comes. It is the deepest gift love could invent: to remain with us under so humble a sign. We ask for hunger for this Bread, and reverence each time we come to His table.',
@@ -139,6 +149,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 1,
         title: { vi: 'Đức Chúa Giêsu lo buồn đổ mồ hôi máu', en: 'The Agony in the Garden' },
         petition: { vi: 'Ta hãy xin cho được ăn năn tội nên.', en: 'That we may obtain true sorrow for sin.' },
+        fruitShort: { vi: 'Vâng Theo Ý Chúa', en: "Choosing God's Will" },
         imageKey: 'agony',
         meditation: {
           en: "Alone in Gethsemane, Jesus takes on the full weight of the world's sin, sweating blood as He prays, “not my will, but yours be done.” He asks His friends to watch with Him, and they fall asleep. We ask for true sorrow for our sins, and for the willingness to stay awake with Him in His hour of need.",
@@ -149,6 +160,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 2,
         title: { vi: 'Đức Chúa Giêsu chịu đánh đòn', en: 'The Scourging at the Pillar' },
         petition: { vi: 'Ta hãy xin cho được hãm mình chịu khó bằng lòng.', en: 'That we may obtain the virtue of purity and mortification.' },
+        fruitShort: { vi: 'Hãm Mình', en: 'Mortification' },
         imageKey: 'scourging',
         meditation: {
           en: 'For our sake He is bound and torn, His body given over so that ours might be made whole. There is nothing glamorous about this suffering, only love that refuses to hold anything back. We ask for the grace to discipline our own desires, offering small mortifications in union with His great one.',
@@ -159,6 +171,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 3,
         title: { vi: 'Đức Chúa Giêsu chịu đội mão gai', en: 'The Crowning with Thorns' },
         petition: { vi: 'Ta hãy xin cho được chịu mọi sự sỉ nhục bằng lòng.', en: 'That we may bear humiliation with patience.' },
+        fruitShort: { vi: 'Hiền Lành', en: 'Meekness' },
         imageKey: 'crowning',
         meditation: {
           en: 'The soldiers mock Him as a false king, pressing thorns into His head and bowing in cruel jest, and He says nothing in His own defense. His silence in the face of humiliation is its own kind of strength. We ask for the courage to bear insult and mockery for His sake without losing our peace.',
@@ -169,6 +182,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 4,
         title: { vi: 'Đức Chúa Giêsu vác Thánh giá', en: 'The Carrying of the Cross' },
         petition: { vi: 'Ta hãy xin cho được vác Thánh giá theo chân Chúa.', en: 'That we may carry our own cross in Christ’s footsteps.' },
+        fruitShort: { vi: 'Can Đảm', en: 'Fortitude' },
         imageKey: 'carrying',
         meditation: {
           en: 'The cross is heavier than He can carry alone, and Simon of Cyrene is pressed into helping Him bear it. Christ does not refuse the help, nor does He put the cross down. We ask for the patience to keep walking under the weight we are given, and the humility to let others help us carry it.',
@@ -179,6 +193,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 5,
         title: { vi: 'Đức Chúa Giêsu chịu chết trên cây Thánh giá', en: 'The Crucifixion' },
         petition: { vi: 'Ta hãy xin đóng đanh tính xác thịt vào Thánh giá Chúa.', en: 'That we may die to sin and cling to Christ’s cross.' },
+        fruitShort: { vi: 'Hy Sinh', en: 'Sacrifice' },
         imageKey: 'crucifixion',
         meditation: {
           en: "From the cross, with His last breath, Jesus forgives His executioners, promises paradise to the thief beside Him, and gives us His own Mother. Even in death He is pouring Himself out for us. We ask for the grace to persevere in faith to the very end, trusting that this death has opened heaven for us.",
@@ -196,6 +211,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 1,
         title: { vi: 'Đức Chúa Giêsu sống lại', en: 'The Resurrection' },
         petition: { vi: 'Ta hãy xin cho được sống lại thật về phần linh hồn.', en: 'That we may obtain true faith and rise to new life in Christ.' },
+        fruitShort: { vi: 'Đức Tin', en: 'The Virtue of Faith' },
         imageKey: 'resurrection',
         meditation: {
           en: "On the third day the tomb is found empty, and death itself is undone. What looked like the final defeat becomes the first proof that God's love cannot be buried. We ask for a living faith in the Resurrection, one that changes how we face every small death and disappointment in our own lives.",
@@ -206,6 +222,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 2,
         title: { vi: 'Đức Chúa Giêsu lên trời', en: 'The Ascension' },
         petition: { vi: 'Ta hãy xin cho được ái mộ những sự trên trời.', en: 'That we may obtain hope and desire for Heaven.' },
+        fruitShort: { vi: 'Đức Cậy', en: 'The Virtue of Hope' },
         imageKey: 'ascension',
         meditation: {
           en: 'Jesus is taken up before their eyes, not abandoning His disciples but going ahead to prepare a place for them. Our true home is no longer only this earth, but where He has gone. We ask for a heart that longs for heaven, without ever loving the world or its people any less.',
@@ -216,6 +233,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 3,
         title: { vi: 'Đức Chúa Thánh Thần hiện xuống', en: 'The Descent of the Holy Spirit' },
         petition: { vi: 'Ta hãy xin cho được lòng đầy rẫy mọi ơn Đức Chúa Thánh Thần.', en: 'That we may be filled with the gifts of the Holy Spirit.' },
+        fruitShort: { vi: 'Đức Mến', en: 'The Virtue of Charity' },
         imageKey: 'pentecost',
         meditation: {
           en: 'Fear kept the apostles hidden behind locked doors until the Spirit came upon them like fire, and they went out boldly to proclaim Christ to every nation. The same Spirit who transformed them dwells in us at our own confirmation. We ask to be filled with His gifts, and sent out just as fearlessly.',
@@ -226,6 +244,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 4,
         title: { vi: 'Đức Chúa Trời cho Đức Bà lên trời', en: 'The Assumption of Mary' },
         petition: { vi: 'Ta hãy xin ơn chết lành trong tay Đức Mẹ.', en: 'That we may obtain the grace of a happy death.' },
+        fruitShort: { vi: 'Ơn Chết Lành', en: 'Grace of a Holy Death' },
         imageKey: 'assumption',
         meditation: {
           en: "Mary, who was never touched by sin, is taken body and soul into heaven, the first fruits of what awaits all who belong to Christ. Her Assumption is a sign of hope for our own death, that it is not an ending but a homecoming. We ask, through her intercession, for the grace of a peaceful and holy death.",
@@ -239,6 +258,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
           vi: 'Ta hãy xin Đức Mẹ phù hộ cho ta được thưởng cùng Đức Mẹ trên nước thiên đàng.',
           en: 'That we may share with Mary the reward of Heaven.',
         },
+        fruitShort: { vi: 'Tin Tưởng Vào Lời Mẹ Chuyển Cầu', en: "Confidence in Mary's Intercession" },
         imageKey: 'coronation',
         meditation: {
           en: 'Crowned Queen of Heaven and earth, Mary does not sit apart from us in glory but continues to be our mother, close to every one of her children. Her queenship is one of tender care, not distance. We ask for confidence in her intercession, trusting that she brings every one of our prayers before her Son.',

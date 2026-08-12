@@ -409,7 +409,7 @@
   font-style: italic;
   font-size: clamp(16px, 4.8vw, 22px);
   line-height: 1.4;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--gold);
   margin: 0;
   display: block;
   text-wrap: balance;
@@ -422,12 +422,58 @@
   margin-top: 4px;
 }
 
-.scripture-ref {
-  font-size: clamp(12px, 3.2vw, 13px);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--gold);
-  margin: 8px 0 0;
+/* ---------- Hail Mary bead layout (verse bottom-anchored, left-aligned) ---------- */
+
+.reading-main-bead {
+  justify-content: flex-end;
+}
+
+.prayer-card-bead {
+  text-align: left;
+  padding-bottom: 52px;
+}
+
+.prayer-card-bead .prayer-triggers {
+  align-items: flex-start;
+}
+
+.prayer-card-bead .prayer-trigger {
+  margin: 0;
+}
+
+/* ---------- Footer bar (mystery / fruit / scripture reference) ---------- */
+
+.prayer-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 20px;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (min-width: 640px) {
+  .prayer-footer {
+    border-top-right-radius: 16px;
+  }
+}
+
+.prayer-footer-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.prayer-footer-item svg {
+  fill: var(--gold);
+  flex-shrink: 0;
 }
 
 .meditation-button {

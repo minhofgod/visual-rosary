@@ -51,7 +51,12 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations, sho
   const verse = step.kind === 'hailMary' ? getBeadVerse(step.slug) : undefined;
 
   return (
-    <motion.div className="prayer-card" variants={container} initial="hidden" animate="visible">
+    <motion.div
+      className={`prayer-card${step.kind === 'hailMary' ? ' prayer-card-bead' : ''}`}
+      variants={container}
+      initial="hidden"
+      animate="visible"
+    >
       {step.mystery && (
         <div className="mystery-banner">
           {step.mysteryEyebrow && (
@@ -91,7 +96,6 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations, sho
             displayLang={displayLang}
             className="scripture-text"
           />
-          <p className="scripture-ref">{verse.ref}</p>
         </motion.div>
       )}
 

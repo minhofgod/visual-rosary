@@ -11,6 +11,8 @@ export interface Mystery {
   order: number;
   title: Bilingual;
   petition: Bilingual;
+  /** Short 1-4 word fruit name for the bottom footer bar, e.g. { vi: 'Khiêm Nhường', en: 'Humility' } */
+  fruitShort: Bilingual;
   meditation: Bilingual;
   /** key into mysteryImages.ts for the full-bleed background painting */
   imageKey: string;
