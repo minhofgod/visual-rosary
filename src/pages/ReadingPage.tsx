@@ -76,11 +76,14 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
   // mystery has been announced) don't have one of their own, so they cycle through
   // this set's 5 mystery images instead — a themed preview of the decades ahead,
   // rather than a blank gradient. The closing prayer stays a plain gradient.
+  // The closing prayer reuses the set's first mystery image, matching
+  // visualrosary.org's own closing screen (which shows the same image its
+  // introductory prayers opened with).
   const currentMystery = step.decadeNumber
     ? set.list[step.decadeNumber - 1]
-    : step.kind !== 'closing'
-      ? set.list[step.index % 5]
-      : undefined;
+    : step.kind === 'closing'
+      ? set.list[0]
+      : set.list[step.index % 5];
   // Prefer a bead-specific image (e.g. a unique painting per Hail Mary); fall back
   // to the one shared image for the whole mystery until that slug has been sourced.
   const image = getBeadImage(step.slug) ?? (currentMystery ? getMysteryImage(currentMystery.imageKey) : undefined);
