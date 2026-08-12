@@ -56,6 +56,8 @@ export interface Step {
   kind: StepKind;
   prayer: Bilingual;
   heading: Bilingual;
+  /** URL-safe id for deep-linking, e.g. "annunciation-hail-mary-9" (matches visualrosary.org's scheme) */
+  slug: string;
   mystery?: Mystery;
   decadeNumber?: number;
   beadInDecade?: number;
@@ -69,27 +71,53 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
   const push = (s: Omit<Step, 'index'>) => steps.push({ ...s, index: steps.length });
 
   // Crucifix: Sign of the Cross, then the Creed
-  push({ beadIndex: 0, kind: 'sign', prayer: prayers.signOfTheCross, heading: heading('Dấu Thánh Giá', 'Sign of the Cross') });
-  push({ beadIndex: 0, kind: 'creed', prayer: prayers.apostlesCreed, heading: heading('Kinh Tin Kính', "Apostles' Creed") });
+  push({
+    beadIndex: 0,
+    kind: 'sign',
+    prayer: prayers.signOfTheCross,
+    heading: heading('Dấu Thánh Giá', 'Sign of the Cross'),
+    slug: 'sign-of-the-cross',
+  });
+  push({
+    beadIndex: 0,
+    kind: 'creed',
+    prayer: prayers.apostlesCreed,
+    heading: heading('Kinh Tin Kính', "Apostles' Creed"),
+    slug: 'apostles-creed',
+  });
 
   // Tail: 1 large (Our Father) + 3 small (Hail Mary x3)
-  push({ beadIndex: 1, kind: 'ourFather', prayer: prayers.ourFather, heading: heading('Kinh Lạy Cha', "Our Father") });
+  push({
+    beadIndex: 1,
+    kind: 'ourFather',
+    prayer: prayers.ourFather,
+    heading: heading('Kinh Lạy Cha', 'Our Father'),
+    slug: 'our-father',
+  });
   for (let n = 1; n <= 3; n++) {
     push({
       beadIndex: 1 + n,
       kind: 'hailMary',
       prayer: prayers.hailMary,
       heading: heading(`Kính Mừng ${n}/3`, `Hail Mary ${n} of 3`),
+      slug: `hail-mary-${n}`,
     });
   }
 
   // Centerpiece: Glory Be
-  push({ beadIndex: 5, kind: 'gloryBe', prayer: prayers.gloryBe, heading: heading('Kinh Sáng Danh', 'Glory Be') });
+  push({
+    beadIndex: 5,
+    kind: 'gloryBe',
+    prayer: prayers.gloryBe,
+    heading: heading('Kinh Sáng Danh', 'Glory Be'),
+    slug: 'glory-be',
+  });
 
   // 5 decades
   let beadCursor = 6;
   for (let d = 1; d <= 5; d++) {
     const mystery = mysterySet.list[d - 1];
+    const base = mystery.imageKey;
     const decadeLargeBead = beadCursor;
 
     push({
@@ -97,6 +125,7 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
       kind: 'decadeIntro',
       prayer: prayers.ourFather,
       heading: heading(`Ngắm thứ ${d}`, `Decade ${d}`),
+      slug: `${base}-our-father`,
       mystery,
       decadeNumber: d,
     });
@@ -108,6 +137,7 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
         kind: 'hailMary',
         prayer: prayers.hailMary,
         heading: heading(`Kính Mừng ${b}/10`, `Hail Mary ${b} of 10`),
+        slug: `${base}-hail-mary-${b}`,
         decadeNumber: d,
         beadInDecade: b,
       });
@@ -120,6 +150,7 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
       kind: 'gloryBe',
       prayer: prayers.gloryBe,
       heading: heading('Kinh Sáng Danh', 'Glory Be'),
+      slug: `${base}-glory-be`,
       decadeNumber: d,
     });
     push({
@@ -127,12 +158,19 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
       kind: 'fatima',
       prayer: prayers.fatimaPrayer,
       heading: heading('Kinh Fatima', 'Fatima Prayer'),
+      slug: `${base}-fatima`,
       decadeNumber: d,
     });
   }
 
   // Closing, back at the crucifix
-  push({ beadIndex: 0, kind: 'closing', prayer: prayers.hailHolyQueen, heading: heading('Lạy Nữ Vương', 'Hail, Holy Queen') });
+  push({
+    beadIndex: 0,
+    kind: 'closing',
+    prayer: prayers.hailHolyQueen,
+    heading: heading('Lạy Nữ Vương', 'Hail, Holy Queen'),
+    slug: 'hail-holy-queen',
+  });
 
   return steps;
 }
