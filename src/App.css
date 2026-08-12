@@ -307,11 +307,17 @@
   height: 12px;
 }
 
+.rail-dot-centerpiece {
+  width: 14px;
+  height: 14px;
+}
+
 .rail-dot-cross {
-  width: 13px;
-  height: 13px;
-  border-radius: 3px;
-  transform: rotate(45deg);
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent !important;
+  color: var(--gold);
 }
 
 .rail-dot.is-done {

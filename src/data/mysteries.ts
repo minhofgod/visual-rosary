@@ -21,7 +21,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         order: 2,
         title: { vi: 'Đức Bà đi viếng bà thánh Isave', en: 'The Visitation' },
         petition: { vi: 'Ta hãy xin cho được lòng yêu người.', en: 'That we may obtain love of neighbor.' },
-        fruitShort: { vi: 'Bác Ái Huynh Đệ', en: 'Fraternal Charity' },
+        fruitShort: { vi: 'Bác Ái', en: 'Fraternal Charity' },
         imageKey: 'visitation',
         meditation: {
           en: "Even carrying the Word made flesh within her, Mary's first thought is for her cousin Elizabeth, and she hurries into the hill country to serve her. True love of God always overflows into service of others. We ask for hearts that, having received Christ, cannot help but hasten toward whoever needs us.",
