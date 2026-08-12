@@ -15,9 +15,13 @@ export interface BeadLayoutItem {
 
 /**
  * The physical bead layout is identical every time — 1 crucifix, 1 large + 3 small
- * on the tail, 1 centerpiece, then 5 decades of (1 large + 10 small). Only which
- * prayers land on which bead changes with the chosen mystery set, so this is
- * computed once and reused for every rosary.
+ * on the tail, 1 centerpiece, then 5 decades of (1 large + 10 small + 1 large).
+ * That trailing large bead doesn't exist on a real physical rosary — Glory Be and
+ * the Fatima Prayer are traditionally said "on" the 10th Hail Mary bead — but we
+ * give it a distinct, larger bead of its own here so it's visually unambiguous
+ * from Hail Mary 10 on the rail, rather than reusing the same small dot for both.
+ * Only which prayers land on which bead changes with the chosen mystery set, so
+ * this is computed once and reused for every rosary.
  */
 export function buildBeadLayout(): BeadLayoutItem[] {
   const beads: BeadLayoutItem[] = [];
@@ -33,6 +37,7 @@ export function buildBeadLayout(): BeadLayoutItem[] {
     for (let b = 1; b <= 10; b++) {
       beads.push({ beadIndex: i++, kind: 'small', decadeNumber: d, beadInDecade: b });
     }
+    beads.push({ beadIndex: i++, kind: 'large', decadeNumber: d });
   }
 
   return beads;
@@ -155,9 +160,10 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
       beadCursor += 1;
     }
 
-    const lastSmallBead = beadCursor - 1;
+    const gloryBeBead = beadCursor;
+    beadCursor += 1;
     push({
-      beadIndex: lastSmallBead,
+      beadIndex: gloryBeBead,
       kind: 'gloryBe',
       prayer: prayers.gloryBe,
       heading: heading('Kinh Sáng Danh', 'Glory Be'),
