@@ -1,0 +1,280 @@
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  overflow-y: auto;
+}
+
+.app-start {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  padding: 32px 16px;
+}
+
+/* ---------- Mystery picker ---------- */
+
+.mystery-picker h1 {
+  font-size: 32px;
+  margin: 0 0 8px;
+}
+
+.mystery-picker .subtitle {
+  color: var(--text-soft);
+  margin-bottom: 24px;
+}
+
+.mystery-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.mystery-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font: inherit;
+  font-size: 16px;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.mystery-option.is-selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.today-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.start-button,
+.primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+/* ---------- Language toggle ---------- */
+
+.lang-toggle {
+  display: inline-flex;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.lang-toggle button {
+  border: none;
+  background: #fff;
+  color: var(--text-soft);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+
+.lang-toggle button.is-active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ---------- Header / footer ---------- */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-restart {
+  border: none;
+  background: none;
+  color: var(--text-soft);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.header-mystery-name {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: 15px;
+  flex: 1;
+  text-align: center;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 16px;
+  overflow-y: auto;
+}
+
+.app-footer {
+  display: flex;
+  gap: 10px;
+  padding: 12px 0 20px;
+  border-top: 1px solid var(--border);
+}
+
+.app-footer button {
+  flex: 1;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.app-footer button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.app-footer button.primary {
+  margin-top: 0;
+  flex: 2;
+  border-color: var(--accent);
+}
+
+/* ---------- Rosary SVG ---------- */
+
+.rosary-svg {
+  width: 100%;
+  max-width: 300px;
+  flex-shrink: 0;
+}
+
+.rosary-string {
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+
+.bead {
+  fill: var(--bead-color);
+  stroke: #fff;
+  stroke-width: 0.75;
+  cursor: pointer;
+  transition: fill 0.15s, r 0.15s;
+}
+
+.bead.is-done {
+  fill: var(--bead-done);
+}
+
+.bead.is-current {
+  fill: var(--gold);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.bead-cross rect {
+  fill: var(--bead-color);
+}
+
+.bead-cross.is-current rect,
+.bead-cross.is-done rect {
+  fill: var(--gold);
+}
+
+.bead-cross.is-done rect {
+  fill: var(--bead-done);
+}
+
+/* ---------- Prayer card ---------- */
+
+.prayer-card {
+  width: 100%;
+  text-align: center;
+  padding: 4px 8px;
+}
+
+.prayer-progress {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+
+.mystery-banner {
+  background: var(--accent-soft);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+
+.mystery-title p {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--accent);
+  margin: 0;
+}
+
+.mystery-petition p {
+  font-size: 14px;
+  color: var(--text-soft);
+  font-style: italic;
+  margin: 4px 0 0;
+}
+
+.prayer-heading p {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin: 0 0 8px;
+}
+
+.prayer-text p {
+  font-family: 'Source Serif 4', serif;
+  font-size: 19px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.prayer-text p.secondary {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 15px;
+  color: var(--text-soft);
+  font-style: italic;
+  margin-top: 10px;
+}

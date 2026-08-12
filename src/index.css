@@ -1,0 +1,29 @@
+:root {
+  --ground: #fbf8f3;
+  --text: #241f1b;
+  --text-soft: #6b5f56;
+  --accent: #8b3a42;
+  --accent-soft: rgba(139, 58, 66, 0.12);
+  --gold: #c9a227;
+  --border: #e4ddd1;
+  --bead-color: #d8cdbc;
+  --bead-done: #b8a58c;
+
+  font: 17px/1.5 'Be Vietnam Pro', system-ui, sans-serif;
+  color: var(--text);
+  background: var(--ground);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+}
