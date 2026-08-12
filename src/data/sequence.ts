@@ -55,8 +55,10 @@ export interface Step {
   heading: Bilingual;
   /** URL-safe id for deep-linking, e.g. "annunciation-hail-mary-9" (matches visualrosary.org's scheme) */
   slug: string;
-  /** A second prayer shown on the same screen, e.g. the Fatima Prayer alongside the decade's Glory Be */
-  secondary?: { heading: Bilingual; prayer: Bilingual };
+  /** Extra prayers shown as smaller buttons on the same screen, e.g. the Fatima Prayer
+   * alongside the decade's Glory Be, or Kinh Trông Cậy + Các Lời Nguyện Vắn Tắt after
+   * the closing Hail, Holy Queen. */
+  secondary?: { heading: Bilingual; prayer: Bilingual }[];
   /** Small label above the mystery title, e.g. "Thứ tư thì ngắm" / "The Fourth Glorious Mystery" */
   mysteryEyebrow?: Bilingual;
   mystery?: Mystery;
@@ -168,32 +170,24 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
       prayer: prayers.gloryBe,
       heading: heading('Kinh Sáng Danh', 'Glory Be'),
       slug: `${base}-glory-be`,
-      secondary: { heading: heading('Kinh Fatima', 'Fatima Prayer'), prayer: prayers.fatimaPrayer },
+      secondary: [{ heading: heading('Kinh Fatima', 'Fatima Prayer'), prayer: prayers.fatimaPrayer }],
       decadeNumber: d,
     });
   }
 
-  // Closing, back at the crucifix
+  // Closing, back at the crucifix. Kinh Trông Cậy and the Brief Invocations are
+  // traditionally said right after Hail, Holy Queen at the same centerpiece bead,
+  // so they're smaller secondary buttons on this same screen rather than their own steps.
   push({
     beadIndex: 0,
     kind: 'closing',
     prayer: prayers.hailHolyQueen,
     heading: heading('Lạy Nữ Vương', 'Hail, Holy Queen'),
     slug: 'hail-holy-queen',
-  });
-  push({
-    beadIndex: 0,
-    kind: 'closing',
-    prayer: prayers.weFlyToThyPatronage,
-    heading: heading('Kinh Trông Cậy', 'We Fly to Thy Patronage'),
-    slug: 'we-fly-to-thy-patronage',
-  });
-  push({
-    beadIndex: 0,
-    kind: 'closing',
-    prayer: prayers.briefInvocations,
-    heading: heading('Các Lời Nguyện Vắn Tắt', 'Brief Invocations'),
-    slug: 'brief-invocations',
+    secondary: [
+      { heading: heading('Kinh Trông Cậy', 'We Fly to Thy Patronage'), prayer: prayers.weFlyToThyPatronage },
+      { heading: heading('Các Lời Nguyện Vắn Tắt', 'Brief Invocations'), prayer: prayers.briefInvocations },
+    ],
   });
 
   return steps;

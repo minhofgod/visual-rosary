@@ -46,7 +46,7 @@ const item = {
 export function PrayerCard({ step, displayLang, showFruits, showMeditations, showScriptures }: Props) {
   const [meditationOpen, setMeditationOpen] = useState(false);
   const [prayerOpen, setPrayerOpen] = useState(false);
-  const [secondaryOpen, setSecondaryOpen] = useState(false);
+  const [secondaryOpenIndex, setSecondaryOpenIndex] = useState<number | null>(null);
 
   const verse = step.kind === 'hailMary' ? getBeadVerse(step.slug) : undefined;
 
@@ -105,12 +105,17 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations, sho
           <span className="prayer-trigger-ellipsis">…</span>
         </button>
 
-        {step.secondary && (
-          <button type="button" className="prayer-trigger" onClick={() => setSecondaryOpen(true)}>
-            <Text text={step.secondary.heading} displayLang={displayLang} className="prayer-trigger-label" />
+        {step.secondary?.map((extra, i) => (
+          <button
+            key={i}
+            type="button"
+            className="prayer-trigger prayer-trigger-secondary"
+            onClick={() => setSecondaryOpenIndex(i)}
+          >
+            <Text text={extra.heading} displayLang={displayLang} className="prayer-trigger-label" />
             <span className="prayer-trigger-ellipsis">…</span>
           </button>
-        )}
+        ))}
       </motion.div>
 
       {prayerOpen && (
@@ -119,12 +124,16 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations, sho
         </Modal>
       )}
 
-      {secondaryOpen && step.secondary && (
+      {secondaryOpenIndex !== null && step.secondary?.[secondaryOpenIndex] && (
         <Modal
-          title={displayLang === 'en' ? step.secondary.heading.en : step.secondary.heading.vi}
-          onClose={() => setSecondaryOpen(false)}
+          title={
+            displayLang === 'en'
+              ? step.secondary[secondaryOpenIndex].heading.en
+              : step.secondary[secondaryOpenIndex].heading.vi
+          }
+          onClose={() => setSecondaryOpenIndex(null)}
         >
-          <Text text={step.secondary.prayer} displayLang={displayLang} className="prayer-text" />
+          <Text text={step.secondary[secondaryOpenIndex].prayer} displayLang={displayLang} className="prayer-text" />
         </Modal>
       )}
 
