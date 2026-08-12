@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import type { Step } from '../data/sequence';
 import type { DisplayLang } from '../state/useDisplayLang';
@@ -45,7 +44,6 @@ const item = {
 } as const;
 
 export function PrayerCard({ step, displayLang, showFruits, showMeditations, showScriptures }: Props) {
-  const navigate = useNavigate();
   const [meditationOpen, setMeditationOpen] = useState(false);
   const [prayerOpen, setPrayerOpen] = useState(false);
   const [secondaryOpen, setSecondaryOpen] = useState(false);
@@ -114,14 +112,6 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations, sho
           </button>
         )}
       </motion.div>
-
-      {step.kind === 'closing' && (
-        <motion.div variants={item}>
-          <button type="button" className="return-home-button" onClick={() => navigate('/')}>
-            {displayLang === 'en' ? 'Return Home' : 'Về Trang Chủ'}
-          </button>
-        </motion.div>
-      )}
 
       {prayerOpen && (
         <Modal title={displayLang === 'en' ? step.heading.en : step.heading.vi} onClose={() => setPrayerOpen(false)}>

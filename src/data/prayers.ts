@@ -8,6 +8,8 @@ export const prayers: Record<
   | 'gloryBe'
   | 'fatimaPrayer'
   | 'hailHolyQueen'
+  | 'weFlyToThyPatronage'
+  | 'briefInvocations'
   | 'memorare',
   Bilingual
 > = {
@@ -39,8 +41,16 @@ export const prayers: Record<
     vi: 'Lạy Nữ Vương Mẹ nhân lành làm cho chúng con được sống, được vui, được cậy, thân lạy Mẹ. Chúng con con cháu Evà ở chốn khách đầy, kêu đến cùng Bà, chúng con ở nơi khóc lóc than thở kêu khẩn Bà thương. Hỡi ôi! Bà là Chúa bầu chúng con, xin ghé mặt thương xem chúng con. Đến sau khỏi đầy, xin cho chúng con được thấy Đức Chúa Giêsu Con lòng Bà gồm phúc lạ. Ôi! Khoan thay! Nhân thay! Dịu thay! Thánh Maria trọn đời đồng trinh. Amen.',
     en: 'Hail, holy Queen, Mother of Mercy, our life, our sweetness, and our hope. To thee do we cry, poor banished children of Eve. To thee do we send up our sighs, mourning and weeping in this valley of tears. Turn then, most gracious advocate, thine eyes of mercy toward us, and after this our exile show unto us the blessed fruit of thy womb, Jesus. O clement, O loving, O sweet Virgin Mary. Amen.',
   },
-  memorare: {
+  weFlyToThyPatronage: {
     vi: 'Chúng con trông cậy Rất Thánh Đức Mẹ Chúa Trời, xin chớ chê chớ bỏ lời chúng con nguyện trong cơn gian nan thiếu thốn, Đức Nữ Đồng Trinh hiển vinh sáng láng. Hằng chữa chúng con cho khỏi sự dữ. Amen.',
+    en: 'We fly to thy patronage, O holy Mother of God; despise not our petitions in our necessities, but deliver us always from all dangers, O glorious and blessed Virgin. Amen.',
+  },
+  briefInvocations: {
+    vi: 'Lạy Trái Tim Cực Thánh Chúa Giêsu.\n- Xin thương xót chúng con.\n\nLạy Trái Tim cực thanh cực tịnh Rất Thánh Đức Bà Maria.\n- Xin cầu cho chúng con.\n\nLạy ông thánh Giuse là bạn thanh sạch Đức Bà Maria trọn đời đồng trinh.\n- Xin cầu cho chúng con.',
+    en: 'Sacred Heart of Jesus,\n- Have mercy on us.\n\nImmaculate Heart of Mary,\n- Pray for us.\n\nSaint Joseph, chaste spouse of the Virgin Mary,\n- Pray for us.',
+  },
+  memorare: {
+    vi: 'Lạy Thánh Nữ Đồng Trinh Maria, là Mẹ rất nhân từ, xin hãy nhớ xưa nay chưa từng nghe có người nào chạy đến cùng Đức Mẹ, xin bầu chữa cứu giúp, mà Đức Mẹ từ bỏ chẳng nhậm lời. Nhân vì sự ấy, con lấy lòng trông cậy than van chạy đến, sấp mình xuống dưới chân Đức Mẹ là Nữ Đồng Trinh trên hết các kẻ đồng trinh, xin Đức Mẹ đoái đến con là kẻ tội lỗi. Lạy Mẹ là Mẹ Chúa Cứu Thế, xin chớ bỏ lời con kêu xin, một dủ lòng thương mà nhậm lời con cùng. Amen.',
     en: 'Remember, O most gracious Virgin Mary, that never was it known that anyone who fled to thy protection, implored thy help, or sought thy intercession, was left unaided. Inspired by this confidence, I fly unto thee, O Virgin of virgins, my Mother; to thee do I come, before thee I stand, sinful and sorrowful. O Mother of the Word Incarnate, despise not my petitions, but in thy mercy hear and answer me. Amen.',
   },
 };

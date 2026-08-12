@@ -47,8 +47,9 @@ export function PickerPage() {
 
       <header className="reading-header">
         <div className="landing-wordmark">
-          <span>Đọc Kinh</span>
-          <span>Mân Côi</span>
+          <span className="landing-wordmark-small">Đọc Kinh</span>
+          <span className="landing-wordmark-big">Mân Côi</span>
+          <span className="landing-wordmark-tagline">by MinhofGod</span>
         </div>
         <div className="reading-header-right">
           <LangToggle value={displayLang} onChange={setDisplayLang} />

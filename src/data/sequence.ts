@@ -181,6 +181,20 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
     heading: heading('Lạy Nữ Vương', 'Hail, Holy Queen'),
     slug: 'hail-holy-queen',
   });
+  push({
+    beadIndex: 0,
+    kind: 'closing',
+    prayer: prayers.weFlyToThyPatronage,
+    heading: heading('Kinh Trông Cậy', 'We Fly to Thy Patronage'),
+    slug: 'we-fly-to-thy-patronage',
+  });
+  push({
+    beadIndex: 0,
+    kind: 'closing',
+    prayer: prayers.briefInvocations,
+    heading: heading('Các Lời Nguyện Vắn Tắt', 'Brief Invocations'),
+    slug: 'brief-invocations',
+  });
 
   return steps;
 }

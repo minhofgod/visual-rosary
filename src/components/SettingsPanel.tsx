@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import type { Settings, BeadPosition } from '../state/useSettings';
 import type { DisplayLang } from '../state/useDisplayLang';
 
@@ -11,6 +12,8 @@ interface Props {
 const t = (lang: DisplayLang, vi: string, en: string) => (lang === 'en' ? en : lang === 'both' ? `${vi} / ${en}` : vi);
 
 export function SettingsPanel({ settings, onChange, onClose, displayLang }: Props) {
+  const navigate = useNavigate();
+
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="settings-panel" onClick={(e) => e.stopPropagation()}>
@@ -20,6 +23,10 @@ export function SettingsPanel({ settings, onChange, onClose, displayLang }: Prop
             ×
           </button>
         </div>
+
+        <button type="button" className="return-home-button" onClick={() => navigate('/')}>
+          {t(displayLang, 'Về Trang Chủ', 'Return Home')}
+        </button>
 
         <div className="settings-group">
           <h3>{t(displayLang, 'Vị trí chuỗi hạt', 'Beads')}</h3>
