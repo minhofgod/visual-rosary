@@ -77,7 +77,7 @@ export function PickerPage() {
           })}
         </div>
 
-        {prayersToday !== null && (
+        {prayersToday !== null && prayersToday > 10 && (
           <div className="landing-prayer-count">
             <span className="landing-prayer-count-number">{prayersToday}</span>
             <span className="landing-prayer-count-label">
