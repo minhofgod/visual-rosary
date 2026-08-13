@@ -12,6 +12,15 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Fixed a mislabeled decade image** — `crowning-hail-mary-5` was byte-identical
+  to `scourging-hail-mary-8` (Giotto's *Flagellation*), so the Crowning decade
+  showed the wrong scene. Replaced with Fra Angelico's *Mocking of Christ* (San
+  Marco, Cell 7) and corrected the artist/source in `beadImages.ts`.
+- **Exported the image library** to a shared, repo-external folder
+  `../Catholic Images/` (Dropbox sibling of this project): all 220 public-domain
+  artworks under their original Wikimedia filenames + `CREDITS.csv` (per-site
+  usage column "Visual Rosary Website") + a `README.md` with instructions for
+  future sessions to reuse the library and source new images without duplicates.
 - **How-to-pray diagram callout lines** — made all leader lines horizontal
   (each numbered badge pinned level with the bead it annotates) instead of some
   running diagonal; step 5 (joining bead) now drops a short **vertical** line
