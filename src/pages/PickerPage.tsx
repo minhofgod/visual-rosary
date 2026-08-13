@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { LangToggle } from '../components/LangToggle';
 import { MysteryBackground } from '../components/MysteryBackground';
 import { RosaryDiagram } from '../components/RosaryDiagram';
+import { ShareModal } from '../components/ShareModal';
 import { useDisplayLang } from '../state/useDisplayLang';
 import { useSlideshow } from '../state/useSlideshow';
 import { usePrayersToday } from '../state/usePrayersToday';
@@ -17,26 +18,7 @@ export function PickerPage() {
   const image = useSlideshow();
   const today = todaysMysteryKey();
   const prayersToday = usePrayersToday();
-  const [copied, setCopied] = useState(false);
-
-  const handleShare = async () => {
-    const url = window.location.href;
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: 'Đọc Kinh Mân Côi', url });
-      } catch {
-        // user cancelled the share sheet — no-op
-      }
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
-    } catch {
-      // clipboard unavailable — nothing more we can do here
-    }
-  };
+  const [shareOpen, setShareOpen] = useState(false);
 
   return (
     <div className="reading-screen landing-screen">
@@ -87,9 +69,11 @@ export function PickerPage() {
         )}
       </main>
 
-      <button type="button" className="landing-share" onClick={handleShare}>
-        {copied ? (displayLang === 'en' ? 'Copied!' : 'Đã sao chép!') : displayLang === 'en' ? 'Share' : 'Chia sẻ'}
+      <button type="button" className="landing-share" onClick={() => setShareOpen(true)}>
+        {displayLang === 'en' ? 'Share' : 'Chia sẻ'}
       </button>
+
+      {shareOpen && <ShareModal displayLang={displayLang} onClose={() => setShareOpen(false)} />}
 
       <RosaryDiagram displayLang={displayLang} />
     </div>
