@@ -979,6 +979,20 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
+.streak-nudge {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--gold);
+  text-align: center;
+  max-width: 240px;
+  margin-top: -2px;
+}
+
+.streak-nudge.is-done {
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+
 .streak-week {
   display: inline-flex;
   gap: 10px;
@@ -1022,6 +1036,76 @@
 
 .streak-meta-sep {
   opacity: 0.5;
+}
+
+.streak-month-toggle {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.streak-month-toggle:hover {
+  color: #fff;
+}
+
+.streak-month {
+  width: 100%;
+  max-width: 252px;
+}
+
+.streak-month-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.streak-month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.streak-month-dow {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  padding-bottom: 2px;
+}
+
+.streak-month-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.streak-month-cell.is-empty {
+  background: transparent;
+}
+
+.streak-month-cell.is-prayed {
+  background: var(--gold);
+  color: #241f1b;
+  font-weight: 700;
+}
+
+.streak-month-cell.is-today {
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.85);
+}
+
+.streak-month-cell.is-future {
+  color: rgba(255, 255, 255, 0.3);
+  background: transparent;
 }
 
 .landing-prayer-count {

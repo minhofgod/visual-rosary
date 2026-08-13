@@ -14,8 +14,9 @@ domain artwork, scripture verses, and a settings panel.
 ### Recently completed
 - **Device-local prayer streak** — the landing page shows a 🔥 streak card
   (captioned "Your rosary streak" / "Chuỗi ngày lần hạt của bạn", with current &
-  longest streak, total rosaries, and a 7-day dot row) once at least one rosary
-  has been prayed on the device. Saved in `localStorage` (no login),
+  longest streak, total rosaries, a 7-day dot row, an expandable **month
+  calendar**, and a **"keep it going" nudge** that changes based on whether
+  you've prayed today) once at least one rosary has been prayed on the device. Saved in `localStorage` (no login),
   recorded when a rosary reaches its closing step (session-guarded against
   refresh double-counts), bilingual VI/EN. Files: `src/lib/prayerStreak.ts`,
   `src/state/useStreak.ts`, `src/components/StreakCard.tsx`. Designed so a future
@@ -47,8 +48,9 @@ domain artwork, scripture verses, and a settings panel.
 Audience priority: **Vietnamese Catholics**. Accounts/login wanted eventually
 (Supabase Auth) but **backburnered** — build personal features device-local first.
 Prioritized directions: personal habit, audio/hands-free, community.
-1. ~~**Device-local streak**~~ — ✅ SHIPPED (streak, longest, total, 7-day row).
-   Still could add: a full month calendar view + "resume where you left off".
+1. ~~**Device-local streak**~~ — ✅ SHIPPED (streak, longest, total, 7-day row,
+   month calendar, "keep it going" nudge). Still could add: "resume where you
+   left off".
 2. **Guided hands-free audio mode (VI first)** — recorded prayer audio, gentle
    auto-advance, soft bell between decades + Fatima prayer. (Partial quick win:
    bell/timer pacing before full audio exists.) Open: audio source.

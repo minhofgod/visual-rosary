@@ -13,6 +13,7 @@ export interface StreakStats {
   longestStreak: number;
   prayedToday: boolean;
   recentDays: { date: string; prayed: boolean }[]; // last 7 days, oldest → newest
+  prayedDays: string[]; // all local YYYY-MM-DD days prayed (for the month calendar)
 }
 
 interface Stored {
@@ -123,5 +124,6 @@ export function getStreakStats(): StreakStats {
     longestStreak: longest,
     prayedToday: daySet.has(today),
     recentDays,
+    prayedDays: [...daySet].sort(),
   };
 }
