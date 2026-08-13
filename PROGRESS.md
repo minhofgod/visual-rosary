@@ -12,6 +12,10 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **How-to-pray diagram callout lines** — made all leader lines horizontal
+  (each numbered badge pinned level with the bead it annotates) instead of some
+  running diagonal; step 5 (joining bead) now drops a short **vertical** line
+  straight down inside the loop onto the bead at its base.
 - Downloadable **QR poster** in the Share modal.
 - Anonymous **"Rosaries Prayed Today" counter** via Supabase — hidden until the
   day's total exceeds 10; gated by a `prayer_counter` feature flag; fail-open so a
