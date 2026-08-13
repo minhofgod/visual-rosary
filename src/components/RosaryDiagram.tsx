@@ -48,17 +48,20 @@ interface Callout {
 
 const L = 66;
 const R_X = 634;
+// Badges are pinned level with their target so every leader line is horizontal
+// (badge y === target y) — except step 5, which drops a short vertical line
+// straight down inside the bead loop onto the joining bead at the loop's base.
 const rawCallouts: { step: number; lx: number; ly: number; t: [number, number] }[] = [
   { step: 1, lx: L, ly: 745, t: [340, 745] },
   { step: 2, lx: L, ly: 672, t: [341, 672] },
   { step: 3, lx: L, ly: 610, t: [291, 610] },
   { step: 4, lx: L, ly: 545, t: [341, 545] },
-  { step: 6, lx: L, ly: 470, t: [pointAt(3).x, pointAt(3).y] },
-  { step: 7, lx: L, ly: 372, t: [pointAt(10).x, pointAt(10).y] },
-  { step: 8, lx: L, ly: 160, t: [pointAt(21).x, pointAt(21).y] },
-  { step: 5, lx: R_X, ly: 470, t: [361, 488] },
-  { step: 9, lx: R_X, ly: 545, t: [361, 503] },
-  { step: 10, lx: R_X, ly: 700, t: [360, 706] },
+  { step: 6, lx: L, ly: pointAt(3).y, t: [pointAt(3).x, pointAt(3).y] },
+  { step: 7, lx: L, ly: pointAt(10).y, t: [pointAt(10).x, pointAt(10).y] },
+  { step: 8, lx: L, ly: pointAt(21).y, t: [pointAt(21).x, pointAt(21).y] },
+  { step: 5, lx: CX, ly: 425, t: [CX, 495] },
+  { step: 9, lx: R_X, ly: 500, t: [361, 500] },
+  { step: 10, lx: R_X, ly: 706, t: [360, 706] },
 ];
 
 const callouts: Callout[] = rawCallouts.map((c) => ({ step: c.step, lx: c.lx, ly: c.ly, tx: c.t[0], ty: c.t[1] }));
