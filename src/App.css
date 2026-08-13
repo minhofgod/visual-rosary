@@ -935,6 +935,89 @@
   color: var(--gold);
 }
 
+/* ---------- Device-local prayer streak (landing) ---------- */
+
+.streak-card {
+  margin-top: 28px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+  padding: 14px 22px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.streak-main {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.streak-flame {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.streak-number {
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.streak-unit {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.streak-week {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.streak-day {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.streak-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.streak-day.is-prayed .streak-dot {
+  background: var(--gold);
+}
+
+.streak-dow {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.streak-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.streak-meta b {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+}
+
+.streak-meta-sep {
+  opacity: 0.5;
+}
+
 .landing-prayer-count {
   margin-top: 28px;
   display: inline-flex;

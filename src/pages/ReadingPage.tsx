@@ -19,6 +19,7 @@ import { getBeadImage } from '../data/beadImages';
 import { buildSequence } from '../data/sequence';
 import { findStepIndexBySlug } from '../data/slugs';
 import { logPrayerCompletion } from '../lib/prayerStats';
+import { recordCompletionLocal } from '../lib/prayerStreak';
 import type { MysteryKey } from '../data/types';
 
 const slideVariants = {
@@ -75,6 +76,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
   useEffect(() => {
     if (rosary.isComplete) {
       logPrayerCompletion(mysteryKey);
+      recordCompletionLocal(mysteryKey);
     }
   }, [rosary.isComplete, mysteryKey]);
 

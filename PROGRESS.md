@@ -12,6 +12,13 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Device-local prayer streak** — the landing page shows a 🔥 streak card
+  (current & longest streak, total rosaries, and a 7-day dot row) once at least
+  one rosary has been prayed on the device. Saved in `localStorage` (no login),
+  recorded when a rosary reaches its closing step (session-guarded against
+  refresh double-counts), bilingual VI/EN. Files: `src/lib/prayerStreak.ts`,
+  `src/state/useStreak.ts`, `src/components/StreakCard.tsx`. Designed so a future
+  Supabase-Auth account can adopt the same data. First step of the roadmap below.
 - **Fixed a mislabeled decade image** — `crowning-hail-mary-5` was byte-identical
   to `scourging-hail-mary-8` (Giotto's *Flagellation*), so the Crowning decade
   showed the wrong scene. Replaced with Fra Angelico's *Mocking of Christ* (San
@@ -35,8 +42,18 @@ domain artwork, scripture verses, and a settings panel.
 - Verse citations fixed; footer bar with Vietnamese book abbreviations.
 - Prayer-modal sizing so long prayers fit without scrolling.
 
-### Possible next steps (not yet decided)
-- Ideas / bugs to be added here as they come up.
+### Possible next steps (roadmap — from 2026-08-13 brainstorm)
+Audience priority: **Vietnamese Catholics**. Accounts/login wanted eventually
+(Supabase Auth) but **backburnered** — build personal features device-local first.
+Prioritized directions: personal habit, audio/hands-free, community.
+1. ~~**Device-local streak**~~ — ✅ SHIPPED (streak, longest, total, 7-day row).
+   Still could add: a full month calendar view + "resume where you left off".
+2. **Guided hands-free audio mode (VI first)** — recorded prayer audio, gentle
+   auto-advance, soft bell between decades + Fatima prayer. (Partial quick win:
+   bell/timer pacing before full audio exists.) Open: audio source.
+3. **Community** — anonymous intention wall ("ý cầu nguyện") others can pray for,
+   live "praying now" count. Builds on the existing prayer counter. Open: moderation.
+4. **Later:** Supabase Auth accounts to sync streaks + own intentions.
 
 ## How to run
 ```bash

@@ -4,9 +4,11 @@ import { LangToggle } from '../components/LangToggle';
 import { MysteryBackground } from '../components/MysteryBackground';
 import { RosaryDiagram } from '../components/RosaryDiagram';
 import { ShareModal } from '../components/ShareModal';
+import { StreakCard } from '../components/StreakCard';
 import { useDisplayLang } from '../state/useDisplayLang';
 import { useSlideshow } from '../state/useSlideshow';
 import { usePrayersToday } from '../state/usePrayersToday';
+import { useStreak } from '../state/useStreak';
 import { mysterySets, todaysMysteryKey } from '../data/mysteries';
 import type { MysteryKey } from '../data/types';
 
@@ -18,6 +20,7 @@ export function PickerPage() {
   const image = useSlideshow();
   const today = todaysMysteryKey();
   const prayersToday = usePrayersToday();
+  const streak = useStreak();
   const [shareOpen, setShareOpen] = useState(false);
 
   return (
@@ -58,6 +61,8 @@ export function PickerPage() {
             );
           })}
         </div>
+
+        {streak && <StreakCard stats={streak} displayLang={displayLang} />}
 
         {prayersToday !== null && prayersToday > 10 && (
           <div className="landing-prayer-count">
