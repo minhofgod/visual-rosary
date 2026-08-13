@@ -5,6 +5,7 @@ import { MysteryBackground } from '../components/MysteryBackground';
 import { RosaryDiagram } from '../components/RosaryDiagram';
 import { useDisplayLang } from '../state/useDisplayLang';
 import { useSlideshow } from '../state/useSlideshow';
+import { usePrayersToday } from '../state/usePrayersToday';
 import { mysterySets, todaysMysteryKey } from '../data/mysteries';
 import type { MysteryKey } from '../data/types';
 
@@ -15,6 +16,7 @@ export function PickerPage() {
   const { displayLang, setDisplayLang } = useDisplayLang();
   const image = useSlideshow();
   const today = todaysMysteryKey();
+  const prayersToday = usePrayersToday();
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
@@ -74,6 +76,15 @@ export function PickerPage() {
             );
           })}
         </div>
+
+        {prayersToday !== null && (
+          <div className="landing-prayer-count">
+            <span className="landing-prayer-count-number">{prayersToday}</span>
+            <span className="landing-prayer-count-label">
+              {displayLang === 'en' ? 'Rosaries Prayed Today' : 'Người Đã Lần Hạt Hôm Nay'}
+            </span>
+          </div>
+        )}
       </main>
 
       <button type="button" className="landing-share" onClick={handleShare}>

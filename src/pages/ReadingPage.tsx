@@ -18,6 +18,7 @@ import { getMysteryImage } from '../data/mysteryImages';
 import { getBeadImage } from '../data/beadImages';
 import { buildSequence } from '../data/sequence';
 import { findStepIndexBySlug } from '../data/slugs';
+import { logPrayerCompletion } from '../lib/prayerStats';
 import type { MysteryKey } from '../data/types';
 
 const slideVariants = {
@@ -68,6 +69,14 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.hash]);
+
+  // Log one completion (anonymous, session-guarded) when the rosary is prayed through
+  // to its final step — powers the public "Rosaries Prayed Today" counter.
+  useEffect(() => {
+    if (rosary.isComplete) {
+      logPrayerCompletion(mysteryKey);
+    }
+  }, [rosary.isComplete, mysteryKey]);
 
   const set = mysterySets[mysteryKey];
   const step = rosary.currentStep;
