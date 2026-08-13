@@ -13,8 +13,9 @@ domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
 - **Device-local prayer streak** — the landing page shows a 🔥 streak card
-  (current & longest streak, total rosaries, and a 7-day dot row) once at least
-  one rosary has been prayed on the device. Saved in `localStorage` (no login),
+  (captioned "Your rosary streak" / "Chuỗi ngày lần hạt của bạn", with current &
+  longest streak, total rosaries, and a 7-day dot row) once at least one rosary
+  has been prayed on the device. Saved in `localStorage` (no login),
   recorded when a rosary reaches its closing step (session-guarded against
   refresh double-counts), bilingual VI/EN. Files: `src/lib/prayerStreak.ts`,
   `src/state/useStreak.ts`, `src/components/StreakCard.tsx`. Designed so a future

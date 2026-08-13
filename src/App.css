@@ -950,6 +950,12 @@
   font-family: 'Be Vietnam Pro', sans-serif;
 }
 
+.streak-caption {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .streak-main {
   display: inline-flex;
   align-items: baseline;

@@ -29,12 +29,16 @@ export function StreakCard({ stats, displayLang }: Props) {
 
   return (
     <div className="streak-card">
+      <div className="streak-caption">{pick('Chuỗi ngày lần hạt của bạn', 'Your rosary streak', displayLang)}</div>
+
       <div className="streak-main">
         <span className="streak-flame" aria-hidden="true">
           🔥
         </span>
         <span className="streak-number">{stats.currentStreak}</span>
-        <span className="streak-unit">{pick('ngày liên tiếp', 'day streak', displayLang)}</span>
+        <span className="streak-unit">
+          {pick('ngày liên tiếp', stats.currentStreak === 1 ? 'day in a row' : 'days in a row', displayLang)}
+        </span>
       </div>
 
       <div className="streak-week" role="group" aria-label={pick('Bảy ngày gần đây', 'Last seven days', displayLang)}>
