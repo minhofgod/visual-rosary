@@ -12,13 +12,18 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
-- **SEO — content guide (Stage 1)** — added `src/components/HowToGuide.tsx`, a
+- **SEO — content guide + prerender** — added `src/components/HowToGuide.tsx`, a
   text-rich, crawlable Vietnamese-first article on the landing page (~900 words in
   VI): step-by-step "cách lần hạt Mân Côi", the full prayer texts, the 20 mysteries
-  with their weekday schedule, and an FAQ. Semantic h2/h3/h4. Google renders JS, so
-  this is indexable now. (Stage 2 = prerender it into static HTML for non-JS
-  crawlers — next; must be build-tested via a temp outDir since `vite build` can't
-  run locally due to the Dropbox EPERM.)
+  with their weekday schedule, and an FAQ (semantic h2/h3/h4). **Stage 2 (prerender):**
+  the guide's content lives in shared pure data (`src/data/guideContent.ts`) driving
+  both `<HowToGuide>` and `src/lib/renderGuideHtml.ts`; a postbuild step
+  (`tsx scripts/inject-guide.ts`, added to `npm run build`) bakes the Vietnamese
+  guide HTML into `dist/index.html` inside `#root`, so no-JS crawlers/link scrapers
+  get the full text. React cleanly replaces it on mount (verified: no console
+  warnings, single root child). Build tested via a temp outDir (local `vite build`
+  is blocked by the Dropbox EPERM; the fresh temp dir avoids it). The inject step is
+  fail-soft — any error logs and exits 0, so it can never break the deploy.
 - **SEO — quick wins** — added `robots.txt` + `sitemap.xml`, keyword-tuned
   title/description ("cách lần hạt Mân Côi", "đọc Kinh Mân Côi"), a `keywords` meta,
   `og:image`/`twitter:image` (logo), and JSON-LD (WebSite + Organization + a HowTo
