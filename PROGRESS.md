@@ -4,6 +4,16 @@ Running log of where we are, so any session can pick up quickly. Newest first.
 For architecture/infra details see the README and `src/` — this file is just the
 "what's done / what's next" narrative.
 
+> **⏰ OPEN FOLLOW-UPS — remind Minh (he asked to be nudged, 2026-08-14):**
+> - **Search Console:** confirm the sitemap was submitted (`sitemap.xml`) and the
+>   homepage "Request indexing" was done. Domain property was verified via GoDaddy's
+>   auto-TXT on 2026-08-14. Check the Performance report ~1 week later (≈2026-08-21).
+> - **Backlink:** add a link from the main *Hỏi Đáp Công Giáo* site to
+>   dockinhmancoi.com (anchor "đọc Kinh Mân Côi" / "cách lần hạt Mân Côi") — biggest
+>   off-page lever for the new domain.
+> - **Optional SEO/perf (not started):** code-split the ~750 KB JS bundle; compress
+>   the large bead images (some ~1.4 MB); per-route titles/meta for the 4 mystery pages.
+
 ## Current state (2026-08-13)
 
 Feature-complete and deployed on Vercel (`dockinhmancoi.com`). Working tree clean.
