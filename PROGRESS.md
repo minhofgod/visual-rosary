@@ -12,6 +12,13 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **SEO — quick wins** — added `robots.txt` + `sitemap.xml`, keyword-tuned
+  title/description ("cách lần hạt Mân Côi", "đọc Kinh Mân Côi"), a `keywords` meta,
+  `og:image`/`twitter:image` (logo), and JSON-LD (WebSite + Organization + a HowTo
+  mirroring the 10-step guide). NOTE: the decisive lever is still open — the site
+  is a client-rendered SPA (crawlers get an empty `<div id="root">`), so the real
+  fix is **prerendering to static HTML + a long-form Vietnamese "cách lần hạt" prose
+  guide**. See the SEO plan discussed 2026-08-14.
 - **Swipe past the end to finish** — on the final Hail, Holy Queen screen, a
   forward swipe/scroll/ArrowDown now returns to the home page (more intuitive than
   tapping the logo). A gentle "Vuốt lên để hoàn tất ↑ / Swipe up to finish" hint
