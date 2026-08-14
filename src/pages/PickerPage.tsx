@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LangToggle } from '../components/LangToggle';
 import { MysteryBackground } from '../components/MysteryBackground';
 import { RosaryDiagram } from '../components/RosaryDiagram';
 import { ShareModal } from '../components/ShareModal';
 import { StreakCard } from '../components/StreakCard';
+import { RosaryO } from '../components/RosaryO';
 import { useDisplayLang } from '../state/useDisplayLang';
 import { useSlideshow } from '../state/useSlideshow';
 import { usePrayersToday } from '../state/usePrayersToday';
 import { useStreak } from '../state/useStreak';
+import { useResume } from '../state/useResume';
+import { buildSequence } from '../data/sequence';
+import { findStepIndexBySlug } from '../data/slugs';
 import { mysterySets, todaysMysteryKey } from '../data/mysteries';
 import type { MysteryKey } from '../data/types';
 
@@ -21,7 +25,17 @@ export function PickerPage() {
   const today = todaysMysteryKey();
   const prayersToday = usePrayersToday();
   const streak = useStreak();
+  const resume = useResume();
   const [shareOpen, setShareOpen] = useState(false);
+
+  // Resolve the saved resume point into its mystery set + step heading for the label.
+  const resumeInfo = useMemo(() => {
+    if (!resume || !(resume.mysteryKey in mysterySets)) return null;
+    const key = resume.mysteryKey as MysteryKey;
+    const steps = buildSequence(key);
+    const step = steps[findStepIndexBySlug(steps, resume.slug)];
+    return { key, set: mysterySets[key], step };
+  }, [resume]);
 
   return (
     <div className="reading-screen landing-screen">
@@ -36,7 +50,9 @@ export function PickerPage() {
       <header className="reading-header">
         <div className="landing-wordmark">
           <span className="landing-wordmark-small">Đọc Kinh</span>
-          <span className="landing-wordmark-big">Mân Côi</span>
+          <span className="landing-wordmark-big">
+            Mân C<RosaryO />I
+          </span>
           <span className="landing-wordmark-tagline">by MinhofGod</span>
         </div>
         <div className="reading-header-right">
@@ -50,6 +66,22 @@ export function PickerPage() {
         </h1>
 
         <div className="landing-links">
+          {resumeInfo && (
+            <button
+              type="button"
+              className="landing-resume"
+              onClick={() => navigate(`/${resumeInfo.key}/pray#${resumeInfo.step.slug}`)}
+            >
+              <span className="landing-resume-label">
+                {displayLang === 'en' ? 'Continue where you left off' : 'Tiếp tục nơi đã dừng'}
+              </span>
+              <span className="landing-resume-sub">
+                {displayLang === 'en' ? resumeInfo.set.name.en : resumeInfo.set.name.vi} ·{' '}
+                {displayLang === 'en' ? resumeInfo.step.heading.en : resumeInfo.step.heading.vi}
+              </span>
+            </button>
+          )}
+
           <div className="landing-links-label">{displayLang === 'en' ? 'Begin' : 'Bắt Đầu'}</div>
           {ORDER.map((key) => {
             const set = mysterySets[key];

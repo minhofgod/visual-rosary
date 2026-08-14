@@ -79,7 +79,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         imageKey: 'baptism',
         meditation: {
           en: "As Jesus rises from the waters of the Jordan, the Father's voice names Him beloved Son, and the Spirit descends like a dove. In our own baptism we were claimed with the same words. We ask for the grace to live each day aware that we are truly, already, God's beloved children.",
-          vi: 'Khi Chúa Giêsu bước lên khỏi dòng nước sông Giođan, tiếng Chúa Cha gọi Người là Con yêu dấu, và Thánh Thần ngự xuống như chim bồ câu. Trong phép Rửa của mình, ta cũng đã được gọi bằng chính lời ấy. Chúng ta xin ơn sống mỗi ngày trong ý thức rằng mình thật sự, đã từ lâu, là con cái yêu dấu của Thiên Chúa.',
+          vi: 'Khi Chúa Giêsu bước lên khỏi dòng nước sông Gio-đan, tiếng Chúa Cha gọi Người là Con yêu dấu, và Thánh Thần ngự xuống như chim bồ câu. Trong phép Rửa của mình, ta cũng đã được gọi bằng chính lời ấy. Chúng ta xin ơn sống mỗi ngày trong ý thức rằng mình thật sự, đã từ lâu, là con cái yêu dấu của Thiên Chúa.',
         },
       },
       {
@@ -153,7 +153,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         imageKey: 'agony',
         meditation: {
           en: "Alone in Gethsemane, Jesus takes on the full weight of the world's sin, sweating blood as He prays, “not my will, but yours be done.” He asks His friends to watch with Him, and they fall asleep. We ask for true sorrow for our sins, and for the willingness to stay awake with Him in His hour of need.",
-          vi: 'Một mình trong vườn Giệtsimani, Chúa Giêsu gánh lấy trọn vẹn sức nặng tội lỗi của cả nhân loại, đổ mồ hôi máu khi cầu nguyện: “xin đừng theo ý con, một theo ý Cha.” Người xin các môn đệ tỉnh thức cùng Người, nhưng các ông lại ngủ mê. Chúng ta xin ơn thật lòng ăn năn tội lỗi mình, và sẵn lòng tỉnh thức bên Người trong giờ Người cần đến ta.',
+          vi: 'Một mình trong vườn Ghết-sê-ma-ni, Chúa Giêsu gánh lấy trọn vẹn sức nặng tội lỗi của cả nhân loại, đổ mồ hôi máu khi cầu nguyện: “xin đừng theo ý con, một theo ý Cha.” Người xin các môn đệ tỉnh thức cùng Người, nhưng các ông lại ngủ mê. Chúng ta xin ơn thật lòng ăn năn tội lỗi mình, và sẵn lòng tỉnh thức bên Người trong giờ Người cần đến ta.',
         },
       },
       {
@@ -186,7 +186,7 @@ export const mysterySets: Record<MysteryKey, MysterySet> = {
         imageKey: 'carrying',
         meditation: {
           en: 'The cross is heavier than He can carry alone, and Simon of Cyrene is pressed into helping Him bear it. Christ does not refuse the help, nor does He put the cross down. We ask for the patience to keep walking under the weight we are given, and the humility to let others help us carry it.',
-          vi: 'Thập giá nặng hơn sức Người có thể vác một mình, và ông Simon thành Xyrênê bị bắt buộc giúp Người vác đỡ. Chúa Kitô không từ chối sự giúp đỡ ấy, cũng không đặt thập giá xuống. Chúng ta xin ơn kiên nhẫn tiếp tục bước đi dưới gánh nặng được trao cho mình, và lòng khiêm nhường để người khác giúp ta vác nó.',
+          vi: 'Thập giá nặng hơn sức Người có thể vác một mình, và ông Si-môn gốc Ky-rê-nê bị bắt buộc giúp Người vác đỡ. Chúa Kitô không từ chối sự giúp đỡ ấy, cũng không đặt thập giá xuống. Chúng ta xin ơn kiên nhẫn tiếp tục bước đi dưới gánh nặng được trao cho mình, và lòng khiêm nhường để người khác giúp ta vác nó.',
         },
       },
       {

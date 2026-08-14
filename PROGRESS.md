@@ -12,6 +12,25 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Resume where you left off** — the landing page now shows a gold "Tiếp tục nơi
+  đã dừng / Continue where you left off" button (with the mystery set + current
+  step) when a rosary is in progress. Device-local (`src/lib/resumeState.ts`,
+  `useResume`); saved as you pray, cleared on completion, expires after 2 days.
+- **Gentler Carrying-decade image** — `carrying-hail-mary-2` was Bosch's grotesque
+  jeering-crowd *Christ Carrying the Cross*; replaced with Lorenzo Lotto's tender
+  close-up (metadata updated in `beadImages.ts`).
+- **Vietnamese meditation name fixes** — aligned place/person names in the
+  meditations to the CGKPV spellings used in the verses: `Giệtsimani → Ghết-sê-ma-ni`,
+  `Giođan → Gio-đan`, `Simon thành Xyrênê → Si-môn gốc Ky-rê-nê`. (Traditional
+  devotional forms like Chúa Giêsu, Phêrô, Giuse, Isave left as-is — correct, and
+  matching the mystery titles; they differ from the verses only by hyphenation.)
+- **New brand logo (Claude Design)** — the landing wordmark's Ô in "MÂN CÔI" is now
+  a rosary glyph (`src/components/RosaryO.tsx`): beaded ring + gold centerpiece +
+  crucifix pendant, rotated 22° so the crucifix clears the letter. Added the full
+  favicon/icon kit under `public/logo/`, wired the SVG favicon + favicon-32 +
+  apple-touch-icon in `index.html`, added `public/manifest.webmanifest`
+  (theme `#1a1310`) as a PWA foundation, and loaded Source Serif 4 weight 700.
+  Source kit lives in `./Rosary diagram recreation/logo/` (has a README + rules).
 - **Faith/hope/charity intention on the 3 opening Hail Marys** — each of the three
   opening Hail Mary screens now shows the virtue it's traditionally offered for
   ("Cầu cho được Đức Tin/Cậy/Mến" / "For an increase of Faith/Hope/Charity"), in
@@ -54,8 +73,7 @@ Audience priority: **Vietnamese Catholics**. Accounts/login wanted eventually
 (Supabase Auth) but **backburnered** — build personal features device-local first.
 Prioritized directions: personal habit, audio/hands-free, community.
 1. ~~**Device-local streak**~~ — ✅ SHIPPED (streak, longest, total, 7-day row,
-   month calendar, "keep it going" nudge). Still could add: "resume where you
-   left off".
+   month calendar, "keep it going" nudge). "Resume where you left off" also ✅ SHIPPED.
 2. **Guided hands-free audio mode (VI first)** — recorded prayer audio, gentle
    auto-advance, soft bell between decades + Fatima prayer. (Partial quick win:
    bell/timer pacing before full audio exists.) Open: audio source.

@@ -20,6 +20,7 @@ import { buildSequence } from '../data/sequence';
 import { findStepIndexBySlug } from '../data/slugs';
 import { logPrayerCompletion } from '../lib/prayerStats';
 import { recordCompletionLocal } from '../lib/prayerStreak';
+import { saveResume, clearResume } from '../lib/resumeState';
 import type { MysteryKey } from '../data/types';
 
 const slideVariants = {
@@ -79,6 +80,16 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
       recordCompletionLocal(mysteryKey);
     }
   }, [rosary.isComplete, mysteryKey]);
+
+  // Remember (or clear) where the user is, so the landing page can offer to
+  // resume. Skip saving the final step — a finished rosary has nothing to resume.
+  useEffect(() => {
+    if (rosary.isComplete) {
+      clearResume();
+    } else {
+      saveResume(mysteryKey, rosary.currentStep.slug);
+    }
+  }, [rosary.currentStep.slug, rosary.isComplete, mysteryKey]);
 
   const set = mysterySets[mysteryKey];
   const step = rosary.currentStep;
