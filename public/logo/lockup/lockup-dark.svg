@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150" width="300" height="150">
+  
+  <g font-family="&#39;Source Serif 4&#39;, Georgia, serif" fill="#f2ead9">
+    <text x="0" y="26" font-size="15" font-weight="600" letter-spacing="1.8">ĐỌC KINH</text>
+    <text x="0" y="70" font-size="38" font-weight="700" letter-spacing="0.76">MÂN C</text>
+    <text x="215" y="70" font-size="38" font-weight="700" letter-spacing="0.76">I</text>
+    <text x="0" y="110" font-size="12" font-style="italic" fill="#b9ac93">by MinhofGod</text>
+  </g>
+  <g transform="translate(153, 36) scale(0.98)">
+    <path d="M11 1 L20 -7 L29 1" fill="none" stroke="#f2ead9" stroke-width="3.4"></path>
+    <g transform="rotate(22 20 20)">
+      <circle cx="20" cy="20" r="13" fill="none" stroke="#ffffff" stroke-width="1.2"></circle>
+      <path d="M20 33 V44" stroke="#ffffff" stroke-width="1.2" fill="none"></path>
+      <g fill="#ffffff"><circle cx="26.5" cy="8.74" r="2.1"></circle><circle cx="31.26" cy="13.5" r="2.1"></circle><circle cx="31.26" cy="26.5" r="2.1"></circle><circle cx="26.5" cy="31.26" r="2.1"></circle><circle cx="13.5" cy="31.26" r="2.1"></circle><circle cx="8.74" cy="26.5" r="2.1"></circle><circle cx="8.74" cy="13.5" r="2.1"></circle><circle cx="13.5" cy="8.74" r="2.1"></circle></g>
+      <g fill="#c9a227"><circle cx="20" cy="7" r="2.9"></circle><circle cx="33" cy="20" r="2.9"></circle><circle cx="7" cy="20" r="2.9"></circle><circle cx="20" cy="33" r="3.5"></circle></g>
+      <path d="M18.2 44 h3.6 v11.5 h-3.6 z M13.9 47.6 h12.2 v3.6 h-12.2 z" fill="#c9a227"></path>
+    </g>
+  </g>
+</svg>
