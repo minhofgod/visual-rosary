@@ -1243,6 +1243,97 @@
 }
 
 /* ================================================================
+   How-to-pray text guide (SEO content) on the landing page
+   ================================================================ */
+
+.howto-guide {
+  position: relative;
+  z-index: 2;
+  background: #1a1310;
+  padding: 0 20px 90px;
+  color: #e6dcc3;
+}
+
+.howto-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: left;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.howto-title {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: clamp(24px, 6vw, 34px);
+  color: var(--gold);
+  text-align: center;
+  margin: 0 0 14px;
+}
+
+.howto-lead {
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(230, 220, 195, 0.85);
+  margin: 0 0 28px;
+}
+
+.howto-h3 {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--gold);
+  margin: 34px 0 12px;
+}
+
+.howto-h4 {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: #f2ead9;
+  margin: 18px 0 6px;
+}
+
+.howto-steps,
+.howto-mystery-list {
+  padding-left: 1.3em;
+  line-height: 1.75;
+}
+
+.howto-steps li,
+.howto-mystery-list li {
+  margin-bottom: 6px;
+}
+
+.howto-prayer p {
+  line-height: 1.75;
+  color: rgba(230, 220, 195, 0.85);
+  margin: 0 0 6px;
+}
+
+.howto-secondary {
+  color: rgba(230, 220, 195, 0.6);
+  font-style: italic;
+}
+
+.howto-days {
+  color: rgba(230, 220, 195, 0.7);
+  font-size: 0.85em;
+  font-weight: 400;
+}
+
+.howto-faq dt {
+  font-weight: 600;
+  color: #f2ead9;
+  margin-top: 16px;
+}
+
+.howto-faq dd {
+  margin: 4px 0 0;
+  line-height: 1.75;
+  color: rgba(230, 220, 195, 0.85);
+}
+
+/* ================================================================
    Rosary diagram ("how to pray") section on the landing page
    ================================================================ */
 

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { LangToggle } from '../components/LangToggle';
 import { MysteryBackground } from '../components/MysteryBackground';
 import { RosaryDiagram } from '../components/RosaryDiagram';
+import { HowToGuide } from '../components/HowToGuide';
 import { ShareModal } from '../components/ShareModal';
 import { StreakCard } from '../components/StreakCard';
 import { RosaryO } from '../components/RosaryO';
@@ -113,6 +114,8 @@ export function PickerPage() {
       {shareOpen && <ShareModal displayLang={displayLang} onClose={() => setShareOpen(false)} />}
 
       <RosaryDiagram displayLang={displayLang} />
+
+      <HowToGuide displayLang={displayLang} />
     </div>
   );
 }

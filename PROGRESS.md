@@ -12,6 +12,13 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **SEO — content guide (Stage 1)** — added `src/components/HowToGuide.tsx`, a
+  text-rich, crawlable Vietnamese-first article on the landing page (~900 words in
+  VI): step-by-step "cách lần hạt Mân Côi", the full prayer texts, the 20 mysteries
+  with their weekday schedule, and an FAQ. Semantic h2/h3/h4. Google renders JS, so
+  this is indexable now. (Stage 2 = prerender it into static HTML for non-JS
+  crawlers — next; must be build-tested via a temp outDir since `vite build` can't
+  run locally due to the Dropbox EPERM.)
 - **SEO — quick wins** — added `robots.txt` + `sitemap.xml`, keyword-tuned
   title/description ("cách lần hạt Mân Côi", "đọc Kinh Mân Côi"), a `keywords` meta,
   `og:image`/`twitter:image` (logo), and JSON-LD (WebSite + Organization + a HowTo
