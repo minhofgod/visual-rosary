@@ -522,6 +522,26 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
+/* Faith / hope / charity intention on the 3 opening Hail Marys */
+.prayer-intention,
+.prayer-intention p {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: clamp(13px, 3.4vw, 15px);
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  margin: 0 0 12px;
+  text-align: center;
+}
+
+.prayer-intention p.secondary {
+  font-weight: 500;
+  font-size: 0.9em;
+  font-style: italic;
+  color: rgba(201, 162, 39, 0.75);
+  margin-top: 2px;
+}
+
 .prayer-triggers {
   display: flex;
   flex-direction: column;

@@ -64,6 +64,9 @@ export interface Step {
   mystery?: Mystery;
   decadeNumber?: number;
   beadInDecade?: number;
+  /** Devotional intention shown on the 3 opening Hail Marys — the theological
+   * virtues faith, hope, and charity (one per bead). */
+  intention?: Bilingual;
 }
 
 const heading = (vi: string, en: string): Bilingual => ({ vi, en });
@@ -108,6 +111,13 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
     heading: heading('Kinh Lạy Cha', 'Our Father'),
     slug: 'our-father',
   });
+  // The 3 opening Hail Marys are traditionally offered for the three theological
+  // virtues — one each for faith, hope, and charity — before entering the mysteries.
+  const OPENING_HM_INTENTION: Bilingual[] = [
+    heading('Cầu cho được Đức Tin', 'For an increase of Faith'),
+    heading('Cầu cho được Đức Cậy', 'For an increase of Hope'),
+    heading('Cầu cho được Đức Mến', 'For an increase of Charity'),
+  ];
   for (let n = 1; n <= 3; n++) {
     push({
       beadIndex: 1 + n,
@@ -115,6 +125,7 @@ export function buildSequence(mysteryKey: MysteryKey): Step[] {
       prayer: prayers.hailMary,
       heading: heading(`Kính Mừng ${n}/3`, `Hail Mary ${n} of 3`),
       slug: `hail-mary-${n}`,
+      intention: OPENING_HM_INTENTION[n - 1],
     });
   }
 

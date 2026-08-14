@@ -114,6 +114,12 @@ export function PrayerCard({ step, displayLang, showFruits, showMeditations, sho
         </motion.div>
       )}
 
+      {step.intention && (
+        <motion.div variants={item}>
+          <Text text={step.intention} displayLang={displayLang} className="prayer-intention" />
+        </motion.div>
+      )}
+
       <motion.div variants={item} className="prayer-triggers">
         <button type="button" className="prayer-trigger" onClick={() => setPrayerOpen(true)}>
           <Text text={step.heading} displayLang={displayLang} className="prayer-trigger-label" />

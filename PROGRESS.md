@@ -12,6 +12,11 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Faith/hope/charity intention on the 3 opening Hail Marys** — each of the three
+  opening Hail Mary screens now shows the virtue it's traditionally offered for
+  ("Cầu cho được Đức Tin/Cậy/Mến" / "For an increase of Faith/Hope/Charity"), in
+  gold above the prayer. Added `Step.intention` in `sequence.ts`, rendered in
+  `PrayerCard`. Decade Hail Marys are unaffected.
 - **Device-local prayer streak** — the landing page shows a 🔥 streak card
   (captioned "Your rosary streak" / "Chuỗi ngày lần hạt của bạn", with current &
   longest streak, total rosaries, a 7-day dot row, an expandable **month
