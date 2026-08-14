@@ -52,7 +52,14 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
   const rosary = useRosary(mysteryKey, initialStepIndex);
   const { displayLang, setDisplayLang } = useDisplayLang();
   const { settings, setSettings } = useSettings();
-  const swipe = useSwipeNav(rosary.next, rosary.prev);
+  // On the final step (Hail, Holy Queen) a forward swipe means "I'm done" — send the
+  // user home instead of clamping at the end. It takes a deliberate swipe/scroll
+  // (≥50px drag or a wheel gesture), so a tap won't trigger it.
+  const handleNext = () => {
+    if (rosary.isComplete) navigate('/');
+    else rosary.next();
+  };
+  const swipe = useSwipeNav(handleNext, rosary.prev);
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   // Keep the URL's hash in sync with the current step, so it's always shareable/bookmarkable.
@@ -154,7 +161,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
             position="left"
             displayLang={displayLang}
             onBeadClick={rosary.jumpToBead}
-            onNext={rosary.next}
+            onNext={handleNext}
           />
         )}
 
@@ -193,13 +200,17 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
             position="right"
             displayLang={displayLang}
             onBeadClick={rosary.jumpToBead}
-            onNext={rosary.next}
+            onNext={handleNext}
           />
         )}
       </div>
 
       {showFooterBar && currentMystery && (
         <PrayerFooter mystery={currentMystery} verse={footerVerse} displayLang={displayLang} />
+      )}
+
+      {rosary.isComplete && (
+        <div className="closing-hint">{displayLang === 'en' ? 'Swipe up to finish ↑' : 'Vuốt lên để hoàn tất ↑'}</div>
       )}
 
       {settingsOpen && (

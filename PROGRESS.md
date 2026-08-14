@@ -12,6 +12,11 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Swipe past the end to finish** — on the final Hail, Holy Queen screen, a
+  forward swipe/scroll/ArrowDown now returns to the home page (more intuitive than
+  tapping the logo). A gentle "Vuốt lên để hoàn tất ↑ / Swipe up to finish" hint
+  appears on that screen. Only the deliberate next-gesture triggers it (a tap does
+  not); earlier steps are unchanged.
 - **Resume where you left off** — the landing page now shows a gold "Tiếp tục nơi
   đã dừng / Continue where you left off" button (with the mystery set + current
   step) when a rosary is in progress. Device-local (`src/lib/resumeState.ts`,
