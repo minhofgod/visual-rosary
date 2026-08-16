@@ -116,6 +116,12 @@ export function PickerPage() {
       <RosaryDiagram displayLang={displayLang} />
 
       <HowToGuide displayLang={displayLang} />
+
+      <footer className="site-footer">
+        <a href="/privacy.html">{displayLang === 'en' ? 'Privacy Policy' : 'Chính Sách Bảo Mật'}</a>
+        <span className="site-footer-sep" aria-hidden="true">·</span>
+        <span>© Đọc Kinh Mân Côi</span>
+      </footer>
     </div>
   );
 }

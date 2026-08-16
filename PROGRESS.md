@@ -5,6 +5,13 @@ For architecture/infra details see the README and `src/` — this file is just t
 "what's done / what's next" narrative.
 
 > **⏰ OPEN FOLLOW-UPS — remind Minh (he asked to be nudged, 2026-08-14):**
+> - **Google Play (free app):** the PWA is now install-ready (SW + manifest + iOS
+>   tags + privacy page). Remaining, Minh's side: create a Play Developer account
+>   ($25 one-time + ID verification); a personal account needs a 12-tester / 14-day
+>   closed test. Then run dockinhmancoi.com through **PWABuilder** (or Bubblewrap) to
+>   get the `.aab` + signing SHA-256 → send it to me and I add
+>   `public/.well-known/assetlinks.json`. Privacy URL for the listing:
+>   `https://dockinhmancoi.com/privacy.html`.
 > - **Search Console:** confirm the sitemap was submitted (`sitemap.xml`) and the
 >   homepage "Request indexing" was done. Domain property was verified via GoDaddy's
 >   auto-TXT on 2026-08-14. Check the Performance report ~1 week later (≈2026-08-21).
@@ -22,6 +29,17 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **PWA / installable app (Play Store prep)** — the site was already installable via
+  the manifest (that's the "Install app" prompt Minh saw). Made it app-store ready:
+  a **service worker** (`public/sw.js`, registered prod-only in `main.tsx`; network-
+  first navigations, cache-first hashed assets, offline app-shell fallback);
+  **manifest polish** (`id`, `categories`, separate any/maskable icons); **iOS meta
+  tags** (`apple-mobile-web-app-capable` etc. — Apple shows no auto prompt, users
+  "Add to Home Screen"); a bilingual **privacy policy** at `/privacy.html` (Play
+  requires one) linked from a new landing footer. Build-verified via temp outDir
+  (files serve, manifest valid, SW + apple tags in the bundle); live SW registration
+  couldn't be confirmed in the sandbox browser but works on real HTTPS. Next steps
+  for Play in the follow-ups block above.
 - **SEO — content guide + prerender** — added `src/components/HowToGuide.tsx`, a
   text-rich, crawlable Vietnamese-first article on the landing page (~900 words in
   VI): step-by-step "cách lần hạt Mân Côi", the full prayer texts, the 20 mysteries

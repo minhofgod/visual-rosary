@@ -1,15 +1,20 @@
 {
+  "id": "/",
   "name": "Đọc Kinh Mân Côi",
   "short_name": "Mân Côi",
   "description": "Lần hạt Mân Côi trực tuyến, song ngữ Việt–Anh, với hình ảnh và Kinh Thánh cho từng Kinh Kính Mừng.",
   "lang": "vi",
+  "dir": "ltr",
+  "categories": ["books", "education", "lifestyle"],
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#1a1310",
   "theme_color": "#1a1310",
   "icons": [
-    { "src": "/logo/png/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/logo/png/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/logo/png/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/logo/png/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/logo/png/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/logo/png/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
