@@ -1,10 +1,12 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LangToggle } from '../components/LangToggle';
+import { MysteryBackground } from '../components/MysteryBackground';
 import { PrayerRequestCard } from '../components/PrayerRequestCard';
 import { PrayingForYouModal } from '../components/PrayingForYouModal';
 import { SignInModal } from '../components/SignInModal';
 import { useDisplayLang } from '../state/useDisplayLang';
+import { useSlideshow } from '../state/useSlideshow';
 import { useAuth } from '../state/useAuth';
 import {
   getWall, createRequest, prayForRequest, reportRequest, blockPoster, deleteRequest,
@@ -17,6 +19,7 @@ const MAX_LEN = 500;
 export function PrayerWallPage() {
   const navigate = useNavigate();
   const { displayLang, setDisplayLang } = useDisplayLang();
+  const image = useSlideshow();
   const auth = useAuth();
 
   const [items, setItems] = useState<WallItem[]>([]);
@@ -100,7 +103,13 @@ export function PrayerWallPage() {
 
   return (
     <div className="reading-screen pw-screen">
+      <MysteryBackground image={image?.file} gradientClass="bg-landing" />
       <div className="bg-scrim" />
+      {image && (
+        <div className="bg-credit">
+          {image.title}, {image.artist} — Public domain, via Wikimedia Commons
+        </div>
+      )}
 
       <header className="reading-header">
         <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label={t('Trang chủ', 'Home')}>
@@ -108,19 +117,22 @@ export function PrayerWallPage() {
             <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
           </svg>
         </button>
-        <span className="reading-mystery-name">{t('Ý Cầu Nguyện', 'Prayer Requests')}</span>
         <div className="reading-header-right">
           <LangToggle value={displayLang} onChange={setDisplayLang} />
         </div>
       </header>
 
       <main className="pw-main">
-        <p className="pw-lead">
-          {t(
-            'Xin cộng đoàn cùng cầu nguyện cho ý nguyện của bạn. Hãy đăng ý cầu nguyện, và cầu nguyện cho anh chị em mình.',
-            'Ask the community to pray for your intention — and pray for one another.',
-          )}
-        </p>
+        <div className="pw-hero">
+          <div className="pw-eyebrow">{t('CỘNG ĐOÀN CẦU NGUYỆN', 'PRAYER COMMUNITY')}</div>
+          <h1 className="pw-title">{t('Ý Cầu Nguyện', 'Prayer Requests')}</h1>
+          <p className="pw-lead">
+            {t(
+              'Xin cộng đoàn cùng cầu nguyện cho ý nguyện của bạn. Hãy đăng ý cầu nguyện, và cầu nguyện cho anh chị em mình.',
+              'Ask the community to pray for your intention — and pray for one another.',
+            )}
+          </p>
+        </div>
 
         {/* Post box */}
         {auth.isSignedIn ? (
