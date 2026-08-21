@@ -41,9 +41,10 @@ domain artwork, scripture verses, and a settings panel.
   the authenticated flows** (Google/magic-link sign-in → post → pray → report/block)
   — I can't sign into his accounts. If Google sign-in errors, check the OAuth Client
   ID in Supabase is the real `.apps.googleusercontent.com` value.
-  **Still to do:** sync device streak → account; Play data-safety form; before
-  public launch set up Resend SMTP + publish the Google OAuth consent screen.
-  Apple sign-in deferred ($99/yr).
+  **Still to do:** Play data-safety form; before public launch set up Resend SMTP +
+  publish the Google OAuth consent screen. Apple sign-in deferred ($99/yr).
+  (Streak↔account sync was DROPPED 2026-08-14 — too few users to matter; the streak
+  stays device-local and accounts are just for the wall.)
 - **PWA / installable app (Play Store prep)** — the site was already installable via
   the manifest (that's the "Install app" prompt Minh saw). Made it app-store ready:
   a **service worker** (`public/sw.js`, registered prod-only in `main.tsx`; network-
