@@ -29,6 +29,15 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Community milestone — backend scaffolding (IN PROGRESS)** — wrote the Supabase
+  schema + RLS + moderation SQL ([`supabase/community-schema.sql`](supabase/community-schema.sql))
+  and a setup guide ([`docs/community-setup.md`](docs/community-setup.md)) for the
+  anonymous prayer-request wall + accounts. Design: posters anonymous (wall read only
+  via `get_prayer_wall()`, never exposes user_id); sign-in to post; pray/report/block
+  via SECURITY DEFINER RPCs; rate-limit + report auto-hide + ban/admin flags.
+  **Blocked on Minh:** run the SQL + enable Email/Google providers in Supabase
+  (steps 1–4 of the guide). Then build sign-in + wall + "🙏 Praying for you" card +
+  moderation UI. Full design in [roadmap memory]. Apple sign-in deferred ($99/yr).
 - **PWA / installable app (Play Store prep)** — the site was already installable via
   the manifest (that's the "Install app" prompt Minh saw). Made it app-store ready:
   a **service worker** (`public/sw.js`, registered prod-only in `main.tsx`; network-
