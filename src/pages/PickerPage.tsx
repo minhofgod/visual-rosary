@@ -95,9 +95,11 @@ export function PickerPage() {
           })}
         </div>
 
-        <button type="button" className="landing-community-link" onClick={() => navigate('/y-cau-nguyen')}>
-          🙏 {displayLang === 'en' ? 'Prayer Requests' : 'Ý Cầu Nguyện'}
-        </button>
+        {import.meta.env.DEV && (
+          <button type="button" className="landing-community-link" onClick={() => navigate('/y-cau-nguyen')}>
+            🙏 {displayLang === 'en' ? 'Prayer Requests' : 'Ý Cầu Nguyện'}
+          </button>
+        )}
 
         {streak && <StreakCard stats={streak} displayLang={displayLang} />}
 

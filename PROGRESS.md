@@ -29,6 +29,14 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Community wall gated to DEV-ONLY (2026-08-21)** — the wall link + `/y-cau-nguyen`
+  route are wrapped in `import.meta.env.DEV`, so they're **hidden in production** (a
+  catch-all route redirects any direct hit to `/`). Reason: Google sign-in broke
+  after activating the Supabase **custom domain** (`auth.dockinhmancoi.com` returns
+  Cloudflare 1016/530 — provisioning stalled), which forced the OAuth callback onto
+  the not-yet-serving domain. To re-launch: remove/fix the custom domain (or drop it
+  and keep the free app-name branding) so sign-in works on the `supabase.co` callback,
+  then remove the `import.meta.env.DEV` gates in `App.tsx` + `PickerPage.tsx`.
 - **Community — prayer-request wall + accounts (BUILT; auth flow needs Minh's test)**
   — Supabase setup done (SQL run; Email + Google providers enabled; URL config).
   Built: `useAuth` (Google + magic link), `prayerWall.ts` data layer, route
