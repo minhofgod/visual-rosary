@@ -1592,29 +1592,31 @@
 
 .signin-email {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .signin-email input {
-  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   color: #fff;
   font: inherit;
-  padding: 10px 12px;
+  padding: 11px 12px;
 }
 
 .signin-email button {
+  width: 100%;
   background: var(--gold);
   color: #241f1b;
   border: none;
   border-radius: 10px;
-  padding: 10px 16px;
+  padding: 11px 16px;
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  white-space: nowrap;
 }
 
 .signin-sent {
