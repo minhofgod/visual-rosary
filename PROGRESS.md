@@ -29,15 +29,21 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
-- **Community milestone — backend scaffolding (IN PROGRESS)** — wrote the Supabase
-  schema + RLS + moderation SQL ([`supabase/community-schema.sql`](supabase/community-schema.sql))
-  and a setup guide ([`docs/community-setup.md`](docs/community-setup.md)) for the
-  anonymous prayer-request wall + accounts. Design: posters anonymous (wall read only
-  via `get_prayer_wall()`, never exposes user_id); sign-in to post; pray/report/block
-  via SECURITY DEFINER RPCs; rate-limit + report auto-hide + ban/admin flags.
-  **Blocked on Minh:** run the SQL + enable Email/Google providers in Supabase
-  (steps 1–4 of the guide). Then build sign-in + wall + "🙏 Praying for you" card +
-  moderation UI. Full design in [roadmap memory]. Apple sign-in deferred ($99/yr).
+- **Community — prayer-request wall + accounts (BUILT; auth flow needs Minh's test)**
+  — Supabase setup done (SQL run; Email + Google providers enabled; URL config).
+  Built: `useAuth` (Google + magic link), `prayerWall.ts` data layer, route
+  `/y-cau-nguyen` (`PrayerWallPage`), `PrayerRequestCard`, `SignInModal`, and the
+  "🙏 Praying for you" `PrayingForYouModal` (rotating intercessions from
+  `src/data/intercessions.ts` + refresh + Amen → records the prayer). Landing has a
+  "🙏 Ý Cầu Nguyện" link. Privacy policy updated for accounts + user content.
+  **Verified:** wall reads from live Supabase (get_prayer_wall RPC works, empty),
+  sign-in modal renders, lint/tsc/build clean, no console errors. **Minh must test
+  the authenticated flows** (Google/magic-link sign-in → post → pray → report/block)
+  — I can't sign into his accounts. If Google sign-in errors, check the OAuth Client
+  ID in Supabase is the real `.apps.googleusercontent.com` value.
+  **Still to do:** sync device streak → account; Play data-safety form; before
+  public launch set up Resend SMTP + publish the Google OAuth consent screen.
+  Apple sign-in deferred ($99/yr).
 - **PWA / installable app (Play Store prep)** — the site was already installable via
   the manifest (that's the "Install app" prompt Minh saw). Made it app-store ready:
   a **service worker** (`public/sw.js`, registered prod-only in `main.tsx`; network-

@@ -1,0 +1,198 @@
+import { useEffect, useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { LangToggle } from '../components/LangToggle';
+import { PrayerRequestCard } from '../components/PrayerRequestCard';
+import { PrayingForYouModal } from '../components/PrayingForYouModal';
+import { SignInModal } from '../components/SignInModal';
+import { useDisplayLang } from '../state/useDisplayLang';
+import { useAuth } from '../state/useAuth';
+import {
+  getWall, createRequest, prayForRequest, reportRequest, blockPoster, deleteRequest,
+  type WallItem, type WallSort,
+} from '../lib/prayerWall';
+
+const PRAYED_GUARD = 'rosary.prayedFor.';
+const MAX_LEN = 500;
+
+export function PrayerWallPage() {
+  const navigate = useNavigate();
+  const { displayLang, setDisplayLang } = useDisplayLang();
+  const auth = useAuth();
+
+  const [items, setItems] = useState<WallItem[]>([]);
+  const [sort, setSort] = useState<WallSort>('new');
+  const [loading, setLoading] = useState(true);
+  const [body, setBody] = useState('');
+  const [posting, setPosting] = useState(false);
+  const [signInOpen, setSignInOpen] = useState(false);
+  const [prayingId, setPrayingId] = useState<string | null>(null);
+
+  const t = (vi: string, en: string) => (displayLang === 'en' ? en : vi);
+
+  async function load(s: WallSort) {
+    setLoading(true);
+    const data = await getWall(s, 50, 0);
+    setItems(
+      data.map((it) => ({
+        ...it,
+        prayed_by_me: it.prayed_by_me || localStorage.getItem(PRAYED_GUARD + it.id) === '1',
+      })),
+    );
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    load(sort);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sort, auth.isSignedIn]);
+
+  async function submit(e: FormEvent) {
+    e.preventDefault();
+    const text = body.trim();
+    if (!text) return;
+    if (!auth.isSignedIn) {
+      setSignInOpen(true);
+      return;
+    }
+    setPosting(true);
+    try {
+      await createRequest(text);
+      setBody('');
+      await load(sort);
+    } catch {
+      alert(t('Không đăng được. Xin thử lại sau.', 'Could not post. Please try again later.'));
+    } finally {
+      setPosting(false);
+    }
+  }
+
+  async function amen(id: string) {
+    const newCount = await prayForRequest(id);
+    localStorage.setItem(PRAYED_GUARD + id, '1');
+    setItems((prev) =>
+      prev.map((it) =>
+        it.id === id ? { ...it, prayed_by_me: true, prayed_count: newCount ?? it.prayed_count + 1 } : it,
+      ),
+    );
+  }
+
+  async function report(id: string) {
+    if (!confirm(t('Báo cáo ý cầu nguyện này là không phù hợp?', 'Report this request as inappropriate?'))) return;
+    await reportRequest(id);
+    setItems((prev) => prev.filter((it) => it.id !== id));
+  }
+
+  async function block(id: string) {
+    if (!auth.isSignedIn) {
+      setSignInOpen(true);
+      return;
+    }
+    if (!confirm(t('Ẩn tất cả bài của người này?', "Hide all of this person's posts?"))) return;
+    await blockPoster(id);
+    await load(sort);
+  }
+
+  async function remove(id: string) {
+    if (!confirm(t('Xóa ý cầu nguyện của bạn?', 'Delete your request?'))) return;
+    await deleteRequest(id);
+    setItems((prev) => prev.filter((it) => it.id !== id));
+  }
+
+  return (
+    <div className="reading-screen pw-screen">
+      <div className="bg-scrim" />
+
+      <header className="reading-header">
+        <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label={t('Trang chủ', 'Home')}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+            <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+          </svg>
+        </button>
+        <span className="reading-mystery-name">{t('Ý Cầu Nguyện', 'Prayer Requests')}</span>
+        <div className="reading-header-right">
+          <LangToggle value={displayLang} onChange={setDisplayLang} />
+        </div>
+      </header>
+
+      <main className="pw-main">
+        <p className="pw-lead">
+          {t(
+            'Xin cộng đoàn cùng cầu nguyện cho ý nguyện của bạn. Hãy đăng ý cầu nguyện, và cầu nguyện cho anh chị em mình.',
+            'Ask the community to pray for your intention — and pray for one another.',
+          )}
+        </p>
+
+        {/* Post box */}
+        {auth.isSignedIn ? (
+          <form className="pw-post" onSubmit={submit}>
+            <textarea
+              value={body}
+              maxLength={MAX_LEN}
+              onChange={(e) => setBody(e.target.value)}
+              placeholder={t('Xin cầu nguyện cho…', 'Please pray for…')}
+              rows={3}
+            />
+            <div className="pw-post-row">
+              <span className="pw-post-count">{body.length}/{MAX_LEN}</span>
+              <div className="pw-post-actions">
+                <button type="button" className="pw-signout" onClick={() => auth.signOut()}>
+                  {t('Đăng xuất', 'Sign out')}
+                </button>
+                <button type="submit" className="pw-post-btn" disabled={posting || !body.trim()}>
+                  {posting ? '…' : t('Đăng', 'Post')}
+                </button>
+              </div>
+            </div>
+          </form>
+        ) : (
+          <div className="pw-signin-prompt">
+            <span>{t('Đăng nhập để chia sẻ ý cầu nguyện của bạn.', 'Sign in to share your prayer request.')}</span>
+            <button type="button" className="pw-post-btn" onClick={() => setSignInOpen(true)}>
+              {t('Đăng nhập', 'Sign in')}
+            </button>
+          </div>
+        )}
+
+        {/* Sort */}
+        <div className="pw-sort">
+          <button type="button" className={sort === 'new' ? 'is-active' : ''} onClick={() => setSort('new')}>
+            {t('Mới nhất', 'Newest')}
+          </button>
+          <button type="button" className={sort === 'prayed' ? 'is-active' : ''} onClick={() => setSort('prayed')}>
+            {t('Được cầu nguyện nhiều', 'Most prayed')}
+          </button>
+        </div>
+
+        {/* List */}
+        {loading ? (
+          <p className="pw-empty">{t('Đang tải…', 'Loading…')}</p>
+        ) : items.length === 0 ? (
+          <p className="pw-empty">{t('Chưa có ý cầu nguyện nào. Hãy là người đầu tiên.', 'No requests yet. Be the first.')}</p>
+        ) : (
+          <ul className="pw-list">
+            {items.map((it) => (
+              <PrayerRequestCard
+                key={it.id}
+                item={it}
+                displayLang={displayLang}
+                onPray={() => setPrayingId(it.id)}
+                onReport={() => report(it.id)}
+                onBlock={() => block(it.id)}
+                onDelete={it.is_mine ? () => remove(it.id) : undefined}
+              />
+            ))}
+          </ul>
+        )}
+      </main>
+
+      {prayingId && (
+        <PrayingForYouModal
+          displayLang={displayLang}
+          onAmen={() => amen(prayingId)}
+          onClose={() => setPrayingId(null)}
+        />
+      )}
+      {signInOpen && <SignInModal displayLang={displayLang} onClose={() => setSignInOpen(false)} />}
+    </div>
+  );
+}
