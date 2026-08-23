@@ -103,7 +103,7 @@ export function PickerPage() {
 
         {streak && <StreakCard stats={streak} displayLang={displayLang} />}
 
-        {prayersToday !== null && prayersToday > 10 && (
+        {prayersToday !== null && (
           <div className="landing-prayer-count">
             <span className="landing-prayer-count-number">{prayersToday}</span>
             <span className="landing-prayer-count-label">

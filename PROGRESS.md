@@ -29,6 +29,9 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Always show the "Rosaries Prayed Today" counter** — removed the earlier
+  ">10" gate in `PickerPage`, so the real count shows even when low (incl. 0).
+  (Reverses the earlier "hide until >10" decision, per Minh's request.)
 - **Community wall gated to DEV-ONLY (2026-08-21)** — the wall link + `/y-cau-nguyen`
   route are wrapped in `import.meta.env.DEV`, so they're **hidden in production** (a
   catch-all route redirects any direct hit to `/`). Reason: Google sign-in broke
