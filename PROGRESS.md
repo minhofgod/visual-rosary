@@ -29,6 +29,10 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Counter resets at Vietnam midnight, not UTC** — updated the `get_prayers_today()`
+  SQL function (in Supabase) to use `Asia/Ho_Chi_Minh` for the day boundary, so the
+  "Rosaries Prayed Today" count resets at VN midnight. Server-side only; the SQL is in
+  the chat + memory. (Client comment in `prayerStats.ts` updated to match.)
 - **Always show the "Rosaries Prayed Today" counter** — removed the earlier
   ">10" gate in `PickerPage`, so the real count shows even when low (incl. 0).
   (Reverses the earlier "hide until >10" decision, per Minh's request.)

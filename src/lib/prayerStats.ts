@@ -28,7 +28,8 @@ export async function logPrayerCompletion(mysteryKey: MysteryKey): Promise<void>
   }
 }
 
-/** Total completed rosaries logged today (UTC day), across all mystery sets. */
+/** Total completed rosaries logged today (Vietnam day, Asia/Ho_Chi_Minh), across all
+ * mystery sets. The day boundary lives in the get_prayers_today() SQL function. */
 export async function getPrayersToday(): Promise<number | null> {
   if (!supabase) return null;
   const { data, error } = await supabase.rpc('get_prayers_today');
