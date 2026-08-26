@@ -29,6 +29,14 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Font size control (2026-08-25)** — new "Cỡ chữ / Font size" control in the settings
+  menu (three "A" glyphs: Vừa/Normal ×1, Lớn/Large ×1.15, Rất lớn/X-Large ×1.35), for the
+  elderly prayer audience. Adds `fontScale: number` to `useSettings` (localStorage,
+  device-local). `ReadingPage` sets `--font-scale` inline on `.reading-screen`; the
+  reading-text font-sizes in `App.css` are wrapped in `calc(... * var(--font-scale))`
+  (default `--font-scale: 1` in `index.css`). The prayer/meditation `Modal` renders inside
+  `.reading-screen`, so it scales too via the cascade. Only reading text uses the variable,
+  so landing/profile are unaffected.
 - **Fix: settings menu rendered behind profile content (2026-08-25)** — the menu
   (`SettingsPanel`) is nested inside `<header className="reading-header">` (z-index 2);
   on the profile page `.pf-main` also has `z-index: 2` and comes later in the DOM, so

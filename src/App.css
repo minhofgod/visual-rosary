@@ -65,6 +65,57 @@
   color: #241f1b;
 }
 
+/* Font-size control: three "A" glyphs of increasing size. */
+.font-size-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.font-size-toggle button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 6px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.font-size-toggle button.is-active {
+  background: var(--gold);
+  color: #241f1b;
+  border-color: var(--gold);
+}
+
+.font-size-toggle .font-size-a {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.font-size-toggle button:nth-child(1) .font-size-a {
+  font-size: 15px;
+}
+
+.font-size-toggle button:nth-child(2) .font-size-a {
+  font-size: 20px;
+}
+
+.font-size-toggle button:nth-child(3) .font-size-a {
+  font-size: 26px;
+}
+
+.font-size-toggle .font-size-label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
 /* ================================================================
    Reading screen: full-bleed art background + overlay text
    ================================================================ */
@@ -411,7 +462,7 @@
 
 .mystery-eyebrow,
 .mystery-eyebrow p {
-  font-size: clamp(13px, 3.5vw, 15px);
+  font-size: calc(clamp(13px, 3.5vw, 15px) * var(--font-scale));
   font-weight: 600;
   color: rgba(255, 255, 255, 0.75);
   margin: 0 0 6px;
@@ -420,7 +471,7 @@
 }
 
 .mystery-eyebrow p.secondary {
-  font-size: clamp(11px, 3vw, 13px);
+  font-size: calc(clamp(11px, 3vw, 13px) * var(--font-scale));
   font-style: italic;
   color: rgba(255, 255, 255, 0.55);
   margin-top: 2px;
@@ -433,7 +484,7 @@
 .mystery-title p {
   font-family: 'Source Serif 4', serif;
   font-weight: 600;
-  font-size: clamp(22px, 7vw, 40px);
+  font-size: calc(clamp(22px, 7vw, 40px) * var(--font-scale));
   line-height: 1.2;
   color: var(--gold);
   margin: 0 0 14px;
@@ -443,7 +494,7 @@
 }
 
 .fruit-label {
-  font-size: clamp(12px, 3.2vw, 13px);
+  font-size: calc(clamp(12px, 3.2vw, 13px) * var(--font-scale));
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 2px;
 }
@@ -451,7 +502,7 @@
 .mystery-petition,
 .mystery-petition p {
   font-family: 'Source Serif 4', serif;
-  font-size: clamp(18px, 5.5vw, 28px);
+  font-size: calc(clamp(18px, 5.5vw, 28px) * var(--font-scale));
   line-height: 1.3;
   color: var(--gold);
   margin: 0 0 14px;
@@ -468,7 +519,7 @@
 .scripture-text p {
   font-family: 'Source Serif 4', serif;
   font-style: italic;
-  font-size: clamp(16px, 4.8vw, 22px);
+  font-size: calc(clamp(16px, 4.8vw, 22px) * var(--font-scale));
   line-height: 1.4;
   color: var(--gold);
   margin: 0;
@@ -478,7 +529,7 @@
 }
 
 .scripture-text p.secondary {
-  font-size: clamp(14px, 4vw, 17px);
+  font-size: calc(clamp(14px, 4vw, 17px) * var(--font-scale));
   color: rgba(255, 255, 255, 0.7);
   margin-top: 4px;
 }
@@ -573,7 +624,7 @@
 .prayer-intention,
 .prayer-intention p {
   font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: clamp(13px, 3.4vw, 15px);
+  font-size: calc(clamp(13px, 3.4vw, 15px) * var(--font-scale));
   font-weight: 600;
   color: var(--gold);
   letter-spacing: 0.02em;
@@ -622,7 +673,7 @@
 .prayer-trigger-label,
 .prayer-trigger-label p {
   font-family: 'Source Serif 4', serif;
-  font-size: 20px;
+  font-size: calc(20px * var(--font-scale));
   font-weight: 600;
   color: #fff;
   margin: 0;
@@ -631,7 +682,7 @@
 
 .prayer-trigger-label p.secondary {
   font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: 13px;
+  font-size: calc(13px * var(--font-scale));
   color: rgba(255, 255, 255, 0.65);
   font-style: italic;
   margin-top: 4px;
@@ -656,7 +707,7 @@
 
 .prayer-trigger-secondary .prayer-trigger-label,
 .prayer-trigger-secondary .prayer-trigger-label p {
-  font-size: 14px;
+  font-size: calc(14px * var(--font-scale));
   font-weight: 500;
   color: rgba(255, 255, 255, 0.75);
 }
@@ -668,7 +719,7 @@
 .prayer-text,
 .prayer-text p {
   font-family: 'Source Serif 4', serif;
-  font-size: 20px;
+  font-size: calc(20px * var(--font-scale));
   line-height: 1.55;
   color: #fff;
   margin: 0;
@@ -678,7 +729,7 @@
 
 .prayer-text p.secondary {
   font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: 15px;
+  font-size: calc(15px * var(--font-scale));
   color: rgba(255, 255, 255, 0.65);
   font-style: italic;
   margin-top: 10px;
@@ -689,22 +740,22 @@
    up by the page's swipe-navigation instead of scrolling the text. */
 .prayer-text-md,
 .prayer-text-md p {
-  font-size: 17px;
+  font-size: calc(17px * var(--font-scale));
   line-height: 1.45;
 }
 
 .prayer-text-md p.secondary {
-  font-size: 13px;
+  font-size: calc(13px * var(--font-scale));
 }
 
 .prayer-text-sm,
 .prayer-text-sm p {
-  font-size: 14.5px;
+  font-size: calc(14.5px * var(--font-scale));
   line-height: 1.4;
 }
 
 .prayer-text-sm p.secondary {
-  font-size: 12px;
+  font-size: calc(12px * var(--font-scale));
   margin-top: 6px;
 }
 
@@ -760,7 +811,7 @@
 
 .meditation-text,
 .meditation-text p {
-  font-size: 16px;
+  font-size: calc(16px * var(--font-scale));
   line-height: 1.6;
   margin: 0 0 12px;
   color: rgba(255, 255, 255, 0.92);

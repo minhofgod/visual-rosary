@@ -8,6 +8,8 @@ export interface Settings {
   showMeditations: boolean;
   showScriptures: boolean;
   showFooter: boolean;
+  /** Reading-text size multiplier (1 = normal). */
+  fontScale: number;
 }
 
 const STORAGE_KEY = 'rosary.settings';
@@ -18,6 +20,7 @@ const defaults: Settings = {
   showMeditations: true,
   showScriptures: true,
   showFooter: true,
+  fontScale: 1,
 };
 
 function load(): Settings {

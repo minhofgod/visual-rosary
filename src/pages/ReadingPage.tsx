@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRosary } from '../state/useRosary';
@@ -129,7 +130,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
   const footerVerse = step.kind === 'hailMary' && isDecadeStep ? getBeadVerse(step.slug) : undefined;
 
   return (
-    <div className="reading-screen">
+    <div className="reading-screen" style={{ '--font-scale': settings.fontScale } as CSSProperties}>
       <MysteryBackground image={image?.file} gradientClass={`bg-${mysteryKey}`} direction={rosary.direction} />
       <div className="bg-scrim" />
       {image && (

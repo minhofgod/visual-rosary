@@ -9,6 +9,9 @@
   --bead-color: #d8cdbc;
   --bead-done: #b8a58c;
 
+  /* Reading-text size multiplier; overridden per-device from Settings (font size). */
+  --font-scale: 1;
+
   font: 17px/1.5 'Be Vietnam Pro', system-ui, sans-serif;
   color: var(--text);
   background: var(--ground);

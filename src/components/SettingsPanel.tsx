@@ -64,6 +64,27 @@ export function SettingsPanel({ onClose, displayLang, setDisplayLang, settings, 
         </div>
 
         <div className="settings-group">
+          <h3>{t(displayLang, 'Cỡ chữ', 'Font size')}</h3>
+          <div className="font-size-toggle" role="group" aria-label={t(displayLang, 'Cỡ chữ', 'Font size')}>
+            {[
+              { scale: 1, label: t(displayLang, 'Vừa', 'Normal') },
+              { scale: 1.15, label: t(displayLang, 'Lớn', 'Large') },
+              { scale: 1.35, label: t(displayLang, 'Rất lớn', 'X-Large') },
+            ].map((opt) => (
+              <button
+                key={opt.scale}
+                type="button"
+                className={settings.fontScale === opt.scale ? 'is-active' : ''}
+                onClick={() => onChange({ fontScale: opt.scale })}
+              >
+                <span className="font-size-a">A</span>
+                <span className="font-size-label">{opt.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="settings-group">
           <h3>{t(displayLang, 'Hiển thị', 'Display')}</h3>
           <label className="settings-checkbox">
             <input
