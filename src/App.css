@@ -642,70 +642,81 @@
   color: #fff;
 }
 
-/* Post-rosary nudge: gentle invite to pray for someone on the wall. */
-.finish-nudge {
+/* Post-rosary nudge: a small dismissible bubble above the Prayer Requests button. */
+.landing-community {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.community-nudge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 7px 8px 7px 14px;
   background: #201a17;
+  border: 1px solid rgba(201, 162, 39, 0.55);
+  border-radius: 999px;
   color: #fff;
-  border: 1px solid rgba(201, 162, 39, 0.4);
-  border-radius: 18px;
-  padding: 28px 26px;
-  max-width: 360px;
-  width: calc(100% - 40px);
-  text-align: center;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.finish-nudge-emoji {
-  font-size: 40px;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-
-.finish-nudge-title {
-  font-family: 'Source Serif 4', serif;
-  color: var(--gold);
-  font-size: 22px;
-  margin: 0 0 10px;
-}
-
-.finish-nudge-text {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 14px;
-  line-height: 1.6;
-  margin: 0 0 20px;
-}
-
-.finish-nudge-cta {
-  display: block;
-  width: 100%;
-  background: var(--gold);
-  color: #241f1b;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 20px;
-  font: inherit;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.finish-nudge-later {
-  display: block;
-  width: 100%;
-  margin-top: 10px;
-  padding: 8px;
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.55);
-  font: inherit;
   font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: community-nudge-in 0.25s ease;
+}
+
+/* Little pointer down to the button. */
+.community-nudge::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translateX(-50%) rotate(45deg);
+  background: #201a17;
+  border-right: 1px solid rgba(201, 162, 39, 0.55);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.55);
+}
+
+.community-nudge-text {
+  white-space: nowrap;
+}
+
+.community-nudge-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  line-height: 1;
   cursor: pointer;
 }
 
-.finish-nudge-later:hover,
-.finish-nudge-later:focus-visible {
+.community-nudge-close:hover,
+.community-nudge-close:focus-visible {
+  background: rgba(255, 255, 255, 0.22);
   color: #fff;
+}
+
+@keyframes community-nudge-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Faith / hope / charity intention on the 3 opening Hail Marys */

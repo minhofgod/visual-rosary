@@ -31,11 +31,13 @@ domain artwork, scripture verses, and a settings panel.
 ### Recently completed
 - **Post-rosary "pray for someone" nudge (2026-08-25)** — finishing a rosary
   (`ReadingPage` swipe-past-end) now navigates home with `{ state: { justFinished: true } }`;
-  `PickerPage` shows a gentle portaled popup ("Cầu nguyện cho một người? / Pray for someone?")
-  inviting them to the prayer wall (CTA → `/y-cau-nguyen`, "Để sau / Maybe later" dismisses).
-  History state is cleared after reading so a refresh won't re-trigger it. Styles: `.finish-nudge*`.
-  Also: the collapsed "What is this page?" pill (`.pw-pinned-show`) is now right-aligned to match
-  the Hide button.
+  `PickerPage` then shows a **small dismissible bubble above the Prayer Requests button**
+  (`.community-nudge`, with a ×) — "🙏 Cầu nguyện cho một người? / Pray for someone?".
+  It sits inline in the flow (does NOT cover the streak), tapping it opens the wall
+  (`/y-cau-nguyen`), the × closes it. History state is cleared after reading so a refresh
+  won't re-trigger it. (Was briefly a full-screen modal; changed to this inline bubble.)
+  Also: the collapsed "What is this page?" pill (`.pw-pinned-show`) is now right-aligned to
+  match the Hide button.
 - **Wall order + button readability (2026-08-25)** — moved the pinned welcome note (and its
   collapsed "What is this page?" pill) ABOVE the post/sign-in box, so the intro reads before
   the invitation to post. Made the wall's text buttons opaque so they're legible over the

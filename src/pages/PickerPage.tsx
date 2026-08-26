@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import { createPortal } from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppHeader } from '../components/AppHeader';
 import { MysteryBackground } from '../components/MysteryBackground';
@@ -110,9 +109,29 @@ export function PickerPage() {
           })}
         </div>
 
-        <button type="button" className="landing-community-link" onClick={() => navigate('/y-cau-nguyen')}>
-          🙏 {displayLang === 'en' ? 'Prayer Requests' : 'Ý Cầu Nguyện'}
-        </button>
+        <div className="landing-community">
+          {finishNudgeOpen && (
+            <div className="community-nudge" role="button" tabIndex={0} onClick={() => navigate('/y-cau-nguyen')}>
+              <span className="community-nudge-text">
+                {displayLang === 'en' ? '🙏 Pray for someone?' : '🙏 Cầu nguyện cho một người?'}
+              </span>
+              <button
+                type="button"
+                className="community-nudge-close"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFinishNudgeOpen(false);
+                }}
+                aria-label={displayLang === 'en' ? 'Close' : 'Đóng'}
+              >
+                ×
+              </button>
+            </div>
+          )}
+          <button type="button" className="landing-community-link" onClick={() => navigate('/y-cau-nguyen')}>
+            🙏 {displayLang === 'en' ? 'Prayer Requests' : 'Ý Cầu Nguyện'}
+          </button>
+        </div>
 
         {streak && <StreakCard stats={streak} displayLang={displayLang} onViewProfile={() => navigate('/ho-so')} />}
 
@@ -131,30 +150,6 @@ export function PickerPage() {
       </button>
 
       {shareOpen && <ShareModal displayLang={displayLang} onClose={() => setShareOpen(false)} />}
-
-      {finishNudgeOpen &&
-        createPortal(
-          <div className="modal-backdrop" onClick={() => setFinishNudgeOpen(false)}>
-            <div className="finish-nudge" onClick={(e) => e.stopPropagation()}>
-              <div className="finish-nudge-emoji" aria-hidden="true">🙏</div>
-              <h2 className="finish-nudge-title">
-                {displayLang === 'en' ? 'Pray for someone?' : 'Cầu nguyện cho một người?'}
-              </h2>
-              <p className="finish-nudge-text">
-                {displayLang === 'en'
-                  ? 'Others have shared their intentions. Take a moment to pray for someone in the community.'
-                  : 'Có anh chị em đang xin lời cầu nguyện. Hãy dành một phút cầu nguyện cho một người trong cộng đoàn.'}
-              </p>
-              <button type="button" className="finish-nudge-cta" onClick={() => navigate('/y-cau-nguyen')}>
-                {displayLang === 'en' ? 'See Prayer Requests' : 'Xem Ý Cầu Nguyện'}
-              </button>
-              <button type="button" className="finish-nudge-later" onClick={() => setFinishNudgeOpen(false)}>
-                {displayLang === 'en' ? 'Maybe later' : 'Để sau'}
-              </button>
-            </div>
-          </div>,
-          document.body,
-        )}
 
       <RosaryDiagram displayLang={displayLang} />
 
