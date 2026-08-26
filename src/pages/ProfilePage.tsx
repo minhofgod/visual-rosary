@@ -100,6 +100,22 @@ export function ProfilePage() {
               {t('Đăng nhập để lưu chuỗi ngày', 'Sign in to save your streak')}
             </button>
           )}
+
+          {auth.isSignedIn ? (
+            <p className="pf-sync-note pf-synced">
+              {t(
+                '✓ Đã đồng bộ với tài khoản — chuỗi ngày của bạn theo bạn trên mọi thiết bị.',
+                '✓ Synced to your account — your streak follows you across devices.',
+              )}
+            </p>
+          ) : (
+            <p className="pf-sync-note">
+              {t(
+                'Chuỗi ngày hiện chỉ được lưu trên thiết bị này và có thể bị mất nếu bạn xoá dữ liệu trình duyệt hoặc đổi máy. Hãy đăng nhập để đồng bộ trên mọi thiết bị — chuỗi ngày hiện tại của bạn vẫn được giữ nguyên.',
+                'Your streak is saved only on this device right now and could be lost if you clear your browser or switch devices. Sign in to sync it across all your devices — your current streak is kept.',
+              )}
+            </p>
+          )}
         </div>
 
         <div className="pf-stats">

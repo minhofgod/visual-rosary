@@ -1741,6 +1741,19 @@
   cursor: pointer;
 }
 
+.pf-sync-note {
+  max-width: 420px;
+  margin: 14px auto 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: center;
+}
+
+.pf-sync-note.pf-synced {
+  color: rgba(201, 162, 39, 0.9);
+}
+
 .pf-stats {
   display: flex;
   justify-content: center;

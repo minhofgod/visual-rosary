@@ -37,7 +37,10 @@ domain artwork, scripture verses, and a settings panel.
   account on sign-in (upsert — preserves existing device streaks) and reads them back,
   so the streak/heatmap follow the user across devices; `ReadingPage` records each
   completion to the account when signed in. Days-only sync (streak + heatmap); "total"
-  stays device-local. Sign-in `redirectTo` now returns to the current page.
+  stays device-local. Sign-in `redirectTo` now returns to the current page. The profile
+  also explains that a signed-out streak is device-only and can be lost, encourages
+  sign-in for cross-device sync (keeping the current streak), and shows "✓ Synced" once
+  signed in.
 - **Profile page (`/ho-so`) with year heatmap** — `ProfilePage` shows the Google
   avatar + name (when signed in), the current/longest streak + total, and a
   **year-long "rosary heatmap"** (GitHub-contribution style, ~53 weeks) of days
