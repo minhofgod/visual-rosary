@@ -101,7 +101,7 @@ export function PickerPage() {
           </button>
         )}
 
-        {streak && <StreakCard stats={streak} displayLang={displayLang} />}
+        {streak && <StreakCard stats={streak} displayLang={displayLang} onViewProfile={() => navigate('/ho-so')} />}
 
         {prayersToday !== null && (
           <div className="landing-prayer-count">

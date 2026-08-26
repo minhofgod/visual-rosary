@@ -29,6 +29,14 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Profile page (`/ho-so`) with year heatmap** — `ProfilePage` shows the Google
+  avatar + name (when signed in), the current/longest streak + total, and a
+  **year-long "rosary heatmap"** (GitHub-contribution style, ~53 weeks) of days
+  prayed. Reached via a "Xem cả năm / View full year" link on the landing streak
+  card. **Device-local for now** (uses `prayerStreak`'s `prayedDays`; no server
+  sync) and **production-ready** (not dev-gated) — degrades to a streak view with
+  the 🙏 fallback avatar when not signed in. Future upgrade: persist per-account so
+  it syncs across devices (would need a small Supabase table + per-user logging).
 - **Counter resets at Vietnam midnight, not UTC** — updated the `get_prayers_today()`
   SQL function (in Supabase) to use `Asia/Ho_Chi_Minh` for the day boundary, so the
   "Rosaries Prayed Today" count resets at VN midnight. Server-side only; the SQL is in

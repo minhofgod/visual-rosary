@@ -28,9 +28,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
 interface Props {
   stats: StreakStats;
   displayLang: DisplayLang;
+  onViewProfile?: () => void;
 }
 
-export function StreakCard({ stats, displayLang }: Props) {
+export function StreakCard({ stats, displayLang, onViewProfile }: Props) {
   const [showMonth, setShowMonth] = useState(false);
 
   // Nothing to show until a rosary has been prayed on this device.
@@ -93,6 +94,12 @@ export function StreakCard({ stats, displayLang }: Props) {
       </button>
 
       {showMonth && <MonthCalendar prayedDays={stats.prayedDays} displayLang={displayLang} />}
+
+      {onViewProfile && (
+        <button type="button" className="streak-view-more" onClick={onViewProfile}>
+          {pick('Xem cả năm', 'View full year', displayLang)} →
+        </button>
+      )}
     </div>
   );
 }
