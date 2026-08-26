@@ -1,18 +1,24 @@
 import { useNavigate } from 'react-router-dom';
+import { LangToggle } from './LangToggle';
 import type { Settings, BeadPosition } from '../state/useSettings';
 import type { DisplayLang } from '../state/useDisplayLang';
 
 interface Props {
-  settings: Settings;
-  onChange: (patch: Partial<Settings>) => void;
   onClose: () => void;
   displayLang: DisplayLang;
+  setDisplayLang: (lang: DisplayLang) => void;
+  // Reading-only display options. Omitted on pages (landing, profile) where they
+  // don't apply — the panel then shows just the language control.
+  settings?: Settings;
+  onChange?: (patch: Partial<Settings>) => void;
 }
 
 const t = (lang: DisplayLang, vi: string, en: string) => (lang === 'en' ? en : lang === 'both' ? `${vi} / ${en}` : vi);
 
-export function SettingsPanel({ settings, onChange, onClose, displayLang }: Props) {
+export function SettingsPanel({ onClose, displayLang, setDisplayLang, settings, onChange }: Props) {
+  // Language lives here now; reading display options appear only when passed.
   const navigate = useNavigate();
+  const showReadingOptions = !!settings && !!onChange;
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -24,11 +30,20 @@ export function SettingsPanel({ settings, onChange, onClose, displayLang }: Prop
           </button>
         </div>
 
-        <button type="button" className="return-home-button" onClick={() => navigate('/')}>
-          {t(displayLang, 'Về Trang Chủ', 'Return Home')}
-        </button>
-
         <div className="settings-group">
+          <h3>{t(displayLang, 'Ngôn ngữ', 'Language')}</h3>
+          <LangToggle value={displayLang} onChange={setDisplayLang} />
+        </div>
+
+        {showReadingOptions && (
+          <button type="button" className="return-home-button" onClick={() => navigate('/')}>
+            {t(displayLang, 'Về Trang Chủ', 'Return Home')}
+          </button>
+        )}
+
+        {settings && onChange && (
+          <>
+            <div className="settings-group">
           <h3>{t(displayLang, 'Vị trí chuỗi hạt', 'Beads')}</h3>
           <div className="settings-radios">
             {(['left', 'right', 'hidden'] as BeadPosition[]).map((pos) => (
@@ -105,7 +120,9 @@ export function SettingsPanel({ settings, onChange, onClose, displayLang }: Prop
               </div>
             </div>
           </label>
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

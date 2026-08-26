@@ -9,8 +9,7 @@ import { BeadRail } from '../components/BeadRail';
 import { PrayerCard } from '../components/PrayerCard';
 import { PrayerFooter } from '../components/PrayerFooter';
 import { getBeadVerse } from '../data/beadVerses';
-import { LangToggle } from '../components/LangToggle';
-import { SettingsPanel } from '../components/SettingsPanel';
+import { AppHeader } from '../components/AppHeader';
 import { MysteryBackground } from '../components/MysteryBackground';
 import { mysterySets } from '../data/mysteries';
 import { getRailView } from '../data/railView';
@@ -63,7 +62,6 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
   };
   const swipe = useSwipeNav(handleNext, rosary.prev);
   const auth = useAuth();
-  const [settingsOpen, setSettingsOpen] = useState(false);
 
   // Keep the URL's hash in sync with the current step, so it's always shareable/bookmarkable.
   useEffect(() => {
@@ -140,23 +138,23 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
         </div>
       )}
 
-      <header className="reading-header">
-        <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label="restart">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-            <path
-              fillRule="evenodd"
-              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"
-            />
-          </svg>
-        </button>
-        <span className="reading-mystery-name">{displayLang === 'en' ? set.name.en : set.name.vi}</span>
-        <div className="reading-header-right">
-          <LangToggle value={displayLang} onChange={setDisplayLang} />
-          <button type="button" className="icon-button" onClick={() => setSettingsOpen(true)} aria-label="settings">
-            ☰
+      <AppHeader
+        displayLang={displayLang}
+        setDisplayLang={setDisplayLang}
+        settings={settings}
+        onSettingsChange={setSettings}
+        left={
+          <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label="restart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+              <path
+                fillRule="evenodd"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"
+              />
+            </svg>
           </button>
-        </div>
-      </header>
+        }
+        center={<span className="reading-mystery-name">{displayLang === 'en' ? set.name.en : set.name.vi}</span>}
+      />
 
       <div className="reading-body">
         {settings.beadPosition === 'left' && (
@@ -215,15 +213,6 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
 
       {rosary.isComplete && (
         <div className="closing-hint">{displayLang === 'en' ? 'Swipe up to finish ↑' : 'Vuốt lên để hoàn tất ↑'}</div>
-      )}
-
-      {settingsOpen && (
-        <SettingsPanel
-          settings={settings}
-          onChange={setSettings}
-          onClose={() => setSettingsOpen(false)}
-          displayLang={displayLang}
-        />
       )}
     </div>
   );

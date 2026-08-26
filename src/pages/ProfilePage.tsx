@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LangToggle } from '../components/LangToggle';
+import { AppHeader } from '../components/AppHeader';
 import { MysteryBackground } from '../components/MysteryBackground';
 import { SignInModal } from '../components/SignInModal';
 import { useDisplayLang } from '../state/useDisplayLang';
@@ -72,16 +72,18 @@ export function ProfilePage() {
       <MysteryBackground image={image?.file} gradientClass="bg-landing" />
       <div className="bg-scrim" />
 
-      <header className="reading-header">
-        <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label={t('Trang chủ', 'Home')}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-            <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
-          </svg>
-        </button>
-        <div className="reading-header-right">
-          <LangToggle value={displayLang} onChange={setDisplayLang} />
-        </div>
-      </header>
+      <AppHeader
+        displayLang={displayLang}
+        setDisplayLang={setDisplayLang}
+        showProfile={false}
+        left={
+          <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label={t('Trang chủ', 'Home')}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+              <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+            </svg>
+          </button>
+        }
+      />
 
       <main className="pf-main">
         <div className="pf-identity">

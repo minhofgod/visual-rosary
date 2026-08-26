@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LangToggle } from '../components/LangToggle';
+import { AppHeader } from '../components/AppHeader';
 import { MysteryBackground } from '../components/MysteryBackground';
 import { RosaryDiagram } from '../components/RosaryDiagram';
 import { HowToGuide } from '../components/HowToGuide';
@@ -12,7 +12,6 @@ import { useSlideshow } from '../state/useSlideshow';
 import { usePrayersToday } from '../state/usePrayersToday';
 import { useStreak } from '../state/useStreak';
 import { useResume } from '../state/useResume';
-import { useAuth } from '../state/useAuth';
 import { buildSequence } from '../data/sequence';
 import { findStepIndexBySlug } from '../data/slugs';
 import { mysterySets, todaysMysteryKey } from '../data/mysteries';
@@ -28,9 +27,6 @@ export function PickerPage() {
   const prayersToday = usePrayersToday();
   const streak = useStreak();
   const resume = useResume();
-  const auth = useAuth();
-  const authMeta = auth.user?.user_metadata as { avatar_url?: string; picture?: string } | undefined;
-  const avatarUrl = authMeta?.avatar_url || authMeta?.picture;
   const [shareOpen, setShareOpen] = useState(false);
 
   // Resolve the saved resume point into its mystery set + step heading for the label.
@@ -52,33 +48,19 @@ export function PickerPage() {
         </div>
       )}
 
-      <header className="reading-header">
-        <div className="landing-wordmark">
-          <span className="landing-wordmark-small">Đọc Kinh</span>
-          <span className="landing-wordmark-big">
-            Mân C<RosaryO />I
-          </span>
-          <span className="landing-wordmark-tagline">by MinhofGod</span>
-        </div>
-        <div className="reading-header-right">
-          <button
-            type="button"
-            className="landing-profile-btn"
-            onClick={() => navigate('/ho-so')}
-            aria-label={displayLang === 'en' ? 'Profile' : 'Hồ sơ'}
-          >
-            {avatarUrl ? (
-              <img className="landing-profile-avatar" src={avatarUrl} alt="" referrerPolicy="no-referrer" />
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-                <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-              </svg>
-            )}
-          </button>
-          <LangToggle value={displayLang} onChange={setDisplayLang} />
-        </div>
-      </header>
+      <AppHeader
+        displayLang={displayLang}
+        setDisplayLang={setDisplayLang}
+        left={
+          <div className="landing-wordmark">
+            <span className="landing-wordmark-small">Đọc Kinh</span>
+            <span className="landing-wordmark-big">
+              Mân C<RosaryO />I
+            </span>
+            <span className="landing-wordmark-tagline">by MinhofGod</span>
+          </div>
+        }
+      />
 
       <main className="landing-main">
         <h1 className="landing-headline">

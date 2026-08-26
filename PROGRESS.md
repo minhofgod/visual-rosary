@@ -29,13 +29,24 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Unified header: profile + settings on every page (2026-08-25)** — new shared
+  `src/components/AppHeader.tsx` renders a left slot (wordmark or back button), an
+  optional centered slot (the mystery name while praying), and a consistent
+  **[profile] + [☰ menu]** pair on the right. `PickerPage`, `ReadingPage`, and
+  `ProfilePage` all use it. The `VI · EN · VI+EN` toggle moved **inside** the menu
+  (`SettingsPanel`, now with a "Ngôn ngữ / Language" group at the top) instead of
+  being a standalone header control. `SettingsPanel`'s `settings`/`onChange` are now
+  optional: on the landing/profile the menu shows just Language; on the reading page
+  it also shows Return Home + bead/display options. The profile button is hidden on
+  the profile page itself (`showProfile={false}`). `LangToggle` is still used by the
+  (hidden) `PrayerWallPage`.
 - **Persistent profile/sign-in entry point (2026-08-25)** — added a round profile
-  button to the landing header (`PickerPage`, next to the `LangToggle`) that navigates
-  to `/ho-so`. Shows the signed-in Google avatar when available, otherwise a generic
-  person-circle icon. This is the first always-visible door to sign-in/profile —
-  previously the profile was only reachable via the streak card's "Xem cả năm" link
-  (which needs an existing streak) and sign-in only lived on the (hidden) wall. Styles:
-  `.landing-profile-btn` / `.landing-profile-avatar` in `App.css`.
+  button to the landing header (`PickerPage`) that navigates to `/ho-so`. Shows the
+  signed-in Google avatar when available, otherwise a generic person-circle icon.
+  This is the first always-visible door to sign-in/profile — previously the profile
+  was only reachable via the streak card's "Xem cả năm" link (which needs an existing
+  streak) and sign-in only lived on the (hidden) wall. Styles: `.landing-profile-btn`
+  / `.landing-profile-avatar` in `App.css`. (Now folded into `AppHeader`, above.)
 - **Accounts live in production + streak↔account sync (2026-08-24)** — sign-in is now
   reachable in production via a "Đăng nhập để lưu chuỗi ngày / Sign in to save your
   streak" button on the profile (`ProfilePage`), decoupled from the (still-hidden)
