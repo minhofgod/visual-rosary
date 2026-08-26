@@ -34,11 +34,15 @@ For architecture/infra details see the README and `src/` — this file is just t
 - **Holy-card wallpaper (Mt 28:20)** art swapped to Hofmann's *Head of Christ*
   (public domain, d. 1911), sourced from Wikimedia — warm frontal gaze, replaces the
   Grünewald crop that had grabbed a fallen soldier. 3 of 6 sample cards done.
-- **TWA address bar** (Minh's S24 Ultra): verified correct three ways — app targets
-  non-www `dockinhmancoi.com`, that host serves assetlinks 200 with BOTH keys and
-  Google's DAL returns them, the `.apk` is signed `4F:28…` (trusted) and Play re-signs
-  `D4:5A…` (also trusted). Chrome is the device default. Clean reinstall didn't clear
-  it. Next: `adb logcat` read of Chrome's OriginVerifier to see the exact reason.
+- **TWA address bar — ROOT CAUSE FOUND & FIXED.** Never a cache issue. Via `adb`:
+  Chrome logged `cr_WebAppLaunchHandler: Target url verification has been failed`. Pulled
+  the actually-installed `base.apk` off the S24 and parsed its signing block — the app is
+  now signed with classical cert `F1:E9:18:20:A3:EF:93:C5:…:08:34`, which was in NEITHER
+  the assetlinks fingerprint list (`D4:5A…`, `4F:28…`). Play's app-signing key changed
+  when the app was enrolled in **post-quantum / v3.2 ML-DSA hybrid signing** (the
+  "Classical key or Post-quantum" prompt). Fix: added `F1:E9…` to
+  `public/.well-known/assetlinks.json` (kept the old two as backups) → redeploy. After
+  deploy, force-stop Chrome + app to re-verify.
 
 ## Current state (2026-08-13)
 
