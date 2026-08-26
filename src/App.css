@@ -1597,8 +1597,10 @@
   align-items: center;
   gap: 6px;
   margin-bottom: 18px;
-  background: rgba(201, 162, 39, 0.12);
-  border: 1px solid rgba(201, 162, 39, 0.4);
+  background: rgba(28, 21, 10, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(201, 162, 39, 0.55);
   color: var(--gold);
   border-radius: 999px;
   padding: 6px 14px;
@@ -1611,7 +1613,7 @@
 
 .pw-pinned-show:hover,
 .pw-pinned-show:focus-visible {
-  background: rgba(201, 162, 39, 0.2);
+  background: rgba(40, 30, 14, 0.92);
 }
 
 .pw-pinned-body {
@@ -1636,9 +1638,11 @@
 }
 
 .pw-sort button {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.7);
+  background: rgba(18, 13, 10, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.85);
   border-radius: 999px;
   padding: 5px 14px;
   font: inherit;
@@ -1647,9 +1651,10 @@
 }
 
 .pw-sort button.is-active {
-  background: rgba(201, 162, 39, 0.2);
+  background: var(--gold);
   border-color: var(--gold);
-  color: var(--gold);
+  color: #241f1b;
+  font-weight: 600;
 }
 
 .pw-empty {

@@ -161,6 +161,30 @@ export function PrayerWallPage() {
           <h1 className="pw-title">{t('Ý Cầu Nguyện', 'Prayer Requests')}</h1>
         </div>
 
+        {/* Pinned welcome note from Minh — dismissible, remembered per device.
+            When hidden, a small "What is this page?" button brings it back. */}
+        {pinnedHidden ? (
+          <button type="button" className="pw-pinned-show" onClick={showPinned}>
+            ⓘ {t('Trang này là gì?', 'What is this page?')}
+          </button>
+        ) : (
+        <div className="pw-pinned">
+          <div className="pw-pinned-top">
+            <div className="pw-pinned-badge">📌 {t('Ghim', 'Pinned')}</div>
+            <button type="button" className="pw-pinned-hide" onClick={hidePinned}>
+              {t('Ẩn', 'Hide')}
+            </button>
+          </div>
+          <p className="pw-pinned-body">
+            {t(
+              'Hi các bạn, mình là Minh. Đây là chỗ các bạn có thể đăng ý nguyện của mình để mọi người cùng cầu nguyện cho bạn. Những lời cầu nguyện sẽ được đăng ẩn danh. Tuy nhiên khi cầu nguyện, bạn có thể nêu tên người bạn muốn cầu — ví dụ "xin cầu nguyện cho linh hồn Phêrô Nguyễn Văn A" — hoặc không nêu tên cũng được. Chúa là Đấng Toàn Tri: trước khi chúng ta dâng lời cầu nguyện, Ngài đã biết chúng ta cần gì. Nên cộng đoàn không cần biết rõ tên thì Chúa vẫn nhận lời. God bless you all. 🙏',
+              "Hi everyone, I'm Minh. This is a place to share your intentions so others can pray for you. Requests are posted anonymously. When you pray, you're welcome to name the person you're praying for — for example, “please pray for the soul of Peter Nguyễn Văn A” — or leave it unnamed. God is all-knowing: before we lift up our prayers, He already knows what we need. So the community doesn't need to know the name for God to hear us. God bless you all. 🙏",
+            )}
+          </p>
+          <div className="pw-pinned-author">— Minh · MinhofGod</div>
+        </div>
+        )}
+
         {/* Post box */}
         {auth.isSignedIn ? (
           <form className="pw-post" onSubmit={submit}>
@@ -185,30 +209,6 @@ export function PrayerWallPage() {
               {t('Đăng nhập', 'Sign in')}
             </button>
           </div>
-        )}
-
-        {/* Pinned welcome note from Minh — dismissible, remembered per device.
-            When hidden, a small "What is this page?" button brings it back. */}
-        {pinnedHidden ? (
-          <button type="button" className="pw-pinned-show" onClick={showPinned}>
-            ⓘ {t('Trang này là gì?', 'What is this page?')}
-          </button>
-        ) : (
-        <div className="pw-pinned">
-          <div className="pw-pinned-top">
-            <div className="pw-pinned-badge">📌 {t('Ghim', 'Pinned')}</div>
-            <button type="button" className="pw-pinned-hide" onClick={hidePinned}>
-              {t('Ẩn', 'Hide')}
-            </button>
-          </div>
-          <p className="pw-pinned-body">
-            {t(
-              'Hi các bạn, mình là Minh. Đây là chỗ các bạn có thể đăng ý nguyện của mình để mọi người cùng cầu nguyện cho bạn. Những lời cầu nguyện sẽ được đăng ẩn danh. Tuy nhiên khi cầu nguyện, bạn có thể nêu tên người bạn muốn cầu — ví dụ "xin cầu nguyện cho linh hồn Phêrô Nguyễn Văn A" — hoặc không nêu tên cũng được. Chúa là Đấng Toàn Tri: trước khi chúng ta dâng lời cầu nguyện, Ngài đã biết chúng ta cần gì. Nên cộng đoàn không cần biết rõ tên thì Chúa vẫn nhận lời. God bless you all. 🙏',
-              "Hi everyone, I'm Minh. This is a place to share your intentions so others can pray for you. Requests are posted anonymously. When you pray, you're welcome to name the person you're praying for — for example, “please pray for the soul of Peter Nguyễn Văn A” — or leave it unnamed. God is all-knowing: before we lift up our prayers, He already knows what we need. So the community doesn't need to know the name for God to hear us. God bless you all. 🙏",
-            )}
-          </p>
-          <div className="pw-pinned-author">— Minh · MinhofGod</div>
-        </div>
         )}
 
         {/* Sort */}

@@ -29,6 +29,11 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Wall order + button readability (2026-08-25)** — moved the pinned welcome note (and its
+  collapsed "What is this page?" pill) ABOVE the post/sign-in box, so the intro reads before
+  the invitation to post. Made the wall's text buttons opaque so they're legible over the
+  artwork: `.pw-sort button` now has a dark bg (active tab = solid gold), and `.pw-pinned-show`
+  a dark bg with gold text.
 - **Wall hero trimmed + dismissible pinned note (2026-08-25)** — the hero description
   (`.pw-lead` + `.pw-anon-note`) was redundant with Minh's pinned note, so it's removed
   (hero now = eyebrow + title only). The pinned card got a **Hide** button
