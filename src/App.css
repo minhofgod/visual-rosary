@@ -1328,7 +1328,10 @@
 
 /* Unlike the pray screens, the landing page scrolls — the hero fills one
    screen, then the "how to pray" diagram follows below the fold. */
-.landing-screen {
+/* These pages scroll (unlike the fixed, swipe-driven prayer screen). */
+.landing-screen,
+.pf-screen,
+.pw-screen {
   height: auto;
   min-height: 100dvh;
   overflow-y: auto;
