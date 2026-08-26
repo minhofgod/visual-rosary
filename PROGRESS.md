@@ -29,6 +29,14 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Fix: settings menu rendered behind profile content (2026-08-25)** — the menu
+  (`SettingsPanel`) is nested inside `<header className="reading-header">` (z-index 2);
+  on the profile page `.pf-main` also has `z-index: 2` and comes later in the DOM, so
+  it painted over the header's stacking context and the menu's own `z-index: 10` (trapped
+  in that context) couldn't rise above it. Fixed by rendering `SettingsPanel` through a
+  `createPortal(..., document.body)` so the modal always mounts at body level, above all
+  page content, regardless of which header nests it. Verified on landing/reading/profile
+  at mobile + desktop (hit-test: language buttons are topmost/clickable).
 - **Unified header: profile + settings on every page (2026-08-25)** — new shared
   `src/components/AppHeader.tsx` renders a left slot (wordmark or back button), an
   optional centered slot (the mystery name while praying), and a consistent

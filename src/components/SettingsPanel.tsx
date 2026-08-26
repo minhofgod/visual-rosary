@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { LangToggle } from './LangToggle';
 import type { Settings, BeadPosition } from '../state/useSettings';
@@ -20,7 +21,7 @@ export function SettingsPanel({ onClose, displayLang, setDisplayLang, settings, 
   const navigate = useNavigate();
   const showReadingOptions = !!settings && !!onChange;
 
-  return (
+  return createPortal(
     <div className="modal-backdrop" onClick={onClose}>
       <div className="settings-panel" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
@@ -124,6 +125,7 @@ export function SettingsPanel({ onClose, displayLang, setDisplayLang, settings, 
           </>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
