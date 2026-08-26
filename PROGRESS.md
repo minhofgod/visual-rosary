@@ -29,6 +29,11 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Profile heatmap: no scrollbar on desktop (2026-08-25)** — the ~53-week heatmap
+  (~739px) overflowed `.pf-main`'s 640px cap and showed a horizontal scrollbar even on
+  wide desktops. Added a `@media (min-width: 900px)` rule widening `.pf-main` to 820px and
+  setting `.pf-heatmap-scroll { overflow-x: visible }` so the full year fits without a
+  scrollbar. Mobile keeps `overflow-x: auto` (scrolling the grid there is fine).
 - **Post-rosary "pray for someone" nudge (2026-08-25)** — finishing a rosary
   (`ReadingPage` swipe-past-end) now navigates home with `{ state: { justFinished: true } }`;
   `PickerPage` then shows a **small dismissible bubble above the Prayer Requests button**

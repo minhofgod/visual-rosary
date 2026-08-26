@@ -2145,6 +2145,17 @@
   background: transparent;
 }
 
+/* On desktop there's room for the full year, so drop the scrollbar and let the
+   heatmap fit. Mobile keeps overflow-x: auto (scrolling the ~53-week grid is fine there). */
+@media (min-width: 900px) {
+  .pf-main {
+    max-width: 820px;
+  }
+  .pf-heatmap-scroll {
+    overflow-x: visible;
+  }
+}
+
 .pf-empty {
   text-align: center;
   color: rgba(255, 255, 255, 0.6);
