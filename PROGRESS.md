@@ -29,6 +29,13 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Persistent profile/sign-in entry point (2026-08-25)** — added a round profile
+  button to the landing header (`PickerPage`, next to the `LangToggle`) that navigates
+  to `/ho-so`. Shows the signed-in Google avatar when available, otherwise a generic
+  person-circle icon. This is the first always-visible door to sign-in/profile —
+  previously the profile was only reachable via the streak card's "Xem cả năm" link
+  (which needs an existing streak) and sign-in only lived on the (hidden) wall. Styles:
+  `.landing-profile-btn` / `.landing-profile-avatar` in `App.css`.
 - **Accounts live in production + streak↔account sync (2026-08-24)** — sign-in is now
   reachable in production via a "Đăng nhập để lưu chuỗi ngày / Sign in to save your
   streak" button on the profile (`ProfilePage`), decoupled from the (still-hidden)
