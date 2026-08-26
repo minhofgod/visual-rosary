@@ -3,6 +3,7 @@ import { PickerPage } from './pages/PickerPage';
 import { ReadingPage } from './pages/ReadingPage';
 import { PrayerWallPage } from './pages/PrayerWallPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { AdminPage } from './pages/AdminPage';
 import './App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Route path="/" element={<PickerPage />} />
       <Route path="/ho-so" element={<ProfilePage />} />
       <Route path="/y-cau-nguyen" element={<PrayerWallPage />} />
+      <Route path="/quan-tri" element={<AdminPage />} />
       <Route path="/:mysteryKey/pray" element={<ReadingPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

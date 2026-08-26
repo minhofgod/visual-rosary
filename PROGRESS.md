@@ -29,6 +29,17 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Admin moderation panel `/quan-tri` (2026-08-26)** — in-app wall moderation so Minh
+  doesn't need the Supabase dashboard. New `supabase/admin.sql` (**Minh runs it**):
+  `is_admin()` + SECURITY-DEFINER, admin-gated RPCs `admin_list_requests(filter)` (returns
+  ALL requests incl. hidden/removed + user_id + report/prayed counts + poster ban/total),
+  `admin_set_status(id,status)` (visible/hidden/removed), `admin_set_ban(user_id,bool)`.
+  Frontend: `src/lib/admin.ts`, `src/pages/AdminPage.tsx` (route `/quan-tri`, production but
+  self-gates via `amIAdmin()` — non-admins see "no access"). Filters: Reported/All/Visible/
+  Hidden/Removed; per-post Hide/Remove/Restore + Ban/Unban poster. To activate: run admin.sql,
+  then `update public.profiles set is_admin=true where id='<Minh's UUID>'`. Styles `.adm-*`.
+  Still TODO (Minh wants both): **email alerts** on new/reported posts (needs a Resend acct +
+  Supabase Edge Function / webhook; recipient email is configurable to any address).
 - **App-store Step 1: PWA store-ready (2026-08-26)** — prep for wrapping the site as a
   Google Play (TWA) app first, iOS later via cloud-Mac ([[roadmap]] decision). (a) Re-added a
   proper versioned service worker `public/sw.js` (`rosary-v2`: network-first navigations so
