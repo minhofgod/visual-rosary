@@ -120,7 +120,12 @@ export function computeStatsFromDays(days: string[], total: number): StreakStats
     return { date, prayed: daySet.has(date) };
   });
   return {
-    total,
+    // `total` is the device-local completion counter, which isn't synced to the
+    // account — only the prayed *days* are. So after signing in, the merged day set
+    // can exceed the local total (e.g. days prayed on another device), which would
+    // otherwise show a total lower than the streak. You can't pray N distinct days
+    // with fewer than N rosaries, so never display fewer than the prayed-day count.
+    total: Math.max(total, daySet.size),
     currentStreak: current,
     longestStreak: longest,
     prayedToday: daySet.has(today),

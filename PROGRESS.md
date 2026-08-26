@@ -29,6 +29,12 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Fix: total < streak after sign-in (2026-08-25)** — "Tổng số chuỗi" (`total`) is a
+  device-local completion counter that isn't synced to the account, while the streak/heatmap
+  merge in prayed *days* synced from the account. So a signed-in user could see total (e.g. 1)
+  lower than their longest streak (e.g. 6). Fixed by displaying `Math.max(total, daySet.size)`
+  in `computeStatsFromDays` — you can't pray N distinct days with fewer than N rosaries. Local-only
+  users are unaffected (local total ≥ local day count).
 - **Profile heatmap: no scrollbar on desktop (2026-08-25)** — the ~53-week heatmap
   (~739px) overflowed `.pf-main`'s 640px cap and showed a horizontal scrollbar even on
   wide desktops. Added a `@media (min-width: 900px)` rule widening `.pf-main` to 820px and
