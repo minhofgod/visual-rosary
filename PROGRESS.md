@@ -29,6 +29,19 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **App-store Step 1: PWA store-ready (2026-08-26)** — prep for wrapping the site as a
+  Google Play (TWA) app first, iOS later via cloud-Mac ([[roadmap]] decision). (a) Re-added a
+  proper versioned service worker `public/sw.js` (`rosary-v2`: network-first navigations so
+  online users always get the latest deploy, cache-first immutable assets, old-cache cleanup,
+  skipWaiting+claim) and re-registered it in `main.tsx` (PROD only). This replaces the
+  kill-switch; everyone installs the clean v2 fresh, so the earlier stale-cache bug doesn't
+  carry over. (b) Added a true **maskable icon** (`/logo/png/icon-maskable-{192,512}.png`,
+  full-bleed brand bg + mark scaled into the safe zone) and pointed the manifest's `maskable`
+  entries at it (were reusing the tight `any` icon, which would clip under Android's circle
+  mask). (c) Staged `public/.well-known/assetlinks.json` (Digital Asset Links) with PLACEHOLDER
+  package name `com.dockinhmancoi.twa` + fingerprint — **fill the real SHA-256 from Play Console
+  after generating the package**. Next: Minh makes the $25 Play Console account; then PWABuilder
+  → Android package → listing (reuse Threads mockups + raw screenshots) → Data Safety → submit.
 - **Fix: total < streak after sign-in (2026-08-25)** — "Tổng số chuỗi" (`total`) is a
   device-local completion counter that isn't synced to the account, while the streak/heatmap
   merge in prayed *days* synced from the account. So a signed-in user could see total (e.g. 1)

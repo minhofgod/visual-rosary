@@ -12,14 +12,11 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 
-// Service worker registration is intentionally REMOVED for now. A previous SW cached
-// the app shell and, after several deploys, left some devices serving a stale page
-// that pointed at a deleted CSS file (unstyled page). public/sw.js is now a kill-switch
-// that clears its Cache Storage and unregisters itself; not re-registering here lets the
-// site settle to a clean, network-only state. (Re-add a correct, versioned SW later if
-// we want offline/PWA support again.)
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations?.().then((regs) => {
-    regs.forEach((reg) => reg.update().catch(() => {}))
-  }).catch(() => {})
+// Register the service worker in production (keeps dev HMR untouched). Enables offline
+// use and installability — the base for the Google Play (TWA) and PWA app versions.
+// public/sw.js is network-first for pages, so online users always get the latest deploy.
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {})
+  })
 }

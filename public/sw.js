@@ -1,41 +1,69 @@
-// Kill-switch service worker.
+// Service worker for Đọc Kinh Mân Côi (PWA / Play-Store TWA base).
 //
-// A previous version cached the app shell (index.html) and served it offline-first
-// in some cases. After several deploys, that left some devices serving a STALE
-// index.html that referenced an asset hash which no longer exists — so the page
-// loaded with no CSS (raw, unstyled HTML). This version removes the service worker
-// entirely: it deletes the Cache Storage a previous version created, then
-// unregisters itself, so every page load goes straight to the network and is always
-// current.
+//   • Page navigations → NETWORK-FIRST: online users always get the latest deploy;
+//     the cached app shell is only a fallback when the network fails (offline).
+//   • Same-origin hashed static assets → CACHE-FIRST (Vite hashes filenames, so
+//     entries are immutable); populated lazily as they're requested.
+//   • Cross-origin requests (Google Fonts, Supabase) are passed straight through.
+//   • CACHE is versioned — bump the version to force a clean slate; activate()
+//     deletes every older cache, and skipWaiting()+clients.claim() make a new
+//     version take over promptly instead of waiting for every tab to close.
 //
-// IMPORTANT: this ONLY clears the SW Cache Storage. It does NOT touch localStorage,
-// so device-local streaks and settings are fully preserved — nobody loses their streak.
-//
-// (App registration was removed from main.tsx, so fresh loads won't re-install any
-// service worker. A correct, versioned SW can be reintroduced later if we want
-// offline/PWA support again.)
+// This is a clean v2 installed fresh by every client (the previous worker was a
+// self-unregistering kill-switch), so the old stale-cache issue does not carry over.
 
-self.addEventListener('install', () => {
+const CACHE = 'rosary-v2';
+const APP_SHELL = '/';
+const PRECACHE = ['/', '/manifest.webmanifest', '/logo/png/icon-192.png', '/logo/favicon.svg'];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)).catch(() => {}));
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     (async () => {
-      try {
-        const keys = await caches.keys();
-        await Promise.all(keys.map((k) => caches.delete(k)));
-      } catch {
-        /* ignore */
-      }
-      try {
-        await self.registration.unregister();
-      } catch {
-        /* ignore */
-      }
+      const keys = await caches.keys();
+      await Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)));
       await self.clients.claim();
     })(),
   );
 });
 
-// No fetch handler on purpose: every request goes to the network, never the cache.
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
+  if (req.method !== 'GET') return;
+
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return; // fonts, Supabase, etc. — untouched
+
+  // Page navigations: network-first, with an offline fallback to the app shell.
+  if (req.mode === 'navigate') {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE).then((c) => c.put(APP_SHELL, copy)).catch(() => {});
+          return res;
+        })
+        .catch(() => caches.match(req).then((r) => r || caches.match(APP_SHELL))),
+    );
+    return;
+  }
+
+  // Static assets: cache-first (immutable, hashed), falling back to the network.
+  event.respondWith(
+    caches.match(req).then(
+      (cached) =>
+        cached ||
+        fetch(req).then((res) => {
+          if (res.ok && res.type === 'basic') {
+            const copy = res.clone();
+            caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
+          }
+          return res;
+        }),
+    ),
+  );
+});
