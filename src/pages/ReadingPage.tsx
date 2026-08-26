@@ -150,7 +150,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
         left={
           <button
             type="button"
-            className="icon-button icon-button-back"
+            className="icon-button"
             onClick={() => {
               if (confirm(displayLang === 'en' ? 'Leave the rosary?' : 'Rời khỏi chuỗi Mân Côi?')) navigate('/');
             }}

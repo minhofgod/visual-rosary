@@ -28,7 +28,9 @@ For architecture/infra details see the README and `src/` — this file is just t
   use a left back-arrow. Replaced it with a proper **house icon**, label "Trang chủ /
   Home", and a **"Rời khỏi chuỗi Mân Côi? / Leave the rosary?" confirm** before leaving —
   a deliberate exit since you're mid-prayer. The other pages keep the plain back-arrow
-  (leaving them isn't a big action), so the distinction is now intentional.
+  (leaving them isn't a big action), so the distinction is now intentional. NOTE:
+  `.icon-button-back svg` applies `transform: rotate(90deg)` (for the arrow icons), so the
+  house button uses plain `.icon-button` — don't add `icon-button-back` or it tips 90°.
 - **Wallpaper reward — art direction change.** Dropped the dark public-domain oil
   paintings (great for reverence, wrong for a "feel-good" reward). New direction:
   original **designed** cards — warm light gradients, elegant serif Scripture
