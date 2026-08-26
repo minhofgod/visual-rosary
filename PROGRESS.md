@@ -21,6 +21,21 @@ For architecture/infra details see the README and `src/` — this file is just t
 > - **Optional SEO/perf (not started):** code-split the ~750 KB JS bundle; compress
 >   the large bead images (some ~1.4 MB); per-route titles/meta for the 4 mystery pages.
 
+## 2026-08-26 — Rosary exit button: house icon + leave confirm
+
+- The rosary (`ReadingPage`) header button was an odd-one-out: a circled down-arrow
+  labelled "restart" (leftover from before the shared header), while wall/profile/admin
+  use a left back-arrow. Replaced it with a proper **house icon**, label "Trang chủ /
+  Home", and a **"Rời khỏi chuỗi Mân Côi? / Leave the rosary?" confirm** before leaving —
+  a deliberate exit since you're mid-prayer. The other pages keep the plain back-arrow
+  (leaving them isn't a big action), so the distinction is now intentional.
+- **Wallpaper reward — art direction change.** Dropped the dark public-domain oil
+  paintings (great for reverence, wrong for a "feel-good" reward). New direction:
+  original **designed** cards — warm light gradients, elegant serif Scripture
+  (Cormorant Garamond), subtle light-ray/olive-sprig motifs, verified CGKPV text. Bright,
+  consistent, no licensing. Sample built (`scratchpad/warm-card.html`, Mt 11:28). Plan:
+  full set of 6 across warm palettes (dawn gold / morning blue / blush / sage / amber).
+
 ## 2026-08-26 — Admin link in settings + new-requests badge on wall title
 
 - **Admin panel link in the settings menu, admins only.** New cached `useIsAdmin` hook

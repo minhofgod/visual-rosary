@@ -148,12 +148,16 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
         showFontSize
         showReadingLayout
         left={
-          <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label="restart">
+          <button
+            type="button"
+            className="icon-button icon-button-back"
+            onClick={() => {
+              if (confirm(displayLang === 'en' ? 'Leave the rosary?' : 'Rời khỏi chuỗi Mân Côi?')) navigate('/');
+            }}
+            aria-label={displayLang === 'en' ? 'Home' : 'Trang chủ'}
+          >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-              <path
-                fillRule="evenodd"
-                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"
-              />
+              <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
             </svg>
           </button>
         }
