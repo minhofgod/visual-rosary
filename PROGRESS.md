@@ -21,6 +21,25 @@ For architecture/infra details see the README and `src/` — this file is just t
 > - **Optional SEO/perf (not started):** code-split the ~750 KB JS bundle; compress
 >   the large bead images (some ~1.4 MB); per-route titles/meta for the 4 mystery pages.
 
+## 2026-08-26 — Admin members backfill + Mt 28:20 holy card
+
+- **Members list only showed banned users.** Root cause: `profiles` rows are created
+  by the `on_auth_user_created` trigger, which only fires for NEW sign-ups; accounts
+  that authenticated before the trigger existed had no row, so `admin_list_members`
+  (which already defaults to the "All" filter in the UI) couldn't see them — only
+  banned users, whose rows exist because a ban writes them. Fix: added a one-time,
+  re-runnable backfill to `supabase/admin.sql` (`insert into profiles select id from
+  auth.users on conflict do nothing`) + a diagnostic count. Minh runs it in the
+  Supabase SQL editor. No app-code change needed.
+- **Holy-card wallpaper (Mt 28:20)** art swapped to Hofmann's *Head of Christ*
+  (public domain, d. 1911), sourced from Wikimedia — warm frontal gaze, replaces the
+  Grünewald crop that had grabbed a fallen soldier. 3 of 6 sample cards done.
+- **TWA address bar** (Minh's S24 Ultra): verified correct three ways — app targets
+  non-www `dockinhmancoi.com`, that host serves assetlinks 200 with BOTH keys and
+  Google's DAL returns them, the `.apk` is signed `4F:28…` (trusted) and Play re-signs
+  `D4:5A…` (also trusted). Chrome is the device default. Clean reinstall didn't clear
+  it. Next: `adb logcat` read of Chrome's OriginVerifier to see the exact reason.
+
 ## Current state (2026-08-13)
 
 Feature-complete and deployed on Vercel (`dockinhmancoi.com`). Working tree clean.

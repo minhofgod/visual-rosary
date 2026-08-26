@@ -89,3 +89,15 @@ grant execute on function public.admin_list_requests(text, int, int) to authenti
 grant execute on function public.admin_set_status(uuid, text)        to authenticated;
 grant execute on function public.admin_set_ban(uuid, boolean)        to authenticated;
 grant execute on function public.admin_list_members(text, int, int)  to authenticated;
+
+-- ============================================================================
+-- One-time backfill: the on_auth_user_created trigger only creates a profile row
+-- for NEW sign-ups, so anyone who authenticated before that trigger existed has no
+-- profile and never appears in admin_list_members (only banned users do, since a
+-- ban writes their row). This gives every existing auth user a row. Safe to re-run.
+--   -- Diagnose the gap first:
+--   select (select count(*) from auth.users) as accounts,
+--          (select count(*) from public.profiles) as profiles;
+insert into public.profiles (id)
+select id from auth.users
+on conflict (id) do nothing;
