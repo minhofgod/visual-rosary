@@ -67,9 +67,9 @@ export function SettingsPanel({ onClose, displayLang, setDisplayLang, settings, 
           <h3>{t(displayLang, 'Cỡ chữ', 'Font size')}</h3>
           <div className="font-size-toggle" role="group" aria-label={t(displayLang, 'Cỡ chữ', 'Font size')}>
             {[
+              { scale: 0.85, label: t(displayLang, 'Nhỏ', 'Small') },
               { scale: 1, label: t(displayLang, 'Vừa', 'Normal') },
               { scale: 1.15, label: t(displayLang, 'Lớn', 'Large') },
-              { scale: 1.35, label: t(displayLang, 'Rất lớn', 'X-Large') },
             ].map((opt) => (
               <button
                 key={opt.scale}
