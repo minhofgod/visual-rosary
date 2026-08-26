@@ -11,6 +11,7 @@ import { useAuth } from '../state/useAuth';
 import { useSettings } from '../state/useSettings';
 import {
   getWall, createRequest, prayForRequest, reportRequest, blockPoster, deleteRequest,
+  countNewRequests, getWallLastSeen, markWallSeen,
   type WallItem, type WallSort,
 } from '../lib/prayerWall';
 
@@ -76,6 +77,14 @@ export function PrayerWallPage() {
     load(sort);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sort, auth.isSignedIn]);
+
+  // On arrival, count what's new since the last visit (for a gentle top pill), then
+  // mark the wall seen so the count resets for next time and the landing nudge clears.
+  const [newSinceLast, setNewSinceLast] = useState(0);
+  useEffect(() => {
+    countNewRequests(getWallLastSeen()).then(setNewSinceLast);
+    markWallSeen();
+  }, []);
 
   async function submit(e: FormEvent) {
     e.preventDefault();
@@ -223,6 +232,16 @@ export function PrayerWallPage() {
             {t('Cần lời cầu nguyện', 'Needs prayer')}
           </button>
         </div>
+
+        {newSinceLast > 0 && (
+          <div className="pw-new-since">
+            ✨{' '}
+            {t(
+              `${newSinceLast} ý cầu nguyện mới từ lần trước`,
+              `${newSinceLast} new since your last visit`,
+            )}
+          </div>
+        )}
 
         {/* List */}
         {loading ? (

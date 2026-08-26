@@ -21,6 +21,19 @@ For architecture/infra details see the README and `src/` — this file is just t
 > - **Optional SEO/perf (not started):** code-split the ~750 KB JS bundle; compress
 >   the large bead images (some ~1.4 MB); per-route titles/meta for the 4 mystery pages.
 
+## 2026-08-26 — Profile "your prayers" + new-requests badge
+
+- **Profile now shows the signed-in user's own prayer requests** (`ProfilePage`) — a
+  "Your prayer requests" section listing their posts with 🙏 counts + Delete, plus a
+  note that on the wall they stay anonymous. Uses the existing `getMyRequests` /
+  `deleteRequest` (RLS scopes reads to the owner), so it's private to them.
+- **New-requests badge** — a red count of prayer requests from *others* since this
+  device last viewed the wall. New RPC `count_new_requests(p_since)` in
+  `community-schema.sql` (**Minh must run it in Supabase**); device-local last-seen in
+  `prayerWall.ts`; shared `useNewRequests` hook. Shows: (1) as a red corner badge on the
+  **post-rosary nudge** only (never on the cold landing — verified no RPC call there),
+  (2) as a soft "N new since your last visit" pill atop the wall, which resets on view.
+
 ## 2026-08-26 — Admin members backfill + Mt 28:20 holy card
 
 - **Members list only showed banned users.** Root cause: `profiles` rows are created

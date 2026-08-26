@@ -12,6 +12,7 @@ import { useSlideshow } from '../state/useSlideshow';
 import { usePrayersToday } from '../state/usePrayersToday';
 import { useStreak } from '../state/useStreak';
 import { useResume } from '../state/useResume';
+import { useNewRequests } from '../state/useNewRequests';
 import { buildSequence } from '../data/sequence';
 import { findStepIndexBySlug } from '../data/slugs';
 import { mysterySets, todaysMysteryKey } from '../data/mysteries';
@@ -41,6 +42,10 @@ export function PickerPage() {
       window.history.replaceState({ ...window.history.state, usr: null }, '');
     }
   }, [location.state]);
+
+  // New prayer requests since they last looked — only computed once the post-rosary
+  // nudge is showing, so the cold landing page never nags them with a red count.
+  const newRequestCount = useNewRequests(finishNudgeOpen);
 
   // Resolve the saved resume point into its mystery set + step heading for the label.
   const resumeInfo = useMemo(() => {
@@ -112,6 +117,18 @@ export function PickerPage() {
         <div className="landing-community">
           {finishNudgeOpen && (
             <div className="community-nudge" role="button" tabIndex={0} onClick={() => navigate('/y-cau-nguyen')}>
+              {newRequestCount > 0 && (
+                <span
+                  className="community-nudge-badge"
+                  aria-label={
+                    displayLang === 'en'
+                      ? `${newRequestCount} new prayer requests`
+                      : `${newRequestCount} ý cầu nguyện mới`
+                  }
+                >
+                  {newRequestCount > 99 ? '99+' : newRequestCount}
+                </span>
+              )}
               <span className="community-nudge-text">
                 {displayLang === 'en' ? '🙏 Pray for someone?' : '🙏 Cầu nguyện cho một người?'}
               </span>

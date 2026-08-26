@@ -98,3 +98,44 @@ export async function deleteRequest(requestId: string): Promise<boolean> {
   }
   return true;
 }
+
+// ---- "New since last visit" badge -----------------------------------------
+// Device-local: we remember when this device last looked at the wall, and count how
+// many requests (from other people) have appeared since. Deliberately per-device and
+// never surfaced on the cold landing page — it's a gentle "there's news" hint, not a
+// to-do the user is made to feel behind on.
+
+const WALL_LAST_SEEN_KEY = 'rosary.wall.lastSeen';
+
+/** ISO timestamp of when this device last viewed the wall (null if never). */
+export function getWallLastSeen(): string | null {
+  try {
+    return localStorage.getItem(WALL_LAST_SEEN_KEY);
+  } catch {
+    return null;
+  }
+}
+
+/** Marks the wall as seen right now, so the "new" count resets to zero. */
+export function markWallSeen(): void {
+  try {
+    localStorage.setItem(WALL_LAST_SEEN_KEY, new Date().toISOString());
+  } catch {
+    /* private mode / storage disabled */
+  }
+}
+
+/**
+ * How many new, visible requests from OTHER people have appeared since `since`.
+ * Returns 0 when the device has never opened the wall (so a first-timer isn't shown a
+ * backlog). Mirrors get_prayer_wall's visibility/blocking filters server-side.
+ */
+export async function countNewRequests(since: string | null): Promise<number> {
+  if (!supabase || !since) return 0;
+  const { data, error } = await supabase.rpc('count_new_requests', { p_since: since });
+  if (error) {
+    console.error('countNewRequests failed', error);
+    return 0;
+  }
+  return typeof data === 'number' ? data : 0;
+}

@@ -172,6 +172,23 @@ language sql security definer set search_path = public as $$
    limit least(greatest(p_limit, 1), 100) offset greatest(p_offset, 0);
 $$;
 
+-- Count of new, visible requests from OTHER people since a timestamp. Powers the
+-- small "new since your last visit" badge (on the wall + the post-rosary nudge).
+-- Same visibility/blocking filters as get_prayer_wall; excludes the caller's own
+-- posts. When signed out (auth.uid() is null) it counts all visible new posts.
+create or replace function public.count_new_requests(p_since timestamptz)
+returns int
+language sql security definer set search_path = public as $$
+  select count(*)::int
+    from public.prayer_requests r
+   where r.status = 'visible'
+     and r.created_at > p_since
+     and (auth.uid() is null or r.user_id <> auth.uid())
+     and not exists (select 1 from public.profiles p where p.id = r.user_id and p.is_banned)
+     and not exists (select 1 from public.blocks b where b.blocker_id = auth.uid() and b.blocked_user_id = r.user_id);
+$$;
+grant execute on function public.count_new_requests(timestamptz) to anon, authenticated;
+
 -- Record a prayer for a request → returns the new count. Signed-in users are
 -- deduped (one per request); anonymous taps just increment (client-guarded).
 create or replace function public.pray_for_request(p_request_id uuid)

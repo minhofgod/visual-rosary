@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppHeader } from '../components/AppHeader';
 import { MysteryBackground } from '../components/MysteryBackground';
@@ -7,6 +7,7 @@ import { useDisplayLang } from '../state/useDisplayLang';
 import { useSlideshow } from '../state/useSlideshow';
 import { useAuth } from '../state/useAuth';
 import { useStreak } from '../state/useStreak';
+import { getMyRequests, deleteRequest, type WallItem } from '../lib/prayerWall';
 
 function localDateKey(d: Date): string {
   const y = d.getFullYear();
@@ -29,6 +30,9 @@ export function ProfilePage() {
   const auth = useAuth();
   const stats = useStreak();
   const [signInOpen, setSignInOpen] = useState(false);
+  const [myRequests, setMyRequests] = useState<WallItem[]>([]);
+  const [loadingReqs, setLoadingReqs] = useState(false);
+  const [busyId, setBusyId] = useState<string | null>(null);
 
   const t = (vi: string, en: string) => (displayLang === 'en' ? en : vi);
 
@@ -66,6 +70,33 @@ export function ProfilePage() {
     }
     return { cells: out, monthLabels: labels };
   }, [prayedDays, displayLang]);
+
+  // The signed-in user's own prayer requests. RLS scopes this to their rows only, so
+  // it's private to them even though the same posts appear anonymously on the wall.
+  useEffect(() => {
+    if (!auth.isSignedIn) {
+      setMyRequests([]);
+      return;
+    }
+    let cancelled = false;
+    setLoadingReqs(true);
+    getMyRequests().then((r) => {
+      if (cancelled) return;
+      setMyRequests(r);
+      setLoadingReqs(false);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [auth.isSignedIn]);
+
+  async function removeRequest(id: string) {
+    if (!confirm(t('Xoá ý cầu nguyện này?', 'Delete this prayer request?'))) return;
+    setBusyId(id);
+    const ok = await deleteRequest(id);
+    if (ok) setMyRequests((prev) => prev.filter((x) => x.id !== id));
+    setBusyId(null);
+  }
 
   return (
     <div className="reading-screen pf-screen">
@@ -161,6 +192,51 @@ export function ProfilePage() {
           <p className="pf-empty">
             {t('Hãy lần một chuỗi Mân Côi để bắt đầu ghi lại hành trình cầu nguyện của bạn.', 'Pray a rosary to start tracking your prayer journey.')}
           </p>
+        )}
+
+        {auth.isSignedIn && (
+          <section className="pf-requests">
+            <h2 className="pf-heatmap-title">{t('Ý cầu nguyện của bạn', 'Your prayer requests')}</h2>
+            <p className="pf-req-note">
+              {t(
+                'Chỉ mình bạn thấy các bài của mình ở đây. Trên tường, chúng vẫn hoàn toàn ẩn danh.',
+                'Only you can see your own here. On the wall, they stay completely anonymous.',
+              )}
+            </p>
+
+            {loadingReqs ? (
+              <p className="pf-empty">{t('Đang tải…', 'Loading…')}</p>
+            ) : myRequests.length === 0 ? (
+              <p className="pf-empty">
+                {t('Bạn chưa đăng ý cầu nguyện nào.', "You haven't posted any prayer requests yet.")}{' '}
+                <button type="button" className="pf-req-link" onClick={() => navigate('/y-cau-nguyen')}>
+                  {t('Đến bức tường cầu nguyện', 'Go to the prayer wall')}
+                </button>
+              </p>
+            ) : (
+              <ul className="pf-req-list">
+                {myRequests.map((r) => (
+                  <li key={r.id} className="pf-req-card">
+                    <p className="pf-req-body">{r.body}</p>
+                    <div className="pf-req-meta">
+                      <span className="pf-req-prayed">
+                        🙏 {r.prayed_count} {t('lời cầu', r.prayed_count === 1 ? 'prayer' : 'prayers')}
+                      </span>
+                      <span className="pf-req-date">{new Date(r.created_at).toLocaleDateString()}</span>
+                      <button
+                        type="button"
+                        className="pf-req-del"
+                        disabled={busyId === r.id}
+                        onClick={() => removeRequest(r.id)}
+                      >
+                        {t('Xoá', 'Delete')}
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
         )}
       </main>
 
