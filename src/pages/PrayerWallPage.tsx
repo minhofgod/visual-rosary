@@ -132,6 +132,12 @@ export function PrayerWallPage() {
               'Ask the community to pray for your intention — and pray for one another.',
             )}
           </p>
+          <p className="pw-anon-note">
+            {t(
+              '🔒 Mọi ý cầu nguyện đều được đăng ẩn danh — tên của bạn không hiển thị.',
+              '🔒 Every request is posted anonymously — your name is never shown.',
+            )}
+          </p>
         </div>
 
         {/* Post box */}

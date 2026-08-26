@@ -29,6 +29,9 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Prayer wall anonymity note (2026-08-25)** — added a persistent `.pw-anon-note`
+  line under the hero ("🔒 Mọi ý cầu nguyện đều được đăng ẩn danh — tên của bạn không
+  hiển thị." / EN) so posters know their name is never shown. (Wall is still dev-only.)
 - **Font size control (2026-08-25)** — new "Cỡ chữ / Font size" control in the settings
   menu (three "A" glyphs: Vừa/Normal ×1, Lớn/Large ×1.15, Rất lớn/X-Large ×1.35), for the
   elderly prayer audience. Adds `fontScale: number` to `useSettings` (localStorage,
