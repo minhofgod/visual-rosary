@@ -80,11 +80,14 @@ export function PrayerWallPage() {
 
   // On arrival, count what's new since the last visit (for a gentle top pill), then
   // mark the wall seen so the count resets for next time and the landing nudge clears.
+  // Capture the previous "last seen" at first render — the effect resets it, so reading
+  // it up front keeps a re-run (React StrictMode, remounts) from zeroing the count.
+  const [wallSince] = useState(() => getWallLastSeen());
   const [newSinceLast, setNewSinceLast] = useState(0);
   useEffect(() => {
-    countNewRequests(getWallLastSeen()).then(setNewSinceLast);
+    countNewRequests(wallSince).then(setNewSinceLast);
     markWallSeen();
-  }, []);
+  }, [wallSince]);
 
   async function submit(e: FormEvent) {
     e.preventDefault();
@@ -167,7 +170,21 @@ export function PrayerWallPage() {
       <main className="pw-main">
         <div className="pw-hero">
           <div className="pw-eyebrow">{t('CỘNG ĐOÀN CẦU NGUYỆN', 'PRAYER COMMUNITY')}</div>
-          <h1 className="pw-title">{t('Ý Cầu Nguyện', 'Prayer Requests')}</h1>
+          <h1 className="pw-title">
+            {t('Ý Cầu Nguyện', 'Prayer Requests')}
+            {newSinceLast > 0 && (
+              <span
+                className="pw-title-badge"
+                aria-label={
+                  displayLang === 'en'
+                    ? `${newSinceLast} new prayer requests`
+                    : `${newSinceLast} ý cầu nguyện mới`
+                }
+              >
+                {newSinceLast > 99 ? '99+' : newSinceLast}
+              </span>
+            )}
+          </h1>
         </div>
 
         {/* Pinned welcome note from Minh — dismissible, remembered per device.

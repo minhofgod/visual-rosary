@@ -1548,6 +1548,27 @@
   line-height: 1.15;
 }
 
+/* Red "new requests" count riding on the wall title. */
+.pw-title-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: super;
+  margin-left: 8px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  box-sizing: border-box;
+  background: #d64545;
+  color: #fff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
 .pw-lead {
   color: rgba(255, 255, 255, 0.78);
   font-size: 14px;
