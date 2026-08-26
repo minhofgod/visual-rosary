@@ -29,6 +29,15 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Accounts live in production + streak↔account sync (2026-08-24)** — sign-in is now
+  reachable in production via a "Đăng nhập để lưu chuỗi ngày / Sign in to save your
+  streak" button on the profile (`ProfilePage`), decoupled from the (still-hidden)
+  wall. Streak sync: new table `public.user_prayer_days` ([`supabase/streak-sync.sql`](supabase/streak-sync.sql),
+  Minh runs it) + `src/lib/streakSync.ts`. `useStreak` now merges device days into the
+  account on sign-in (upsert — preserves existing device streaks) and reads them back,
+  so the streak/heatmap follow the user across devices; `ReadingPage` records each
+  completion to the account when signed in. Days-only sync (streak + heatmap); "total"
+  stays device-local. Sign-in `redirectTo` now returns to the current page.
 - **Profile page (`/ho-so`) with year heatmap** — `ProfilePage` shows the Google
   avatar + name (when signed in), the current/longest streak + total, and a
   **year-long "rosary heatmap"** (GitHub-contribution style, ~53 weeks) of days

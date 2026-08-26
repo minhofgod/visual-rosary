@@ -20,7 +20,9 @@ import { buildSequence } from '../data/sequence';
 import { findStepIndexBySlug } from '../data/slugs';
 import { logPrayerCompletion } from '../lib/prayerStats';
 import { recordCompletionLocal } from '../lib/prayerStreak';
+import { recordDayServer } from '../lib/streakSync';
 import { saveResume, clearResume } from '../lib/resumeState';
+import { useAuth } from '../state/useAuth';
 import type { MysteryKey } from '../data/types';
 
 const slideVariants = {
@@ -60,6 +62,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
     else rosary.next();
   };
   const swipe = useSwipeNav(handleNext, rosary.prev);
+  const auth = useAuth();
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   // Keep the URL's hash in sync with the current step, so it's always shareable/bookmarkable.
@@ -85,8 +88,9 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
     if (rosary.isComplete) {
       logPrayerCompletion(mysteryKey);
       recordCompletionLocal(mysteryKey);
+      if (auth.isSignedIn) recordDayServer(); // also record to the account when signed in
     }
-  }, [rosary.isComplete, mysteryKey]);
+  }, [rosary.isComplete, mysteryKey, auth.isSignedIn]);
 
   // Remember (or clear) where the user is, so the landing page can offer to
   // resume. Skip saving the final step — a finished rosary has nothing to resume.

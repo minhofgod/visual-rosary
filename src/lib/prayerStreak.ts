@@ -22,7 +22,7 @@ interface Stored {
 }
 
 /** Local-calendar day key (not UTC) — a personal streak follows the user's own day. */
-function localDateKey(d = new Date()): string {
+export function localDateKey(d = new Date()): string {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');
@@ -109,9 +109,10 @@ function computeStreaks(daySet: Set<string>): { current: number; longest: number
   return { current, longest };
 }
 
-export function getStreakStats(): StreakStats {
-  const state = read();
-  const daySet = new Set(state.days);
+/** Compute the full stats from an arbitrary set of prayed days + a total. Used for
+ *  both the local-only case and the signed-in case (local ∪ server days merged). */
+export function computeStatsFromDays(days: string[], total: number): StreakStats {
+  const daySet = new Set(days);
   const { current, longest } = computeStreaks(daySet);
   const today = localDateKey();
   const recentDays = Array.from({ length: 7 }, (_, i) => {
@@ -119,11 +120,24 @@ export function getStreakStats(): StreakStats {
     return { date, prayed: daySet.has(date) };
   });
   return {
-    total: state.total,
+    total,
     currentStreak: current,
     longestStreak: longest,
     prayedToday: daySet.has(today),
     recentDays,
     prayedDays: [...daySet].sort(),
   };
+}
+
+export function getStreakStats(): StreakStats {
+  const state = read();
+  return computeStatsFromDays(state.days, state.total);
+}
+
+/** The device-local prayed days / total — used to seed the account on sign-in. */
+export function getLocalDays(): string[] {
+  return read().days;
+}
+export function getLocalTotal(): number {
+  return read().total;
 }

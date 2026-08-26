@@ -22,7 +22,8 @@ export function useAuth() {
     return () => sub.subscription.unsubscribe();
   }, []);
 
-  const redirectTo = typeof window !== 'undefined' ? `${window.location.origin}/y-cau-nguyen` : undefined;
+  // Return to whatever page the user signed in from (profile, wall, …).
+  const redirectTo = typeof window !== 'undefined' ? window.location.origin + window.location.pathname : undefined;
 
   return {
     session,
