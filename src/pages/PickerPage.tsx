@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AppHeader } from '../components/AppHeader';
 import { MysteryBackground } from '../components/MysteryBackground';
 import { RosaryDiagram } from '../components/RosaryDiagram';
@@ -21,6 +22,7 @@ const ORDER: MysteryKey[] = ['joyful', 'luminous', 'sorrowful', 'glorious'];
 
 export function PickerPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { displayLang, setDisplayLang } = useDisplayLang();
   const image = useSlideshow();
   const today = todaysMysteryKey();
@@ -28,6 +30,18 @@ export function PickerPage() {
   const streak = useStreak();
   const resume = useResume();
   const [shareOpen, setShareOpen] = useState(false);
+
+  // Just finished a rosary (arrived home via the closing swipe)? Gently invite them to
+  // pray for someone on the wall. Read once, then clear the history state so a refresh
+  // or back/forward doesn't re-trigger it.
+  const [finishNudgeOpen, setFinishNudgeOpen] = useState(
+    () => Boolean((location.state as { justFinished?: boolean } | null)?.justFinished),
+  );
+  useEffect(() => {
+    if ((location.state as { justFinished?: boolean } | null)?.justFinished) {
+      window.history.replaceState({ ...window.history.state, usr: null }, '');
+    }
+  }, [location.state]);
 
   // Resolve the saved resume point into its mystery set + step heading for the label.
   const resumeInfo = useMemo(() => {
@@ -117,6 +131,30 @@ export function PickerPage() {
       </button>
 
       {shareOpen && <ShareModal displayLang={displayLang} onClose={() => setShareOpen(false)} />}
+
+      {finishNudgeOpen &&
+        createPortal(
+          <div className="modal-backdrop" onClick={() => setFinishNudgeOpen(false)}>
+            <div className="finish-nudge" onClick={(e) => e.stopPropagation()}>
+              <div className="finish-nudge-emoji" aria-hidden="true">🙏</div>
+              <h2 className="finish-nudge-title">
+                {displayLang === 'en' ? 'Pray for someone?' : 'Cầu nguyện cho một người?'}
+              </h2>
+              <p className="finish-nudge-text">
+                {displayLang === 'en'
+                  ? 'Others have shared their intentions. Take a moment to pray for someone in the community.'
+                  : 'Có anh chị em đang xin lời cầu nguyện. Hãy dành một phút cầu nguyện cho một người trong cộng đoàn.'}
+              </p>
+              <button type="button" className="finish-nudge-cta" onClick={() => navigate('/y-cau-nguyen')}>
+                {displayLang === 'en' ? 'See Prayer Requests' : 'Xem Ý Cầu Nguyện'}
+              </button>
+              <button type="button" className="finish-nudge-later" onClick={() => setFinishNudgeOpen(false)}>
+                {displayLang === 'en' ? 'Maybe later' : 'Để sau'}
+              </button>
+            </div>
+          </div>,
+          document.body,
+        )}
 
       <RosaryDiagram displayLang={displayLang} />
 

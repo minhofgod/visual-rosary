@@ -58,7 +58,7 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
   // user home instead of clamping at the end. It takes a deliberate swipe/scroll
   // (≥50px drag or a wheel gesture), so a tap won't trigger it.
   const handleNext = () => {
-    if (rosary.isComplete) navigate('/');
+    if (rosary.isComplete) navigate('/', { state: { justFinished: true } });
     else rosary.next();
   };
   const swipe = useSwipeNav(handleNext, rosary.prev);

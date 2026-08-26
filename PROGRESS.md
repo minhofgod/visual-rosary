@@ -29,6 +29,13 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Post-rosary "pray for someone" nudge (2026-08-25)** — finishing a rosary
+  (`ReadingPage` swipe-past-end) now navigates home with `{ state: { justFinished: true } }`;
+  `PickerPage` shows a gentle portaled popup ("Cầu nguyện cho một người? / Pray for someone?")
+  inviting them to the prayer wall (CTA → `/y-cau-nguyen`, "Để sau / Maybe later" dismisses).
+  History state is cleared after reading so a refresh won't re-trigger it. Styles: `.finish-nudge*`.
+  Also: the collapsed "What is this page?" pill (`.pw-pinned-show`) is now right-aligned to match
+  the Hide button.
 - **Wall order + button readability (2026-08-25)** — moved the pinned welcome note (and its
   collapsed "What is this page?" pill) ABOVE the post/sign-in box, so the intro reads before
   the invitation to post. Made the wall's text buttons opaque so they're legible over the

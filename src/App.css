@@ -642,6 +642,72 @@
   color: #fff;
 }
 
+/* Post-rosary nudge: gentle invite to pray for someone on the wall. */
+.finish-nudge {
+  background: #201a17;
+  color: #fff;
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  border-radius: 18px;
+  padding: 28px 26px;
+  max-width: 360px;
+  width: calc(100% - 40px);
+  text-align: center;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.finish-nudge-emoji {
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.finish-nudge-title {
+  font-family: 'Source Serif 4', serif;
+  color: var(--gold);
+  font-size: 22px;
+  margin: 0 0 10px;
+}
+
+.finish-nudge-text {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.finish-nudge-cta {
+  display: block;
+  width: 100%;
+  background: var(--gold);
+  color: #241f1b;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.finish-nudge-later {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.finish-nudge-later:hover,
+.finish-nudge-later:focus-visible {
+  color: #fff;
+}
+
 /* Faith / hope / charity intention on the 3 opening Hail Marys */
 .prayer-intention,
 .prayer-intention p {
@@ -1593,7 +1659,9 @@
 
 /* Shown in place of the pinned note once it's hidden — brings it back. */
 .pw-pinned-show {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
+  margin-left: auto;
   align-items: center;
   gap: 6px;
   margin-bottom: 18px;
