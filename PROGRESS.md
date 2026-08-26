@@ -21,6 +21,17 @@ For architecture/infra details see the README and `src/` — this file is just t
 > - **Optional SEO/perf (not started):** code-split the ~750 KB JS bundle; compress
 >   the large bead images (some ~1.4 MB); per-route titles/meta for the 4 mystery pages.
 
+## 2026-08-26 — Admin link in settings + new-requests badge on wall title
+
+- **Admin panel link in the settings menu, admins only.** New cached `useIsAdmin` hook
+  (`state/useIsAdmin.ts`) — one `is_admin` RPC per session, not per page. `AppHeader`
+  passes `isAdmin` to `SettingsPanel`, which renders a gold "🛡️ Trang quản trị / Admin
+  panel" button → `/quan-tri` when true. Signed-out/non-admins see nothing; the page
+  itself still self-gates server-side.
+- **New-requests red badge also on the wall title** (in addition to the pill). Fixed a
+  latent StrictMode/remount bug where the mount effect read *and* reset last-seen,
+  zeroing the count — now captures last-seen once at first render.
+
 ## 2026-08-26 — Profile "your prayers" + new-requests badge
 
 - **Profile now shows the signed-in user's own prayer requests** (`ProfilePage`) — a

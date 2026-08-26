@@ -19,6 +19,8 @@ interface Props {
   /** Show a "Sign out" button (passed from AppHeader when the user is signed in). */
   isSignedIn?: boolean;
   onSignOut?: () => void;
+  /** Show an "Admin panel" link (passed from AppHeader when the user is an admin). */
+  isAdmin?: boolean;
 }
 
 const t = (lang: DisplayLang, vi: string, en: string) => (lang === 'en' ? en : lang === 'both' ? `${vi} / ${en}` : vi);
@@ -43,6 +45,7 @@ export function SettingsPanel({
   showReadingLayout,
   isSignedIn,
   onSignOut,
+  isAdmin,
 }: Props) {
   const navigate = useNavigate();
 
@@ -161,6 +164,19 @@ export function SettingsPanel({
               </label>
             </div>
           </>
+        )}
+
+        {isAdmin && (
+          <button
+            type="button"
+            className="settings-admin"
+            onClick={() => {
+              onClose();
+              navigate('/quan-tri');
+            }}
+          >
+            🛡️ {t(displayLang, 'Trang quản trị', 'Admin panel')}
+          </button>
         )}
 
         {showReturnHome && (

@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SettingsPanel } from './SettingsPanel';
 import { useAuth } from '../state/useAuth';
+import { useIsAdmin } from '../state/useIsAdmin';
 import type { DisplayLang } from '../state/useDisplayLang';
 import type { Settings } from '../state/useSettings';
 
@@ -41,6 +42,7 @@ export function AppHeader({
 }: Props) {
   const navigate = useNavigate();
   const auth = useAuth();
+  const isAdmin = useIsAdmin();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const meta = auth.user?.user_metadata as { avatar_url?: string; picture?: string } | undefined;
@@ -89,6 +91,7 @@ export function AppHeader({
           showReadingLayout={showReadingLayout}
           isSignedIn={auth.isSignedIn}
           onSignOut={auth.enabled ? () => auth.signOut() : undefined}
+          isAdmin={isAdmin}
           onClose={() => setMenuOpen(false)}
         />
       )}
