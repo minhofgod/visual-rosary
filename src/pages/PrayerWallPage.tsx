@@ -15,6 +15,7 @@ import {
 } from '../lib/prayerWall';
 
 const PRAYED_GUARD = 'rosary.prayedFor.';
+const PINNED_HIDDEN_KEY = 'rosary.wall.pinnedHidden';
 const MAX_LEN = 500;
 
 export function PrayerWallPage() {
@@ -31,6 +32,22 @@ export function PrayerWallPage() {
   const [posting, setPosting] = useState(false);
   const [signInOpen, setSignInOpen] = useState(false);
   const [prayingId, setPrayingId] = useState<string | null>(null);
+  const [pinnedHidden, setPinnedHidden] = useState(() => {
+    try {
+      return localStorage.getItem(PINNED_HIDDEN_KEY) === '1';
+    } catch {
+      return false;
+    }
+  });
+
+  function hidePinned() {
+    setPinnedHidden(true);
+    try {
+      localStorage.setItem(PINNED_HIDDEN_KEY, '1');
+    } catch {
+      /* private mode / storage disabled — hidden for this session only */
+    }
+  }
 
   const t = (vi: string, en: string) => (displayLang === 'en' ? en : vi);
 
@@ -133,18 +150,6 @@ export function PrayerWallPage() {
         <div className="pw-hero">
           <div className="pw-eyebrow">{t('CỘNG ĐOÀN CẦU NGUYỆN', 'PRAYER COMMUNITY')}</div>
           <h1 className="pw-title">{t('Ý Cầu Nguyện', 'Prayer Requests')}</h1>
-          <p className="pw-lead">
-            {t(
-              'Xin cộng đoàn cùng cầu nguyện cho ý nguyện của bạn. Hãy đăng ý cầu nguyện, và cầu nguyện cho anh chị em mình.',
-              'Ask the community to pray for your intention — and pray for one another.',
-            )}
-          </p>
-          <p className="pw-anon-note">
-            {t(
-              '🔒 Mọi ý cầu nguyện đều được đăng ẩn danh — tên của bạn không hiển thị.',
-              '🔒 Every request is posted anonymously — your name is never shown.',
-            )}
-          </p>
         </div>
 
         {/* Post box */}
@@ -173,9 +178,15 @@ export function PrayerWallPage() {
           </div>
         )}
 
-        {/* Pinned welcome note from Minh */}
+        {/* Pinned welcome note from Minh — dismissible, remembered per device. */}
+        {!pinnedHidden && (
         <div className="pw-pinned">
-          <div className="pw-pinned-badge">📌 {t('Ghim', 'Pinned')}</div>
+          <div className="pw-pinned-top">
+            <div className="pw-pinned-badge">📌 {t('Ghim', 'Pinned')}</div>
+            <button type="button" className="pw-pinned-hide" onClick={hidePinned}>
+              {t('Ẩn', 'Hide')}
+            </button>
+          </div>
           <p className="pw-pinned-body">
             {t(
               'Hi các bạn, mình là Minh. Đây là chỗ các bạn có thể đăng ý nguyện của mình để mọi người cùng cầu nguyện cho bạn. Những lời cầu nguyện sẽ được đăng ẩn danh. Tuy nhiên khi cầu nguyện, bạn có thể nêu tên người bạn muốn cầu — ví dụ "xin cầu nguyện cho linh hồn Phêrô Nguyễn Văn A" — hoặc không nêu tên cũng được. Chúa là Đấng Toàn Tri: trước khi chúng ta dâng lời cầu nguyện, Ngài đã biết chúng ta cần gì. Nên cộng đoàn không cần biết rõ tên thì Chúa vẫn nhận lời. God bless you all. 🙏',
@@ -184,6 +195,7 @@ export function PrayerWallPage() {
           </p>
           <div className="pw-pinned-author">— Minh · MinhofGod</div>
         </div>
+        )}
 
         {/* Sort */}
         <div className="pw-sort">

@@ -29,6 +29,12 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Wall hero trimmed + dismissible pinned note (2026-08-25)** — the hero description
+  (`.pw-lead` + `.pw-anon-note`) was redundant with Minh's pinned note, so it's removed
+  (hero now = eyebrow + title only). The pinned card got a **Hide** button
+  (`.pw-pinned-hide`); dismissing it is remembered per device via localStorage
+  (`rosary.wall.pinnedHidden`), so it stays hidden across reloads. (Account-level persistence
+  not added — device localStorage suffices.)
 - **Service worker neutralized + menu polish (2026-08-25)** —
   (a) **SW kill-switch**: `public/sw.js` is now a self-unregistering worker that clears
   Cache Storage (NOT localStorage — streaks preserved) and `main.tsx` no longer registers
