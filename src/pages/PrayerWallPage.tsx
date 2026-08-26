@@ -49,6 +49,15 @@ export function PrayerWallPage() {
     }
   }
 
+  function showPinned() {
+    setPinnedHidden(false);
+    try {
+      localStorage.removeItem(PINNED_HIDDEN_KEY);
+    } catch {
+      /* ignore */
+    }
+  }
+
   const t = (vi: string, en: string) => (displayLang === 'en' ? en : vi);
 
   async function load(s: WallSort) {
@@ -178,8 +187,13 @@ export function PrayerWallPage() {
           </div>
         )}
 
-        {/* Pinned welcome note from Minh — dismissible, remembered per device. */}
-        {!pinnedHidden && (
+        {/* Pinned welcome note from Minh — dismissible, remembered per device.
+            When hidden, a small "What is this page?" button brings it back. */}
+        {pinnedHidden ? (
+          <button type="button" className="pw-pinned-show" onClick={showPinned}>
+            ⓘ {t('Trang này là gì?', 'What is this page?')}
+          </button>
+        ) : (
         <div className="pw-pinned">
           <div className="pw-pinned-top">
             <div className="pw-pinned-badge">📌 {t('Ghim', 'Pinned')}</div>

@@ -33,8 +33,10 @@ domain artwork, scripture verses, and a settings panel.
   (`.pw-lead` + `.pw-anon-note`) was redundant with Minh's pinned note, so it's removed
   (hero now = eyebrow + title only). The pinned card got a **Hide** button
   (`.pw-pinned-hide`); dismissing it is remembered per device via localStorage
-  (`rosary.wall.pinnedHidden`), so it stays hidden across reloads. (Account-level persistence
-  not added — device localStorage suffices.)
+  (`rosary.wall.pinnedHidden`), so it stays hidden across reloads. When hidden, a small
+  gold "ⓘ Trang này là gì? / What is this page?" pill (`.pw-pinned-show`) takes its place
+  and reopens the note (clearing the flag) — a clean Hide ↔ reopen toggle. (Account-level
+  persistence not added — device localStorage suffices.)
 - **Service worker neutralized + menu polish (2026-08-25)** —
   (a) **SW kill-switch**: `public/sw.js` is now a self-unregistering worker that clears
   Cache Storage (NOT localStorage — streaks preserved) and `main.tsx` no longer registers
