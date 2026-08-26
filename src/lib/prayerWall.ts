@@ -13,7 +13,7 @@ export interface WallItem {
   prayed_by_me: boolean;
 }
 
-export type WallSort = 'new' | 'prayed';
+export type WallSort = 'new' | 'prayed' | 'needs';
 
 /** Reads the wall (open to everyone). Returns [] if Supabase isn't configured. */
 export async function getWall(sort: WallSort = 'new', limit = 30, offset = 0): Promise<WallItem[]> {

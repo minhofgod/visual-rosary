@@ -10,9 +10,7 @@ function App() {
     <Routes>
       <Route path="/" element={<PickerPage />} />
       <Route path="/ho-so" element={<ProfilePage />} />
-      {/* Prayer wall is dev-only for now — the sign-in/custom-domain setup isn't ready,
-          so it's hidden from the production build. Flip these back on to launch it. */}
-      {import.meta.env.DEV && <Route path="/y-cau-nguyen" element={<PrayerWallPage />} />}
+      <Route path="/y-cau-nguyen" element={<PrayerWallPage />} />
       <Route path="/:mysteryKey/pray" element={<ReadingPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

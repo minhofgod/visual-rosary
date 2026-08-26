@@ -29,6 +29,16 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Prayer wall launched in production (2026-08-25)** — removed the `import.meta.env.DEV`
+  gates (route in `App.tsx`, landing link in `PickerPage.tsx`); the wall (`/y-cau-nguyen`)
+  is now public. Also: (a) a **pinned welcome card** from Minh at the top of the wall
+  (`.pw-pinned`, static UI — not a DB post; explains the wall + anonymity + naming, VI/EN);
+  (b) a new **"Cần lời cầu nguyện / Needs prayer"** sort that surfaces least-prayed requests
+  first — `WallSort` gains `'needs'`, and `get_prayer_wall` in `supabase/community-schema.sql`
+  orders `prayed_count asc` for it (**Minh must re-run that function in Supabase**; until then
+  'needs' degrades to newest); (c) removed the **Sign out** button from the post box (mistake
+  risk) — sign-out now lives only on the profile page; (d) the wall header now uses the shared
+  `AppHeader` (profile + settings menu) like every other page.
 - **Prayer wall anonymity note (2026-08-25)** — added a persistent `.pw-anon-note`
   line under the hero ("🔒 Mọi ý cầu nguyện đều được đăng ẩn danh — tên của bạn không
   hiển thị." / EN) so posters know their name is never shown. (Wall is still dev-only.)

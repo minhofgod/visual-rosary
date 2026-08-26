@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LangToggle } from '../components/LangToggle';
+import { AppHeader } from '../components/AppHeader';
 import { MysteryBackground } from '../components/MysteryBackground';
 import { PrayerRequestCard } from '../components/PrayerRequestCard';
 import { PrayingForYouModal } from '../components/PrayingForYouModal';
@@ -111,16 +111,17 @@ export function PrayerWallPage() {
         </div>
       )}
 
-      <header className="reading-header">
-        <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label={t('Trang chủ', 'Home')}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-            <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
-          </svg>
-        </button>
-        <div className="reading-header-right">
-          <LangToggle value={displayLang} onChange={setDisplayLang} />
-        </div>
-      </header>
+      <AppHeader
+        displayLang={displayLang}
+        setDisplayLang={setDisplayLang}
+        left={
+          <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label={t('Trang chủ', 'Home')}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+              <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+            </svg>
+          </button>
+        }
+      />
 
       <main className="pw-main">
         <div className="pw-hero">
@@ -152,14 +153,9 @@ export function PrayerWallPage() {
             />
             <div className="pw-post-row">
               <span className="pw-post-count">{body.length}/{MAX_LEN}</span>
-              <div className="pw-post-actions">
-                <button type="button" className="pw-signout" onClick={() => auth.signOut()}>
-                  {t('Đăng xuất', 'Sign out')}
-                </button>
-                <button type="submit" className="pw-post-btn" disabled={posting || !body.trim()}>
-                  {posting ? '…' : t('Đăng', 'Post')}
-                </button>
-              </div>
+              <button type="submit" className="pw-post-btn" disabled={posting || !body.trim()}>
+                {posting ? '…' : t('Đăng', 'Post')}
+              </button>
             </div>
           </form>
         ) : (
@@ -171,6 +167,18 @@ export function PrayerWallPage() {
           </div>
         )}
 
+        {/* Pinned welcome note from Minh */}
+        <div className="pw-pinned">
+          <div className="pw-pinned-badge">📌 {t('Ghim', 'Pinned')}</div>
+          <p className="pw-pinned-body">
+            {t(
+              'Hi các bạn, mình là Minh. Đây là chỗ các bạn có thể đăng ý nguyện của mình để mọi người cùng cầu nguyện cho bạn. Những lời cầu nguyện sẽ được đăng ẩn danh. Tuy nhiên khi cầu nguyện, bạn có thể nêu tên người bạn muốn cầu — ví dụ "xin cầu nguyện cho linh hồn Phêrô Nguyễn Văn A" — hoặc không nêu tên cũng được. Chúa là Đấng Toàn Tri: trước khi chúng ta dâng lời cầu nguyện, Ngài đã biết chúng ta cần gì. Nên cộng đoàn không cần biết rõ tên thì Chúa vẫn nhận lời. God bless you all. 🙏',
+              "Hi everyone, I'm Minh. This is a place to share your intentions so others can pray for you. Requests are posted anonymously. When you pray, you're welcome to name the person you're praying for — for example, “please pray for the soul of Peter Nguyễn Văn A” — or leave it unnamed. God is all-knowing: before we lift up our prayers, He already knows what we need. So the community doesn't need to know the name for God to hear us. God bless you all. 🙏",
+            )}
+          </p>
+          <div className="pw-pinned-author">— Minh · MinhofGod</div>
+        </div>
+
         {/* Sort */}
         <div className="pw-sort">
           <button type="button" className={sort === 'new' ? 'is-active' : ''} onClick={() => setSort('new')}>
@@ -178,6 +186,9 @@ export function PrayerWallPage() {
           </button>
           <button type="button" className={sort === 'prayed' ? 'is-active' : ''} onClick={() => setSort('prayed')}>
             {t('Được cầu nguyện nhiều', 'Most prayed')}
+          </button>
+          <button type="button" className={sort === 'needs' ? 'is-active' : ''} onClick={() => setSort('needs')}>
+            {t('Cần lời cầu nguyện', 'Needs prayer')}
           </button>
         </div>
 

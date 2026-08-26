@@ -151,7 +151,10 @@ alter table public.reports enable row level security;
 -- ===========================================================================
 
 -- Read the wall. Never returns user_id. Excludes hidden/removed posts, banned
--- posters, and anyone the caller has blocked. Sort 'new' or 'prayed'.
+-- posters, and anyone the caller has blocked. Sort:
+--   'new'    → newest first
+--   'prayed' → most prayed first
+--   'needs'  → fewest prayed first (surface requests that need prayers), newest as tiebreak
 create or replace function public.get_prayer_wall(p_sort text default 'new', p_limit int default 30, p_offset int default 0)
 returns table (id uuid, body text, prayed_count int, created_at timestamptz, is_mine boolean, prayed_by_me boolean)
 language sql security definer set search_path = public as $$
@@ -164,6 +167,7 @@ language sql security definer set search_path = public as $$
      and not exists (select 1 from public.blocks b where b.blocker_id = auth.uid() and b.blocked_user_id = r.user_id)
    order by
      case when p_sort = 'prayed' then r.prayed_count end desc nulls last,
+     case when p_sort = 'needs'  then r.prayed_count end asc  nulls last,
      r.created_at desc
    limit least(greatest(p_limit, 1), 100) offset greatest(p_offset, 0);
 $$;
