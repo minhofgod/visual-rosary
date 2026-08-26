@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useState, type CSSProperties, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppHeader } from '../components/AppHeader';
 import { MysteryBackground } from '../components/MysteryBackground';
@@ -8,6 +8,7 @@ import { SignInModal } from '../components/SignInModal';
 import { useDisplayLang } from '../state/useDisplayLang';
 import { useSlideshow } from '../state/useSlideshow';
 import { useAuth } from '../state/useAuth';
+import { useSettings } from '../state/useSettings';
 import {
   getWall, createRequest, prayForRequest, reportRequest, blockPoster, deleteRequest,
   type WallItem, type WallSort,
@@ -21,6 +22,7 @@ export function PrayerWallPage() {
   const { displayLang, setDisplayLang } = useDisplayLang();
   const image = useSlideshow();
   const auth = useAuth();
+  const { settings, setSettings } = useSettings();
 
   const [items, setItems] = useState<WallItem[]>([]);
   const [sort, setSort] = useState<WallSort>('new');
@@ -102,7 +104,7 @@ export function PrayerWallPage() {
   }
 
   return (
-    <div className="reading-screen pw-screen">
+    <div className="reading-screen pw-screen" style={{ '--font-scale': settings.fontScale } as CSSProperties}>
       <MysteryBackground image={image?.file} gradientClass="bg-landing" />
       <div className="bg-scrim" />
       {image && (
@@ -114,6 +116,10 @@ export function PrayerWallPage() {
       <AppHeader
         displayLang={displayLang}
         setDisplayLang={setDisplayLang}
+        settings={settings}
+        onSettingsChange={setSettings}
+        showFontSize
+        showReturnHome
         left={
           <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label={t('Trang chủ', 'Home')}>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">

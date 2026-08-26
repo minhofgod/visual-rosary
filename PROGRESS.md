@@ -29,6 +29,17 @@ through the full sequence one prayer per screen with a bead rail, per-bead publi
 domain artwork, scripture verses, and a settings panel.
 
 ### Recently completed
+- **Service worker neutralized + menu polish (2026-08-25)** —
+  (a) **SW kill-switch**: `public/sw.js` is now a self-unregistering worker that clears
+  Cache Storage (NOT localStorage — streaks preserved) and `main.tsx` no longer registers
+  a SW. Fixes stale-cache "unstyled page" after rapid deploys; heals stuck devices on
+  next load(s). (b) **Wall boxes opaque**: `.pw-post`/`.pw-signin-prompt`/`.pw-card`/
+  `.pw-pinned` bumped 0.55→0.85 bg + blur 6px for readability over the art. (c) **Sign out
+  in the menu**: `SettingsPanel` gained granular section flags (`showReturnHome`,
+  `showFontSize`, `showReadingLayout`) + an auto sign-out (AppHeader passes
+  `isSignedIn`/`onSignOut` from `useAuth`). (d) **Wall settings** now show Language + Font
+  size + Return Home only; the wall applies `--font-scale` to `.pw-body`/`.pw-pinned-body`
+  so text size works there too.
 - **Prayer wall launched in production (2026-08-25)** — removed the `import.meta.env.DEV`
   gates (route in `App.tsx`, landing link in `PickerPage.tsx`); the wall (`/y-cau-nguyen`)
   is now public. Also: (a) a **pinned welcome card** from Minh at the top of the wall

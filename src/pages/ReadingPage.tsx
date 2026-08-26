@@ -144,6 +144,9 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
         setDisplayLang={setDisplayLang}
         settings={settings}
         onSettingsChange={setSettings}
+        showReturnHome
+        showFontSize
+        showReadingLayout
         left={
           <button type="button" className="icon-button icon-button-back" onClick={() => navigate('/')} aria-label="restart">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">

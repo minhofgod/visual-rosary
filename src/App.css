@@ -620,6 +620,28 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
+/* Sign out lives at the bottom of the settings menu, set apart from the controls. */
+.settings-signout {
+  width: 100%;
+  margin-top: 24px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
+  padding: 10px 22px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.settings-signout:hover,
+.settings-signout:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
 /* Faith / hope / charity intention on the 3 opening Hail Marys */
 .prayer-intention,
 .prayer-intention p {
@@ -1447,9 +1469,9 @@
 
 .pw-post,
 .pw-signin-prompt {
-  background: rgba(18, 13, 10, 0.55);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background: rgba(18, 13, 10, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 14px;
   padding: 14px;
@@ -1525,8 +1547,10 @@
 }
 
 .pw-pinned {
-  background: rgba(201, 162, 39, 0.12);
-  border: 1px solid rgba(201, 162, 39, 0.45);
+  background: rgba(28, 21, 10, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(201, 162, 39, 0.55);
   border-radius: 14px;
   padding: 16px 18px;
   margin-bottom: 18px;
@@ -1543,7 +1567,7 @@
 
 .pw-pinned-body {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 14px;
+  font-size: calc(14px * var(--font-scale));
   line-height: 1.65;
   margin: 0;
 }
@@ -1595,9 +1619,9 @@
 }
 
 .pw-card {
-  background: rgba(18, 13, 10, 0.55);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background: rgba(18, 13, 10, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 14px;
   padding: 14px 16px;
@@ -1605,6 +1629,7 @@
 
 .pw-body {
   color: #f2ead9;
+  font-size: calc(17px * var(--font-scale));
   line-height: 1.6;
   margin: 0 0 12px;
   white-space: pre-wrap;

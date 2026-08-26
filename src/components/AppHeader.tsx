@@ -15,15 +15,30 @@ interface Props {
   setDisplayLang: (lang: DisplayLang) => void;
   /** Hide the profile button (e.g. on the profile page itself). */
   showProfile?: boolean;
-  /** Reading-only display options; when passed, the menu also shows them. */
+  /** Device settings (font size, and — with showReadingLayout — bead/display options). */
   settings?: Settings;
   onSettingsChange?: (patch: Partial<Settings>) => void;
+  /** Menu sections to show (Language + sign-out are automatic). */
+  showReturnHome?: boolean;
+  showFontSize?: boolean;
+  showReadingLayout?: boolean;
 }
 
 // Shared header used on every page: a left slot, an optional centered slot, and a
 // consistent [profile] + [menu] pair on the right. The language control now lives
 // inside the menu (SettingsPanel) rather than as a standalone toggle.
-export function AppHeader({ left, center, displayLang, setDisplayLang, showProfile = true, settings, onSettingsChange }: Props) {
+export function AppHeader({
+  left,
+  center,
+  displayLang,
+  setDisplayLang,
+  showProfile = true,
+  settings,
+  onSettingsChange,
+  showReturnHome,
+  showFontSize,
+  showReadingLayout,
+}: Props) {
   const navigate = useNavigate();
   const auth = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -69,6 +84,11 @@ export function AppHeader({ left, center, displayLang, setDisplayLang, showProfi
           setDisplayLang={setDisplayLang}
           settings={settings}
           onChange={onSettingsChange}
+          showReturnHome={showReturnHome}
+          showFontSize={showFontSize}
+          showReadingLayout={showReadingLayout}
+          isSignedIn={auth.isSignedIn}
+          onSignOut={auth.enabled ? () => auth.signOut() : undefined}
           onClose={() => setMenuOpen(false)}
         />
       )}
