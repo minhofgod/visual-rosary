@@ -45,6 +45,26 @@ export async function adminSetStatus(id: string, status: RequestStatus): Promise
   return true;
 }
 
+export interface AdminMember {
+  id: string;
+  created_at: string;
+  is_admin: boolean;
+  is_banned: boolean;
+  post_count: number;
+  prayed_given: number;
+}
+export type MemberFilter = 'all' | 'banned' | 'admin';
+
+export async function adminListMembers(filter: MemberFilter = 'all'): Promise<AdminMember[]> {
+  if (!supabase) return [];
+  const { data, error } = await supabase.rpc('admin_list_members', { p_filter: filter, p_limit: 500, p_offset: 0 });
+  if (error) {
+    console.error('adminListMembers failed', error);
+    return [];
+  }
+  return (data ?? []) as AdminMember[];
+}
+
 export async function adminSetBan(userId: string, banned: boolean): Promise<boolean> {
   if (!supabase) return false;
   const { error } = await supabase.rpc('admin_set_ban', { p_user_id: userId, p_banned: banned });

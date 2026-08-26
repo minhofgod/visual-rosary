@@ -60,7 +60,32 @@ begin
   update public.profiles set is_banned = p_banned where id = p_user_id;
 end; $$;
 
+-- List members (accounts) for moderation. NO email / personal data — profiles only
+-- hold an anonymous id + flags. p_filter: 'all' | 'banned' | 'admin'.
+create or replace function public.admin_list_members(
+  p_filter text default 'all', p_limit int default 500, p_offset int default 0
+)
+returns table (
+  id uuid, created_at timestamptz, is_admin boolean, is_banned boolean,
+  post_count int, prayed_given int
+)
+language sql security definer set search_path = public as $$
+  select p.id, p.created_at, p.is_admin, p.is_banned,
+         (select count(*) from public.prayer_requests r where r.user_id = p.id)::int as post_count,
+         (select count(*) from public.prayer_prayed pp where pp.user_id = p.id)::int as prayed_given
+    from public.profiles p
+   where public.is_admin()
+     and (
+       p_filter = 'all'
+       or (p_filter = 'banned' and p.is_banned)
+       or (p_filter = 'admin' and p.is_admin)
+     )
+   order by p.is_banned desc, p.created_at desc
+   limit least(greatest(p_limit, 1), 1000) offset greatest(p_offset, 0);
+$$;
+
 grant execute on function public.is_admin()                          to authenticated;
 grant execute on function public.admin_list_requests(text, int, int) to authenticated;
 grant execute on function public.admin_set_status(uuid, text)        to authenticated;
 grant execute on function public.admin_set_ban(uuid, boolean)        to authenticated;
+grant execute on function public.admin_list_members(text, int, int)  to authenticated;
