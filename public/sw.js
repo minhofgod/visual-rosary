@@ -9,10 +9,18 @@
 //     deletes every older cache, and skipWaiting()+clients.claim() make a new
 //     version take over promptly instead of waiting for every tab to close.
 //
-// This is a clean v2 installed fresh by every client (the previous worker was a
+//   • ART FILENAMES ARE STABLE, NOT CONTENT-HASHED (/images/, /wallpapers/, /avatars/),
+//     so cache-first pins whatever a device fetched first. REPLACEMENT ART MUST GET A
+//     NEW FILENAME — never overwrite an existing one, or devices that already cached it
+//     keep the old picture. (Stale-while-revalidate was tried and rejected: it re-fetches
+//     on every request, ~450 KB per wallpaper and up to 2.8 MB per bead image, which is
+//     far too costly for a mobile-first audience. Bump CACHE below if art is ever
+//     replaced in place anyway.)
+//
+// This is a clean worker installed fresh by every client (the worker before v2 was a
 // self-unregistering kill-switch), so the old stale-cache issue does not carry over.
 
-const CACHE = 'rosary-v2';
+const CACHE = 'rosary-v3';
 const APP_SHELL = '/';
 const PRECACHE = ['/', '/manifest.webmanifest', '/logo/png/icon-192.png', '/logo/favicon.svg'];
 
