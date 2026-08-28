@@ -39,3 +39,14 @@ export async function getPrayersToday(): Promise<number | null> {
   }
   return typeof data === 'number' ? data : null;
 }
+
+/** All-time total of completed rosaries logged, across all mystery sets (get_prayers_total() SQL). */
+export async function getPrayersTotal(): Promise<number | null> {
+  if (!supabase) return null;
+  const { data, error } = await supabase.rpc('get_prayers_total');
+  if (error) {
+    console.error('Failed to fetch prayers-total count', error);
+    return null;
+  }
+  return typeof data === 'number' ? data : null;
+}
