@@ -21,6 +21,26 @@ For architecture/infra details see the README and `src/` — this file is just t
 > - **Optional SEO/perf (not started):** code-split the ~750 KB JS bundle; compress
 >   the large bead images (some ~1.4 MB); per-route titles/meta for the 4 mystery pages.
 
+## 2026-08-28 — 🚀 SHIPPED: Ảnh nền Lời Chúa is live
+
+Minh reviewed locally and gave the go; pushed to `main` (4 commits, `b8ecd9e`…`0d3ceb7`) and deployed.
+The ship gate in [[feedback-wallpaper-local-review]] is now satisfied and closed.
+
+Verified on production: new bundle serving **66** wallpaper ids (incl. the formerly held-back
+cinematic-only cards); wallpaper + avatar JPGs 200; `sw.js` serving `rosary-v3`; privacy policy's
+wallpaper/avatar section live; the site-wide total rendering ("Tổng cộng 143 chuỗi Mân Côi"); and the
+"Có gì mới" panel showing **28 tháng 8, 2026 — Ảnh nền Lời Chúa** with the corrected "tuỳ theo câu Lời
+Chúa" wording. Minh confirmed in his own Chrome that Cache Storage holds **only `rosary-v3`** — the old
+`rosary-v2` was deleted by `activate()`, so the bump did its job and no device carries stale art.
+
+**Note on `git push`:** it reported `update_ref failed for ref 'refs/remotes/origin/main'` while the
+push itself SUCCEEDED (`a102109..0d3ceb7`). Dropbox appears to lock `.git/refs`. This is local
+bookkeeping only — check `git ls-remote origin` before ever re-pushing, and repair with `git fetch`.
+
+**Not walked on production (would write real data):** the gift flow itself — completing a rosary would
+add a fake entry to the public counter, and signing in was not mine to do. Same bundle Minh exercised
+locally, and the sync path is proven against the same live Supabase tables. Left for Minh on his phone.
+
 ## 2026-08-28 — Pre-push audit: how a collection can be lost
 
 Minh: "the most important thing is the user's collection — we don't want them to lose any." Audited
