@@ -4,9 +4,11 @@ import { ReadingPage } from './pages/ReadingPage';
 import { PrayerWallPage } from './pages/PrayerWallPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { AdminPage } from './pages/AdminPage';
+import { useWallpaperSync } from './state/useWallpaperSync';
 import './App.css';
 
 function App() {
+  useWallpaperSync(); // merge the device's wallpaper collection into the account on sign-in
   return (
     <Routes>
       <Route path="/" element={<PickerPage />} />

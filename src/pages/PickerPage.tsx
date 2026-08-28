@@ -9,10 +9,12 @@ import { StreakCard } from '../components/StreakCard';
 import { RosaryO } from '../components/RosaryO';
 import { useDisplayLang } from '../state/useDisplayLang';
 import { useSlideshow } from '../state/useSlideshow';
-import { usePrayersToday } from '../state/usePrayersToday';
+import { usePrayersToday, usePrayersTotal } from '../state/usePrayersToday';
 import { useStreak } from '../state/useStreak';
 import { useResume } from '../state/useResume';
 import { useNewRequests } from '../state/useNewRequests';
+import { useWallpaperCollection } from '../state/useWallpaperCollection';
+import { WallpaperReward } from '../components/WallpaperReward';
 import { buildSequence } from '../data/sequence';
 import { findStepIndexBySlug } from '../data/slugs';
 import { mysterySets, todaysMysteryKey } from '../data/mysteries';
@@ -27,6 +29,7 @@ export function PickerPage() {
   const image = useSlideshow();
   const today = todaysMysteryKey();
   const prayersToday = usePrayersToday();
+  const prayersTotal = usePrayersTotal();
   const streak = useStreak();
   const resume = useResume();
   const [shareOpen, setShareOpen] = useState(false);
@@ -36,6 +39,14 @@ export function PickerPage() {
   // or back/forward doesn't re-trigger it.
   const [finishNudgeOpen, setFinishNudgeOpen] = useState(
     () => Boolean((location.state as { justFinished?: boolean } | null)?.justFinished),
+  );
+  // Just finished → offer the Scripture-wallpaper gift (the reward). Opens once per finish, and
+  // ONLY when a credit was actually banked: gifts are capped at one a day, so a second rosary the
+  // same day finishes without a gift screen rather than opening an empty one that could still be
+  // claimed from. The wall nudge above still shows.
+  const { pending: pendingGifts } = useWallpaperCollection();
+  const [rewardOpen, setRewardOpen] = useState(
+    () => Boolean((location.state as { justFinished?: boolean } | null)?.justFinished) && pendingGifts > 0,
   );
   useEffect(() => {
     if ((location.state as { justFinished?: boolean } | null)?.justFinished) {
@@ -160,6 +171,19 @@ export function PickerPage() {
             </span>
           </div>
         )}
+        {prayersTotal !== null && (
+          <div className="landing-prayer-total">
+            {displayLang === 'en' ? (
+              <>
+                <span className="landing-prayer-total-num">{prayersTotal.toLocaleString('en-US')}</span> prayed all time
+              </>
+            ) : (
+              <>
+                Tổng cộng <span className="landing-prayer-total-num">{prayersTotal.toLocaleString('vi-VN')}</span> chuỗi Mân Côi
+              </>
+            )}
+          </div>
+        )}
       </main>
 
       <button type="button" className="landing-share" onClick={() => setShareOpen(true)}>
@@ -167,6 +191,8 @@ export function PickerPage() {
       </button>
 
       {shareOpen && <ShareModal displayLang={displayLang} onClose={() => setShareOpen(false)} />}
+
+      {rewardOpen && <WallpaperReward displayLang={displayLang} onClose={() => setRewardOpen(false)} />}
 
       <RosaryDiagram displayLang={displayLang} />
 

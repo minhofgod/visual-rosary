@@ -260,10 +260,6 @@
   justify-content: center;
 }
 
-.icon-button-back svg {
-  transform: rotate(90deg);
-}
-
 .reading-mystery-name {
   font-family: 'Source Serif 4', serif;
   font-size: 14px;
@@ -641,6 +637,49 @@
   background: rgba(201, 162, 39, 0.24);
 }
 
+/* "Có gì mới / What's new" — a settings item + a "new" dot when there's an unseen update. */
+.settings-whatsnew {
+  width: 100%;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #efe4cf;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.settings-whatsnew:hover,
+.settings-whatsnew:focus-visible { background: rgba(255, 255, 255, 0.09); }
+.settings-new-dot { width: 9px; height: 9px; border-radius: 50%; background: #d9483b; flex: none; }
+
+.icon-button-menu { position: relative; }
+.header-new-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d9483b;
+  border: 1.5px solid rgba(20, 14, 10, 0.9);
+}
+
+/* What's-new panel content (reuses the .settings-panel shell). */
+.whatsnew-update { padding: 16px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.whatsnew-update:first-of-type { border-top: 0; padding-top: 4px; }
+.whatsnew-date { font-size: 12.5px; color: rgba(255, 255, 255, 0.5); }
+.whatsnew-title { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 18px; color: var(--gold); margin: 3px 0 10px; }
+.whatsnew-list { margin: 0; padding-left: 20px; }
+.whatsnew-list li { font-size: 14px; line-height: 1.55; color: rgba(255, 255, 255, 0.82); margin-bottom: 7px; }
+
 /* Sign out lives at the bottom of the settings menu, set apart from the controls. */
 .settings-signout {
   width: 100%;
@@ -915,6 +954,9 @@
   justify-content: center;
   padding: 20px;
 }
+
+/* Stack above full-screen overlays (the wallpaper reward/gallery modals at z-index 3000). */
+.modal-backdrop.modal-elevated { z-index: 3100; }
 
 .modal {
   background: #201a17;
@@ -1450,6 +1492,18 @@
 .landing-prayer-count-label {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.8);
+}
+
+.landing-prayer-total {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+.landing-prayer-total-num {
+  color: var(--gold);
+  font-weight: 700;
 }
 
 .landing-share {
@@ -2308,6 +2362,82 @@
   margin: 0 0 14px;
 }
 
+/* Prayer-wall nudge on the profile — gentle invite so post-rosary users (who land on the
+   collection after saving) still find the wall. Carries the new-requests badge. */
+.pf-wall-nudge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: rgba(201, 162, 39, 0.12);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 14px;
+  padding: 13px 15px;
+  margin-bottom: 22px;
+  cursor: pointer;
+  color: inherit;
+  transition: background 0.15s ease;
+}
+.pf-wall-nudge:hover { background: rgba(201, 162, 39, 0.18); }
+.pf-wall-nudge-icon { font-size: 22px; flex-shrink: 0; }
+.pf-wall-nudge-text { display: flex; flex-direction: column; gap: 2px; }
+.pf-wall-nudge-text strong { font-size: 15px; color: #f4e6c2; font-weight: 600; }
+.pf-wall-nudge-text span { font-size: 12.5px; color: rgba(255, 255, 255, 0.6); line-height: 1.4; }
+.pf-wall-nudge-badge {
+  margin-left: auto;
+  flex-shrink: 0;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 99px;
+  background: #d9483b;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pf-heatmap-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.pf-heatmap-head .pf-heatmap-title {
+  margin: 0;
+}
+
+.pf-range-toggle {
+  display: inline-flex;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(18, 13, 10, 0.5);
+}
+
+.pf-range-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.pf-range-btn.is-active {
+  background: var(--gold);
+  color: #1a1310;
+}
+
 .pf-heatmap-scroll {
   overflow-x: auto;
   background: rgba(18, 13, 10, 0.55);
@@ -2358,6 +2488,27 @@
 
 .pf-cell.is-future {
   background: transparent;
+}
+
+/* Monthly (30-day) view: a real labelled calendar (weekday headers + day numbers,
+   reusing the StreakCard month styles) centered in the box — not an unlabelled block of
+   squares. The yearly view keeps the wide GitHub-style heatmap above. */
+.pf-heatmap-scroll.is-month {
+  overflow-x: visible;
+  display: flex;
+  justify-content: center;
+}
+
+.pf-month-inline {
+  max-width: 340px;
+}
+
+.pf-month-inline .streak-month-cell {
+  font-size: 12.5px;
+}
+
+.pf-month-inline .streak-month-dow {
+  font-size: 11px;
 }
 
 /* On desktop there's room for the full year, so drop the scrollbar and let the
@@ -2731,3 +2882,517 @@
 .rosary-diagram-cta:focus-visible {
   background: rgba(201, 162, 39, 0.12);
 }
+
+/* ================================================================
+   Wallpaper reward — post-rosary gift (mood picker → keep → save/avatar)
+   ================================================================ */
+.wr-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(10, 7, 4, 0.82);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: wr-fade 0.25s ease;
+}
+@keyframes wr-fade { from { opacity: 0; } to { opacity: 1; } }
+.wr-sheet {
+  width: 100%;
+  max-width: 420px;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #1a1310;
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 26px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  padding: 30px 26px 26px;
+}
+.wr-panel { display: flex; flex-direction: column; }
+.wr-eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c79a3f;
+  text-align: center;
+}
+.wr-q {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: 30px;
+  color: #f2e7cf;
+  text-align: center;
+  margin: 8px 0 22px;
+}
+.wr-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.wr-chip {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 14px 13px;
+  color: #efe4cf;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.wr-chip:hover, .wr-chip:focus-visible { background: rgba(201, 162, 39, 0.16); border-color: #c79a3f; }
+.wr-chip-emoji { font-size: 20px; flex: none; }
+/* Long mood names (e.g. "Cần được yêu thương") wrap to too many lines on narrow phones —
+   shrink the chip type so they fit in 1–2 lines. */
+@media (max-width: 480px) {
+  .wr-q { font-size: 25px; }
+  .wr-chips { gap: 9px; }
+  .wr-chip { font-size: 12.5px; padding: 12px 11px; gap: 7px; line-height: 1.25; }
+  .wr-chip-emoji { font-size: 17px; }
+}
+.wr-seg {
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+.wr-seg button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: rgba(240, 230, 210, 0.7);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.wr-seg button.is-on { background: #c79a3f; color: #1a1310; }
+.wr-preview {
+  /* Sized by HEIGHT with the card's own aspect ratio, so the visible slice of the card never
+     changes with the viewport: a short screen shrinks the preview instead of cropping deeper.
+     (The old `width:210px` + `height:min(300px,40vh)` cropped to the top ~40% on short windows,
+     which cut subjects sitting low in the frame — e.g. the Tv 23:5 chalice.) */
+  height: min(440px, 52vh);
+  aspect-ratio: 1080 / 2340;
+  width: auto;
+  max-width: 100%;
+  align-self: center;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+  margin-bottom: 18px;
+}
+/* The box already carries the card's aspect ratio, so nothing is cropped — the preview shows the
+   whole wallpaper, which is what the person is actually choosing. 🔍 zooms it full-screen. */
+.wr-preview img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top; }
+/* `.wr-zoomable` sets width:100% and is declared later, so it would override the auto width above
+   and defeat the aspect-ratio (the card would crop again). Same-specificity ordering is too fragile
+   to rely on — pin it with the combined selector. */
+.wr-preview.wr-zoomable { width: auto; }
+
+/* Backup failed for a signed-in person: the sync layer is fail-open, so this warning is the only
+   way they learn their collection is not actually on their account. Warm amber, not alarming red. */
+.pf-sync-warn {
+  color: #e8c979;
+  background: rgba(201, 162, 39, 0.1);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+/* Deter long-press / right-click "Save image" on previews of un-earned art (kept art stays
+   savable — that's the point). Deterrence only: screenshots can't be prevented. */
+.no-save {
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Variant browser — the locked-style step (browse one style's un-owned cards, keep one). */
+.wr-vstyle { text-align: center; color: #c79a3f; font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 14px; margin: 0 0 12px; }
+.wr-vstage { position: relative; display: flex; justify-content: center; align-items: center; margin-bottom: 4px; }
+.wr-varrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wr-varrow.l { left: 0; }
+.wr-varrow.r { right: 0; }
+.wr-vdots { display: flex; justify-content: center; gap: 7px; margin: 12px 0 4px; }
+.wr-vdot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, 0.28); border: 0; padding: 0; cursor: pointer; transition: width 0.2s ease; }
+.wr-vdot.on { background: #c79a3f; width: 20px; border-radius: 99px; }
+.wr-vcount { text-align: center; font-size: 12px; color: rgba(255, 255, 255, 0.55); margin: 0 0 16px; }
+
+/* Two-line "Để sau / tải ảnh trong bộ sưu tập" — the second line smaller and quieter. */
+.wr-later { display: flex; flex-direction: column; gap: 1px; line-height: 1.25; }
+.wr-later-sub { font-size: 11.5px; font-weight: 400; opacity: 0.72; }
+
+/* Full-screen pinch/zoom image viewer (ImageZoomViewer) — above every sheet/modal. */
+.izoom {
+  position: fixed;
+  inset: 0;
+  z-index: 3500;
+  background: rgba(0, 0, 0, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: contain;
+}
+.izoom-img {
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+  transition: transform 0.04s linear;
+}
+.izoom-close {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top));
+  right: 14px;
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* "tap to zoom" affordance over a tappable preview image. */
+.wr-zoomable { position: relative; cursor: zoom-in; display: block; width: 100%; border: 0; padding: 0; background: none; }
+.wr-zoom-hint {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.wr-btn-primary {
+  width: 100%;
+  background: #c79a3f;
+  color: #1a1310;
+  border: none;
+  border-radius: 13px;
+  padding: 15px;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+}
+.wr-btn-primary:hover { background: #d8ab48; }
+.wr-btn-ghost {
+  width: 100%;
+  background: transparent;
+  border: 1.5px solid rgba(201, 162, 39, 0.55);
+  color: #f4e6c2;
+  border-radius: 13px;
+  padding: 14px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.wr-btn-ghost:hover { background: rgba(201, 162, 39, 0.14); }
+.wr-savenote {
+  text-align: center;
+  color: #9ec89a;
+  font-size: 14px;
+  margin-top: 12px;
+}
+.wr-skip {
+  align-self: center;
+  background: none;
+  border: none;
+  color: rgba(240, 230, 210, 0.6);
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 16px;
+  padding: 6px 12px;
+}
+.wr-skip:hover { color: #f0e6d2; }
+.wr-sub {
+  text-align: center;
+  color: rgba(240, 230, 210, 0.7);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: -6px 0 18px;
+}
+.wr-done-all { align-items: center; text-align: center; }
+.wr-rose { font-size: 44px; margin-bottom: 12px; }
+.wr-msg { color: rgba(240, 230, 210, 0.85); line-height: 1.6; margin-bottom: 22px; }
+
+/* Wrapped gift — a covered card the user opens; the image is never shown until then. */
+.wr-gift {
+  width: 210px;
+  aspect-ratio: 1080 / 2340;
+  align-self: center;
+  border-radius: 18px;
+  margin: 18px 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(120% 90% at 50% 20%, rgba(201, 162, 39, 0.22), transparent 60%),
+    linear-gradient(160deg, #2a2018, #1a1310);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(201, 162, 39, 0.06);
+}
+.wr-gift-cover { font-size: 64px; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45)); }
+.wr-gift-hint {
+  text-align: center;
+  color: rgba(240, 230, 210, 0.75);
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+.wr-reveal { animation: wr-reveal-in 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes wr-reveal-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wr-reveal { animation: none; }
+}
+
+/* Choose-one step — one revealed card per style; tapping keeps that one. */
+.wr-style-q {
+  text-align: center;
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #f4e6c2;
+  margin: 2px 0 16px;
+}
+.wr-choices {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.wr-choices-one { justify-content: center; }
+.wr-choice {
+  flex: 1 1 0;
+  max-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.wr-choices-one .wr-choice { max-width: 210px; }
+/* A style the person already collected: shown so they can see WHY only some are pickable
+   (a verse can gain a second style in a later update), but dimmed and not selectable. */
+.wr-choice.is-owned { cursor: default; opacity: 0.55; }
+.wr-choice.is-owned img { filter: grayscale(0.35); }
+.wr-choice.is-owned:hover img, .wr-choice.is-owned:focus-visible img { transform: none; }
+.wr-choice-owned {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(240, 230, 210, 0.6);
+}
+.wr-choice img {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  border: 2px solid transparent;
+  transition: transform 140ms ease, border-color 140ms ease;
+}
+.wr-choice:hover img,
+.wr-choice:focus-visible img { transform: translateY(-3px); border-color: rgba(201, 162, 39, 0.75); }
+.wr-choice-style {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: rgba(240, 230, 210, 0.72);
+}
+.wr-return-note {
+  text-align: center;
+  color: rgba(240, 230, 210, 0.7);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 14px 0 2px;
+}
+
+/* ---- Profile: "Your wallpapers" gallery ---- */
+.pf-wp { margin-top: 40px; }
+
+/* Banked gift-credit banner — shown when a finished rosary's reward is still unopened. */
+.pf-wp-gift {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  color: #f4e6c2;
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.20), rgba(201, 162, 39, 0.06));
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+  transition: transform 140ms ease, background 140ms ease;
+}
+.pf-wp-gift:hover { transform: translateY(-2px); background: linear-gradient(135deg, rgba(201, 162, 39, 0.28), rgba(201, 162, 39, 0.10)); }
+.pf-wp-gift-icon { font-size: 30px; line-height: 1; animation: pf-wp-gift-bob 2.4s ease-in-out infinite; }
+@keyframes pf-wp-gift-bob { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-3px) rotate(4deg); } }
+@media (prefers-reduced-motion: reduce) { .pf-wp-gift-icon { animation: none; } }
+.pf-wp-gift-text { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.pf-wp-gift-text strong { font-size: 15px; font-weight: 600; }
+.pf-wp-gift-text span { font-size: 13px; color: rgba(240, 230, 210, 0.7); }
+.pf-wp-gift-open {
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1310;
+  background: #c79a3f;
+  border-radius: 10px;
+  padding: 8px 16px;
+}
+.pf-wp-note { margin-top: 20px; }
+.pf-wp-prog {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+}
+.pf-wp-bar {
+  height: 7px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.pf-wp-bar i { display: block; height: 100%; background: #c79a3f; transition: width 0.4s ease; }
+
+/* Collection grouped by mood — per-mood "X / N" scoreboard (Option 1: counts only). */
+.pf-wp-moods { display: flex; flex-direction: column; gap: 22px; }
+.pf-wp-mood-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+.pf-wp-mood-name { font-size: 15px; color: rgba(255, 255, 255, 0.9); }
+.pf-wp-mood-count { font-size: 13px; font-weight: 600; color: #c79a3f; }
+.pf-wp-mbar {
+  height: 5px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.pf-wp-mbar i { display: block; height: 100%; background: #c79a3f; opacity: 0.85; transition: width 0.4s ease; }
+.pf-wp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.pf-wp-grid.g-lg { grid-template-columns: repeat(2, 1fr); }
+.pf-wp-grid.g-md { grid-template-columns: repeat(3, 1fr); }
+.pf-wp-grid.g-sm { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+
+/* Tile-size control (large / medium / small = 2 / 3 / 4 columns). */
+.pf-wp-sizes { display: flex; justify-content: flex-end; gap: 6px; margin: -8px 0 18px; }
+.pf-wp-size {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(18, 13, 10, 0.5);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.pf-wp-size.is-active { background: #c79a3f; color: #1a1310; border-color: #c79a3f; }
+.pf-wp-size .gi { display: grid; width: 15px; height: 15px; gap: 2px; }
+.pf-wp-size .gi i { background: currentColor; border-radius: 1px; }
+.pf-wp-tile {
+  position: relative;
+  aspect-ratio: 1080 / 2340;
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  background: #0f0b07;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+.pf-wp-tile img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.pf-wp-ref {
+  position: absolute;
+  bottom: 6px;
+  left: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #f0e6d2;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+.pf-wp-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #c79a3f;
+  color: #1a1310;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 99px;
+}
+@media (max-width: 480px) { .pf-wp-grid { grid-template-columns: repeat(2, 1fr); } }

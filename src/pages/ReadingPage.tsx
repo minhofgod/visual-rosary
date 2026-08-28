@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -21,6 +21,7 @@ import { findStepIndexBySlug } from '../data/slugs';
 import { logPrayerCompletion } from '../lib/prayerStats';
 import { recordCompletionLocal } from '../lib/prayerStreak';
 import { recordDayServer } from '../lib/streakSync';
+import { grantGift } from '../lib/wallpaperCollection';
 import { saveResume, clearResume } from '../lib/resumeState';
 import { useAuth } from '../state/useAuth';
 import type { MysteryKey } from '../data/types';
@@ -82,12 +83,19 @@ function ReadingPageInner({ mysteryKey, initialHash }: { mysteryKey: MysteryKey;
   }, [location.hash]);
 
   // Log one completion (anonymous, session-guarded) when the rosary is prayed through
-  // to its final step — powers the public "Rosaries Prayed Today" counter.
+  // to its final step — powers the public "Rosaries Prayed Today" counter. Also bank one
+  // Scripture-wallpaper gift credit (ref-guarded to once per prayed rosary) so it's earned
+  // at completion, not when the reward is opened — quitting before picking never loses it.
+  const giftedRef = useRef(false);
   useEffect(() => {
     if (rosary.isComplete) {
       logPrayerCompletion(mysteryKey);
       recordCompletionLocal(mysteryKey);
       if (auth.isSignedIn) recordDayServer(); // also record to the account when signed in
+      if (!giftedRef.current) {
+        giftedRef.current = true;
+        grantGift();
+      }
     }
   }, [rosary.isComplete, mysteryKey, auth.isSignedIn]);
 

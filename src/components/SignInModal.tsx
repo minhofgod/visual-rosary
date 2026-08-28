@@ -7,9 +7,13 @@ import type { DisplayLang } from '../state/useDisplayLang';
 interface Props {
   displayLang: DisplayLang;
   onClose: () => void;
+  /** Optional context line, overriding the default prayer-request framing. */
+  lead?: string;
+  /** Stack above a full-screen overlay (e.g. the wallpaper reward/gallery modals). */
+  elevated?: boolean;
 }
 
-export function SignInModal({ displayLang, onClose }: Props) {
+export function SignInModal({ displayLang, onClose, lead, elevated }: Props) {
   const auth = useAuth();
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
@@ -33,13 +37,14 @@ export function SignInModal({ displayLang, onClose }: Props) {
   };
 
   return (
-    <Modal title={t('Đăng nhập', 'Sign in')} onClose={onClose}>
+    <Modal title={t('Đăng nhập', 'Sign in')} onClose={onClose} className={elevated ? 'modal-elevated' : undefined}>
       <div className="signin">
         <p className="signin-lead">
-          {t(
-            'Đăng nhập để đăng ý cầu nguyện của bạn. Việc đọc và cầu nguyện cho người khác không cần đăng nhập.',
-            'Sign in to post your prayer request. Reading and praying for others needs no account.',
-          )}
+          {lead ??
+            t(
+              'Đăng nhập để đăng ý cầu nguyện của bạn. Việc đọc và cầu nguyện cho người khác không cần đăng nhập.',
+              'Sign in to post your prayer request. Reading and praying for others needs no account.',
+            )}
         </p>
 
         <button type="button" className="signin-google" onClick={() => auth.signInWithGoogle()}>
