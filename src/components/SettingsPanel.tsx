@@ -21,6 +21,10 @@ interface Props {
   onSignOut?: () => void;
   /** Show an "Admin panel" link (passed from AppHeader when the user is an admin). */
   isAdmin?: boolean;
+  /** Open the "What's new" panel. */
+  onWhatsNew?: () => void;
+  /** Show a "new" dot on the What's-new item (an unseen update). */
+  hasNewUpdate?: boolean;
 }
 
 const t = (lang: DisplayLang, vi: string, en: string) => (lang === 'en' ? en : lang === 'both' ? `${vi} / ${en}` : vi);
@@ -46,6 +50,8 @@ export function SettingsPanel({
   isSignedIn,
   onSignOut,
   isAdmin,
+  onWhatsNew,
+  hasNewUpdate,
 }: Props) {
   const navigate = useNavigate();
 
@@ -63,6 +69,20 @@ export function SettingsPanel({
           <h3>{t(displayLang, 'Ngôn ngữ', 'Language')}</h3>
           <LangToggle value={displayLang} onChange={setDisplayLang} />
         </div>
+
+        {onWhatsNew && (
+          <button
+            type="button"
+            className="settings-whatsnew"
+            onClick={() => {
+              onClose();
+              onWhatsNew();
+            }}
+          >
+            <span>✨ {t(displayLang, 'Có gì mới', "What's new")}</span>
+            {hasNewUpdate && <span className="settings-new-dot" aria-hidden="true" />}
+          </button>
+        )}
 
         {showFontSize && settings && onChange && (
           <div className="settings-group">

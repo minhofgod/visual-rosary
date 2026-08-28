@@ -2,8 +2,12 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SettingsPanel } from './SettingsPanel';
+import { WhatsNewModal } from './WhatsNewModal';
+import { hasUnseenUpdate, markUpdatesSeen } from '../data/updates';
 import { useAuth } from '../state/useAuth';
 import { useIsAdmin } from '../state/useIsAdmin';
+import { useWallpaperCollection } from '../state/useWallpaperCollection';
+import { wallpaperById } from '../lib/wallpaperCollection';
 import type { DisplayLang } from '../state/useDisplayLang';
 import type { Settings } from '../state/useSettings';
 
@@ -44,9 +48,21 @@ export function AppHeader({
   const auth = useAuth();
   const isAdmin = useIsAdmin();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [whatsNewOpen, setWhatsNewOpen] = useState(false);
+  const [hasNew, setHasNew] = useState(hasUnseenUpdate);
 
+  const openWhatsNew = () => {
+    markUpdatesSeen();
+    setHasNew(false);
+    setWhatsNewOpen(true);
+  };
+
+  const { avatar } = useWallpaperCollection();
   const meta = auth.user?.user_metadata as { avatar_url?: string; picture?: string } | undefined;
-  const avatarUrl = meta?.avatar_url || meta?.picture;
+  // A chosen wallpaper avatar (a crop of the art) wins over the Google photo — it's a
+  // deliberate expression of who they are here. Falls back to the Google photo, then the icon.
+  const wallpaperAvatar = avatar ? wallpaperById(avatar)?.avatar : undefined;
+  const avatarUrl = wallpaperAvatar || meta?.avatar_url || meta?.picture;
 
   return (
     <header className="reading-header">
@@ -72,11 +88,12 @@ export function AppHeader({
         )}
         <button
           type="button"
-          className="icon-button"
+          className="icon-button icon-button-menu"
           onClick={() => setMenuOpen(true)}
           aria-label={displayLang === 'en' ? 'Menu' : 'Cài đặt'}
         >
           ☰
+          {hasNew && <span className="header-new-dot" aria-hidden="true" />}
         </button>
       </div>
 
@@ -92,9 +109,13 @@ export function AppHeader({
           isSignedIn={auth.isSignedIn}
           onSignOut={auth.enabled ? () => auth.signOut() : undefined}
           isAdmin={isAdmin}
+          onWhatsNew={openWhatsNew}
+          hasNewUpdate={hasNew}
           onClose={() => setMenuOpen(false)}
         />
       )}
+
+      {whatsNewOpen && <WhatsNewModal displayLang={displayLang} onClose={() => setWhatsNewOpen(false)} />}
     </header>
   );
 }
