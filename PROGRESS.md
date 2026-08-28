@@ -21,6 +21,20 @@ For architecture/infra details see the README and `src/` — this file is just t
 > - **Optional SEO/perf (not started):** code-split the ~750 KB JS bundle; compress
 >   the large bead images (some ~1.4 MB); per-route titles/meta for the 4 mystery pages.
 
+## 2026-08-28 — Gift box capped by viewport height (post-launch fix)
+
+- **Reported by Minh:** on the wrapped-gift step you had to scroll to reach "← Chọn cảm giác khác".
+  Cause: `.wr-gift` was `width: 210px` + the card's aspect ratio, so it was a **fixed 455 px tall**
+  regardless of window size, while the panel needs ~222 px more for the hint and the two buttons.
+  Anything under ~700 px of viewport pushed the last button below the fold. Now
+  `height: min(340px, 36vh)` with `width: auto` — same card shape (it hints at the portrait wallpaper
+  inside), scaled to fit. The 🎁 scales with it (`font-size: min(64px, 6.5vh)`).
+- **Re-checked the keep screen for the same problem**, since this morning's crop fix made that preview
+  taller (min(300px,40vh) → min(440px,52vh)). No regression: it fits at 640 px (panel 498, 69 px
+  spare) and at 560 px (panel 456, 50 px spare). Gift step at 640 px: panel 478, 79 px spare.
+- Minh's collection snapshotted and restored again for the walkthrough (pending 1, giftRef null,
+  8 earned, avatar unchanged); signed out, so nothing reached Supabase.
+
 ## 2026-08-28 — 🚀 SHIPPED: Ảnh nền Lời Chúa is live
 
 Minh reviewed locally and gave the go; pushed to `main` (4 commits, `b8ecd9e`…`0d3ceb7`) and deployed.

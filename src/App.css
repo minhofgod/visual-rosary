@@ -3166,8 +3166,12 @@
 
 /* Wrapped gift — a covered card the user opens; the image is never shown until then. */
 .wr-gift {
-  width: 210px;
+  /* Card-shaped so it hints at the portrait wallpaper inside, but capped by viewport height: at a
+     fixed 210px wide it was always 455px tall, and the panel needs ~222px more for the hint text and
+     the two buttons — so on a shorter window "← Chọn cảm giác khác" fell below the fold. */
+  height: min(340px, 36vh);
   aspect-ratio: 1080 / 2340;
+  width: auto;
   align-self: center;
   border-radius: 18px;
   margin: 18px 0 14px;
@@ -3180,7 +3184,7 @@
   border: 1px solid rgba(201, 162, 39, 0.35);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(201, 162, 39, 0.06);
 }
-.wr-gift-cover { font-size: 64px; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45)); }
+.wr-gift-cover { font-size: min(64px, 6.5vh); filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45)); }
 .wr-gift-hint {
   text-align: center;
   color: rgba(240, 230, 210, 0.75);
